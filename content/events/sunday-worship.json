@@ -1,0 +1,13 @@
+{
+  "title": "Sunday Worship",
+  "slug": "sunday-worship",
+  "date": "2026-09-20T14:00:00.000Z",
+  "time": "10:00 AM",
+  "location": "Church of the Epiphany",
+  "summary": "Holy Eucharist with Scripture, prayer, music, preaching, and Communion.",
+  "details": "Everyone is welcome. A printed bulletin will guide you through the service. Come as you are and participate at your own pace.",
+  "image": "",
+  "featured": true,
+  "buttonLabel": "Plan Your Visit",
+  "buttonUrl": "/welcome"
+}

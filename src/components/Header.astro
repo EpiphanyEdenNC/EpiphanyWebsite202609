@@ -1,0 +1,39 @@
+---
+import { site } from '../lib/content';
+const path = Astro.url.pathname;
+const nav = [
+  ['/welcome', 'Welcome'],
+  ['/worship', 'Worship'],
+  ['/connect', 'Connect'],
+  ['/serve', 'Serve'],
+  ['/events', 'Events']
+];
+---
+<a class="skip-link" href="#main">Skip to main content</a>
+<div class="topbar">
+  <div class="container">
+    <span>Sunday worship · {site.sundayTime}</span>
+    <span class="secondary-top">Everyone is welcome.</span>
+  </div>
+</div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label={`${site.churchName} home`}>
+      <strong>{site.churchName}</strong>
+      <span>{site.tagline}</span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="nav" id="site-nav" aria-label="Primary navigation">
+      {nav.map(([href, label]) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}
+      <a class="give" href="/give" aria-current={path === '/give' ? 'page' : undefined}>Give</a>
+    </nav>
+  </div>
+</header>
+<script>
+  const button = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('#site-nav');
+  button?.addEventListener('click', () => {
+    const open = nav?.classList.toggle('open') ?? false;
+    button.setAttribute('aria-expanded', String(open));
+  });
+</script>

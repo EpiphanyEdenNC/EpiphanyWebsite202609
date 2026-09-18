@@ -1,0 +1,31 @@
+{
+  "title": "Plan Your Visit",
+  "eyebrow": "WELCOME",
+  "intro": "Visiting a church for the first time can feel uncertain. Here is what you can expect at Epiphany.",
+  "sections": [
+    {
+      "heading": "When should I arrive?",
+      "text": "Sunday worship begins at 10:00 AM. Arriving 10 to 15 minutes early will give you time to find a seat and settle in."
+    },
+    {
+      "heading": "What should I wear?",
+      "text": "Whatever you are comfortable wearing. Some people dress up a little and others come casually. You will fit in either way."
+    },
+    {
+      "heading": "What is the service like?",
+      "text": "Our worship follows the Episcopal tradition: Scripture, prayer, a sermon, music, and Holy Communion. A printed bulletin helps you follow the service from beginning to end."
+    },
+    {
+      "heading": "Can I receive Communion?",
+      "text": "All baptized Christians are welcome to receive Holy Communion. If you prefer not to receive, you are welcome to come forward for a blessing or simply remain seated."
+    },
+    {
+      "heading": "What happens after worship?",
+      "text": "We often gather for conversation and refreshments after the service. Visitors are welcome, and there is no pressure to stay."
+    },
+    {
+      "heading": "Still have a question?",
+      "text": "Contact us before Sunday and we will be glad to help make your first visit easier."
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "title": "Worship",
+  "eyebrow": "PRAY WITH US",
+  "intro": "Worship is at the center of our life together. Our Sunday service combines Scripture, prayer, music, preaching, and Holy Communion.",
+  "sections": [
+    {
+      "heading": "Sunday Worship — 10:00 AM",
+      "text": "Our principal weekly service is Holy Eucharist. The service follows the Book of Common Prayer and normally lasts about an hour."
+    },
+    {
+      "heading": "Visitors and newcomers",
+      "text": "You do not need to know the Episcopal liturgy before you come. A bulletin provides what you need, and you are free to participate at your own pace."
+    },
+    {
+      "heading": "Watch online",
+      "anchor": "watch-online",
+      "text": "When available, our Sunday service is streamed online. Use the Watch Online links on this site to reach our Facebook or YouTube channels."
+    },
+    {
+      "heading": "Prayer and pastoral care",
+      "text": "If you would like prayer or need pastoral support, contact the church. We will help connect you with the appropriate person."
+    }
+  ]
+}

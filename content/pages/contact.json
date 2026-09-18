@@ -1,0 +1,15 @@
+{
+  "title": "Contact",
+  "eyebrow": "GET IN TOUCH",
+  "intro": "Have a question before you visit or need to reach someone at Epiphany? We would be glad to hear from you.",
+  "sections": [
+    {
+      "heading": "Church office",
+      "text": "Add the church mailing address, phone number, and preferred contact email in Site Settings inside TinaCMS."
+    },
+    {
+      "heading": "Sunday worship",
+      "text": "Join us Sunday at 10:00 AM."
+    }
+  ]
+}

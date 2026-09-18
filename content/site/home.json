@@ -1,0 +1,22 @@
+{
+  "eyebrow": "THE EPISCOPAL CHURCH IN EDEN",
+  "headline": "You are welcome here.",
+  "subheadline": "Come worship with us, ask questions, find community, and join us in serving our neighbors.",
+  "primaryButtonLabel": "Plan Your Visit",
+  "primaryButtonUrl": "/welcome",
+  "secondaryButtonLabel": "Watch Online",
+  "secondaryButtonUrl": "/worship#watch-online",
+  "heroImage": "",
+  "welcomeHeading": "A church rooted in worship and open to everyone",
+  "welcomeText": "Epiphany is a community of people learning to follow Jesus together. Whether you have been part of the Episcopal Church for years, are returning to church, or are simply curious, you are welcome to join us.",
+  "serviceHeading": "Worship with us Sunday",
+  "serviceText": "Our Sunday service begins at 10:00 AM. Come as you are. Visitors are welcome to participate as much or as little as they are comfortable.",
+  "serviceButtonLabel": "What to Expect",
+  "serviceButtonUrl": "/welcome",
+  "outreachHeading": "Serving our community",
+  "outreachText": "Faith takes us beyond Sunday morning. Epiphany supports local neighbors through hands-on outreach, partnerships, and practical care.",
+  "outreachButtonLabel": "See How We Serve",
+  "outreachButtonUrl": "/serve",
+  "closingHeading": "There is a place for you here.",
+  "closingText": "Visit on Sunday, join us online, or reach out if you have a question before you come."
+}

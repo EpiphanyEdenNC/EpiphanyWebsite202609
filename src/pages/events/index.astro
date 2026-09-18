@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getEvents, formatDate } from '../../lib/content';
+const events = getEvents();
+---
+<BaseLayout title="Events" description="Upcoming worship, formation, fellowship, and outreach at Church of the Epiphany.">
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">WHAT'S HAPPENING</p>
+      <h1 class="h1">Events</h1>
+      <p class="lede">Worship, formation, fellowship, outreach, and other opportunities to take part in parish life.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container cards">
+      {events.map((event: any) => (
+        <article class="event-card">
+          <div class="grow">
+            <div class="event-date">{formatDate(event.date)}</div>
+            <h3>{event.title}</h3>
+            <p class="meta">{event.time}{event.location ? ` · ${event.location}` : ''}</p>
+            <p>{event.summary}</p>
+          </div>
+          <a href={`/events/${event.slug}`}>Event details →</a>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

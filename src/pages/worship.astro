@@ -1,0 +1,16 @@
+---
+import ContentPage from '../layouts/ContentPage.astro';
+import { getPage, site } from '../lib/content';
+const page = getPage('worship');
+const safe = (url: string) => url && url !== '#';
+---
+<ContentPage page={page}>
+  <section class="section compact" style="padding-top:0">
+    <div class="container">
+      <div class="actions">
+        {safe(site.facebookUrl) && <a class="button" href={site.facebookUrl}>Watch on Facebook</a>}
+        {safe(site.youtubeUrl) && <a class="button secondary" href={site.youtubeUrl}>Watch on YouTube</a>}
+      </div>
+    </div>
+  </section>
+</ContentPage>

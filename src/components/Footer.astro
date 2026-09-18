@@ -1,0 +1,35 @@
+---
+import { site } from '../lib/content';
+const safeLink = (url: string) => url && url !== '#';
+---
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h2>{site.churchName}</h2>
+        <p>{site.tagline}</p>
+        <p>{site.footerNote}</p>
+      </div>
+      <div>
+        <h3>Visit</h3>
+        <ul class="footer-links">
+          <li>Sunday · {site.sundayTime}</li>
+          <li>{site.address}</li>
+          {site.phone && <li><a href={`tel:${site.phone}`}>{site.phone}</a></li>}
+          {site.email && <li><a href={`mailto:${site.email}`}>{site.email}</a></li>}
+        </ul>
+      </div>
+      <div>
+        <h3>Connect</h3>
+        <ul class="footer-links">
+          {safeLink(site.facebookUrl) && <li><a href={site.facebookUrl}>Facebook</a></li>}
+          {safeLink(site.youtubeUrl) && <li><a href={site.youtubeUrl}>YouTube</a></li>}
+          {safeLink(site.mailingListUrl) && <li><a href={site.mailingListUrl}>Join our email list</a></li>}
+          <li><a href="/contact">Contact us</a></li>
+          <li><a href="/admin/index.html">Website editor</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">© {new Date().getFullYear()} {site.churchName}. Built as a lightweight Astro + TinaCMS site.</div>
+  </div>
+</footer>

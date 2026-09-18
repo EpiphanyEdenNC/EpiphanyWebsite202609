@@ -1,0 +1,25 @@
+{
+  "name": "epiphany-astro-tina",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.22.0"
+  },
+  "scripts": {
+    "dev": "tinacms dev -c \"astro dev\"",
+    "build": "tinacms build --content=local -c \"astro build\"",
+    "build:local": "tinacms build --local --skip-cloud-checks -c \"astro build\"",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^7.3.2"
+  },
+  "devDependencies": {
+    "@tinacms/cli": "^3.0.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "tinacms": "^3.14.0",
+    "typescript": "^6.0.3"
+  }
+}
