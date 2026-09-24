@@ -68,7 +68,15 @@ const safe = (url: string) => url && url !== '#';
       <div class="cards">
         {events.map((event: any) => (
           <article class="event-card">
-            <div class="grow">
+          {event.image && (
+            <img
+            class="event-card-image"
+            src={event.image}
+            alt={event.title}
+            loading="lazy"
+          />
+  )}
+  <div class="grow">
               <div class="event-date">{formatDate(event.date)}</div>
               <h3>{event.title}</h3>
               <p class="meta">{event.time}{event.location ? ` · ${event.location}` : ''}</p>
