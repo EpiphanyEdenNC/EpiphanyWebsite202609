@@ -26,7 +26,7 @@ const safeLink = (url: string) => url && url !== '#';
           {safeLink(site.youtubeUrl) && <li><a href={site.youtubeUrl}>YouTube</a></li>}
           {safeLink(site.mailingListUrl) && <li><a href={site.mailingListUrl}>Join our email list</a></li>}
           <li><a href="/contact">Contact us</a></li>
-          <li><a href="/admin/index.html">Website editor</a></li>
+          <li><a href="/admin/index.html#/~/">Website editor</a></li>
         </ul>
       </div>
     </div>

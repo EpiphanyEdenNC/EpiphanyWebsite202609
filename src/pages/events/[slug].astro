@@ -1,50 +1,23 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getEvents, formatDate } from '../../lib/content';
+import TinaIsland from '@tinacms/astro/TinaIsland.astro';
+import EventBody from '../../components/islands/EventBody.astro';
+import { getEvents } from '../../lib/content';
+import { getEventTina } from '../../lib/tina-data';
+import { islands } from '../../lib/islands';
+
 export function getStaticPaths() {
-  return getEvents().map((event: any) => ({ params: { slug: event.slug }, props: { event } }));
+  return getEvents().map((event) => ({ params: { slug: event.routeSlug } }));
 }
-const { event } = Astro.props;
+
+const { slug } = Astro.params;
+if (!slug) return new Response('Event not found', { status: 404 });
+const result = await getEventTina(slug);
+const event = result.data?.event;
+if (!event) return new Response('Event not found', { status: 404 });
 ---
-<BaseLayout title={event.title} description={event.summary}>
-  <section class="page-hero">
-    <div class="container">
-      <p class="eyebrow">EVENT</p>
-      <h1 class="h1">{event.title}</h1>
-      <p class="lede">{event.summary}</p>
-    </div>
-  </section>
-  <section class="section compact">
-  <div class="container">
-
-    {event.image && (
-      <img
-        class="event-detail-image"
-        src={event.image}
-        alt={event.title}
-      />
-    )}
-
-    <div class="grid-2" style="align-items:start">
-      <div>
-        <p class="eyebrow">WHEN & WHERE</p>
-        <h2 class="h2">{formatDate(event.date)}</h2>
-        <p class="lede">{event.time}<br />{event.location}</p>
-      </div>
-
-      <div>
-        <p class="lede" style="white-space:pre-line">{event.details}</p>
-
-        {event.buttonLabel && event.buttonUrl && (
-          <div class="actions">
-            <a class="button" href={event.buttonUrl}>
-              {event.buttonLabel}
-            </a>
-          </div>
-        )}
-      </div>
-    </div>
-
-  </div>
-</section>
+<BaseLayout title={event.title} description={event.summary || undefined}>
+  <TinaIsland name="event" wrapper={islands.event.wrapper} params={{ slug }} primary>
+    <EventBody data={event} />
+  </TinaIsland>
 </BaseLayout>

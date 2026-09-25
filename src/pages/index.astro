@@ -1,104 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { home, site, getEvents, formatDate } from '../lib/content';
-const events = getEvents().filter((event: any) => event.featured).slice(0, 3);
-const heroStyle = home.heroImage ? `background-image:url('${home.heroImage}')` : undefined;
-const safe = (url: string) => url && url !== '#';
+import TinaIsland from '@tinacms/astro/TinaIsland.astro';
+import HomeBody from '../components/islands/HomeBody.astro';
+import { getHomeTina } from '../lib/tina-data';
+import { islands } from '../lib/islands';
+
+const result = await getHomeTina();
+const home = result.data?.home;
+if (!home) return new Response('Homepage content not found', { status: 404 });
 ---
 <BaseLayout>
-  <section class:list={["hero", home.heroImage && "has-image"]} style={heroStyle}>
-    <div class="container hero-inner">
-      <p class="eyebrow">{home.eyebrow}</p>
-      <h1 class="display">{home.headline}</h1>
-      <p class="lede">{home.subheadline}</p>
-      <div class="actions">
-        <a class="button" href={home.primaryButtonUrl}>{home.primaryButtonLabel}</a>
-        <a class="button secondary" href={home.secondaryButtonUrl}>{home.secondaryButtonLabel}</a>
-      </div>
-    </div>
-  </section>
-
-  <div class="container quick-strip" aria-label="Quick information">
-    <div class="quick-strip-inner">
-      <a class="quick" href="/worship"><small>Sunday</small><strong>Worship at {site.sundayTime}</strong></a>
-      <a class="quick" href="/welcome"><small>New here?</small><strong>Plan your first visit</strong></a>
-      <a class="quick" href="/events"><small>This week</small><strong>See what is happening</strong></a>
-    </div>
-  </div>
-
-  <section class="section">
-    <div class="container grid-2">
-      <div>
-        <p class="eyebrow">WELCOME</p>
-        <h2 class="h2">{home.welcomeHeading}</h2>
-      </div>
-      <div>
-        <p class="lede">{home.welcomeText}</p>
-        <div class="actions"><a class="button secondary" href="/welcome">Plan Your Visit</a></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section compact">
-    <div class="container grid-2">
-      <div class="feature-block">
-        <p class="eyebrow" style="color:#f0c6b5">WORSHIP</p>
-        <h2 class="h2">{home.serviceHeading}</h2>
-        <p class="lede">{home.serviceText}</p>
-        <div class="actions"><a class="button light" href={home.serviceButtonUrl}>{home.serviceButtonLabel}</a></div>
-      </div>
-      <div class="feature-block clay">
-        <p class="eyebrow" style="color:#f6e0d7">OUTREACH</p>
-        <h2 class="h2">{home.outreachHeading}</h2>
-        <p class="lede">{home.outreachText}</p>
-        <div class="actions"><a class="button ghost-light" href={home.outreachButtonUrl}>{home.outreachButtonLabel}</a></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="events-head">
-        <div>
-          <p class="eyebrow">UPCOMING</p>
-          <h2 class="h2">What's happening</h2>
-        </div>
-        <a href="/events">View all events →</a>
-      </div>
-      <div class="cards">
-        {events.map((event: any) => (
-          <article class="event-card">
-          {event.image && (
-            <img
-            class="event-card-image"
-            src={event.image}
-            alt={event.title}
-            loading="lazy"
-          />
-  )}
-  <div class="grow">
-              <div class="event-date">{formatDate(event.date)}</div>
-              <h3>{event.title}</h3>
-              <p class="meta">{event.time}{event.location ? ` · ${event.location}` : ''}</p>
-              <p>{event.summary}</p>
-            </div>
-            <a href={`/events/${event.slug}`}>Event details →</a>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="section closing">
-    <div class="container grid-2">
-      <div><h2 class="h2">{home.closingHeading}</h2></div>
-      <div>
-        <p class="lede">{home.closingText}</p>
-        <div class="actions">
-          <a class="button light" href="/contact">Contact Us</a>
-          {safe(site.youtubeUrl) && <a class="button ghost-light" href={site.youtubeUrl}>Watch on YouTube</a>}
-        </div>
-      </div>
-    </div>
-  </section>
+  <TinaIsland name="home" wrapper={islands.home.wrapper} primary>
+    <HomeBody data={home} />
+  </TinaIsland>
 </BaseLayout>

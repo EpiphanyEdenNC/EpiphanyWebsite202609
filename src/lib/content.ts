@@ -13,8 +13,11 @@ export function getPage(slug: string) {
 
 export function getEvents() {
   const modules = import.meta.glob('../../content/events/*.json', { eager: true });
-  return Object.values(modules)
-    .map((mod: any) => mod.default)
+  return Object.entries(modules)
+    .map(([filePath, mod]: any) => ({
+      ...mod.default,
+      routeSlug: filePath.split('/').pop()?.replace(/\.json$/, '') || mod.default.slug,
+    }))
     .sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
 }
 

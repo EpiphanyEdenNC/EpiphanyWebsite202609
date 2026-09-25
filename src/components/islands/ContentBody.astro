@@ -1,0 +1,25 @@
+---
+import { tinaField } from '@tinacms/astro/tina-field';
+const { data: page } = Astro.props;
+---
+{page && (
+  <>
+    <section class="page-hero">
+      <div class="container">
+        {page.eyebrow && <p class="eyebrow" data-tina-field={tinaField(page, 'eyebrow')}>{page.eyebrow}</p>}
+        <h1 class="h1" data-tina-field={tinaField(page, 'title')}>{page.title}</h1>
+        {page.intro && <p class="lede" data-tina-field={tinaField(page, 'intro')}>{page.intro}</p>}
+      </div>
+    </section>
+    <section class="section compact">
+      <div class="container page-sections">
+        {(page.sections || []).map((section) => (
+          <article class="page-section" id={section.anchor || undefined} data-tina-field={tinaField(section)}>
+            <h2 data-tina-field={tinaField(section, 'heading')}>{section.heading}</h2>
+            <p data-tina-field={tinaField(section, 'text')}>{section.text}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  </>
+)}

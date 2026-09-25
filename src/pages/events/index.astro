@@ -29,7 +29,7 @@ const events = getEvents();
             <p class="meta">{event.time}{event.location ? ` · ${event.location}` : ''}</p>
             <p>{event.summary}</p>
           </div>
-          <a href={`/events/${event.slug}`}>Event details →</a>
+          <a href={`/events/${event.routeSlug}`}>Event details →</a>
         </article>
       ))}
     </div>

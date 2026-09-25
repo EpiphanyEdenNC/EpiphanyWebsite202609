@@ -13,7 +13,9 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "astro": "^7.3.2"
+    "astro": "^7.3.2",
+    "@astrojs/netlify": "^8.2.6",
+    "@tinacms/astro": "^0.7.0"
   },
   "devDependencies": {
     "@tinacms/cli": "^3.0.0",

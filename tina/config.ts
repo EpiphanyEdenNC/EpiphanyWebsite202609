@@ -31,7 +31,10 @@ export default defineConfig({
         path: "content/site",
         format: "json",
         match: { include: "site" },
-        ui: { allowedActions: { create: false, delete: false } },
+        ui: {
+          global: true,
+          allowedActions: { create: false, delete: false },
+        },
         fields: [
           { type: "string", name: "churchName", label: "Church Name", isTitle: true, required: true },
           { type: "string", name: "tagline", label: "Tagline" },
@@ -53,7 +56,10 @@ export default defineConfig({
         path: "content/site",
         format: "json",
         match: { include: "home" },
-        ui: { allowedActions: { create: false, delete: false } },
+        ui: {
+          router: () => "/",
+          allowedActions: { create: false, delete: false },
+        },
         fields: [
           { type: "string", name: "headline", label: "Main Headline", isTitle: true, required: true },
           { type: "string", name: "eyebrow", label: "Small Heading" },
@@ -82,7 +88,10 @@ export default defineConfig({
         label: "Pages",
         path: "content/pages",
         format: "json",
-        ui: { allowedActions: { create: false, delete: false } },
+        ui: {
+          router: ({ document }) => `/${document._sys.filename}`,
+          allowedActions: { create: false, delete: false },
+        },
         fields: [
           { type: "string", name: "title", label: "Page Title", isTitle: true, required: true },
           { type: "string", name: "eyebrow", label: "Small Heading" },
@@ -106,6 +115,16 @@ export default defineConfig({
         label: "Events",
         path: "content/events",
         format: "json",
+        ui: {
+          router: ({ document }) => `/events/${document._sys.filename}`,
+          filename: {
+            readonly: true,
+            slugify: (values) =>
+              values?.slug ||
+              values?.title?.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") ||
+              "event",
+          },
+        },
         fields: [
           { type: "string", name: "title", label: "Event Name", isTitle: true, required: true },
           { type: "string", name: "slug", label: "URL Slug", required: true },

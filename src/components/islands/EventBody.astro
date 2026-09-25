@@ -1,0 +1,38 @@
+---
+import { tinaField } from '@tinacms/astro/tina-field';
+import { formatDate } from '../../lib/content';
+const { data: event } = Astro.props;
+---
+{event && (
+  <>
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow">EVENT</p>
+        <h1 class="h1" data-tina-field={tinaField(event, 'title')}>{event.title}</h1>
+        <p class="lede" data-tina-field={tinaField(event, 'summary')}>{event.summary}</p>
+      </div>
+    </section>
+    <section class="section compact">
+      <div class="container">
+        {event.image && (
+          <img class="event-detail-image" src={event.image} alt={event.title} data-tina-field={tinaField(event, 'image')} />
+        )}
+        <div class="grid-2" style="align-items:start">
+          <div>
+            <p class="eyebrow">WHEN & WHERE</p>
+            <h2 class="h2" data-tina-field={tinaField(event, 'date')}>{formatDate(event.date)}</h2>
+            <p class="lede"><span data-tina-field={tinaField(event, 'time')}>{event.time}</span><br /><span data-tina-field={tinaField(event, 'location')}>{event.location}</span></p>
+          </div>
+          <div>
+            <p class="lede" style="white-space:pre-line" data-tina-field={tinaField(event, 'details')}>{event.details}</p>
+            {event.buttonLabel && event.buttonUrl && (
+              <div class="actions">
+                <a class="button" href={event.buttonUrl} data-tina-field={tinaField(event, 'buttonLabel')}>{event.buttonLabel}</a>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  </>
+)}
