@@ -15,16 +15,36 @@ const { event } = Astro.props;
     </div>
   </section>
   <section class="section compact">
-    <div class="container grid-2" style="align-items:start">
+  <div class="container">
+
+    {event.image && (
+      <img
+        class="event-detail-image"
+        src={event.image}
+        alt={event.title}
+      />
+    )}
+
+    <div class="grid-2" style="align-items:start">
       <div>
         <p class="eyebrow">WHEN & WHERE</p>
         <h2 class="h2">{formatDate(event.date)}</h2>
         <p class="lede">{event.time}<br />{event.location}</p>
       </div>
+
       <div>
         <p class="lede" style="white-space:pre-line">{event.details}</p>
-        {event.buttonLabel && event.buttonUrl && <div class="actions"><a class="button" href={event.buttonUrl}>{event.buttonLabel}</a></div>}
+
+        {event.buttonLabel && event.buttonUrl && (
+          <div class="actions">
+            <a class="button" href={event.buttonUrl}>
+              {event.buttonLabel}
+            </a>
+          </div>
+        )}
       </div>
     </div>
-  </section>
+
+  </div>
+</section>
 </BaseLayout>
