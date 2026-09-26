@@ -3,13 +3,9 @@ import { site } from '../lib/content';
 const path = Astro.url.pathname;
 const headerSignup = site.header?.emailSignup;
 const showEmailSignup = headerSignup?.enabled && headerSignup.url && headerSignup.url !== '#';
-const nav = [
-  ['/welcome', 'Welcome'],
-  ['/worship', 'Worship'],
-  ['/connect', 'Connect'],
-  ['/serve', 'Serve'],
-  ['/events', 'Events']
-];
+const nav = site.header?.navigationLinks ?? [];
+const giveButton = site.header?.giveButton;
+const showGiveButton = giveButton?.enabled && giveButton.url && giveButton.url !== '#';
 ---
 <a class="skip-link" href="#main">Skip to main content</a>
 <div class="topbar">
@@ -26,9 +22,9 @@ const nav = [
     </a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
     <nav class="nav" id="site-nav" aria-label="Primary navigation">
-      {nav.map(([href, label]) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}
+      {nav.filter((link) => link.label && link.url && link.url !== '#').map((link) => <a href={link.url} aria-current={path === link.url ? 'page' : undefined}>{link.label}</a>)}
       {showEmailSignup && <a class="signup" href={headerSignup.url}>{headerSignup.label || 'Email Sign Up'}</a>}
-      <a class="give" href="/give" aria-current={path === '/give' ? 'page' : undefined}>Give</a>
+      {showGiveButton && <a class="give" href={giveButton.url} aria-current={path === giveButton.url ? 'page' : undefined}>{giveButton.label || 'Give'}</a>}
     </nav>
   </div>
 </header>

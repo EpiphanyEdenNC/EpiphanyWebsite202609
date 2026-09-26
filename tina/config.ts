@@ -53,8 +53,29 @@ export default defineConfig({
             fields: [
               {
                 type: "object",
+                name: "navigationLinks",
+                label: "Navigation Buttons (add, remove, or reorder)",
+                list: true,
+                ui: { itemProps: (item) => ({ label: item?.label || "New button" }) },
+                fields: [
+                  { type: "string", name: "label", label: "Button Text", required: true },
+                  { type: "string", name: "url", label: "Button Link", required: true }
+                ]
+              },
+              {
+                type: "object",
                 name: "emailSignup",
                 label: "Email Signup Button",
+                fields: [
+                  { type: "boolean", name: "enabled", label: "Show button on every page" },
+                  { type: "string", name: "label", label: "Button Text" },
+                  { type: "string", name: "url", label: "Button Link" }
+                ]
+              },
+              {
+                type: "object",
+                name: "giveButton",
+                label: "Give Button",
                 fields: [
                   { type: "boolean", name: "enabled", label: "Show button on every page" },
                   { type: "string", name: "label", label: "Button Text" },
