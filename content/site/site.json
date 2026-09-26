@@ -22,6 +22,11 @@
       "label": "Email Sign Up",
       "url": "https://mailchi.mp/7585f512f250/email-signup"
     },
+    "textSignup": {
+      "enabled": true,
+      "label": "Text Sign Up",
+      "url": "/text-signup"
+    },
     "giveButton": {
       "enabled": true,
       "label": "Give",

@@ -3,6 +3,8 @@ import { site } from '../lib/content';
 const path = Astro.url.pathname;
 const headerSignup = site.header?.emailSignup;
 const showEmailSignup = headerSignup?.enabled && headerSignup.url && headerSignup.url !== '#';
+const textSignup = site.header?.textSignup;
+const showTextSignup = textSignup?.enabled && textSignup.url && textSignup.url !== '#';
 const nav = site.header?.navigationLinks ?? [];
 const giveButton = site.header?.giveButton;
 const showGiveButton = giveButton?.enabled && giveButton.url && giveButton.url !== '#';
@@ -24,6 +26,7 @@ const showGiveButton = giveButton?.enabled && giveButton.url && giveButton.url !
     <nav class="nav" id="site-nav" aria-label="Primary navigation">
       {nav.filter((link) => link.label && link.url && link.url !== '#').map((link) => <a href={link.url} aria-current={path === link.url ? 'page' : undefined}>{link.label}</a>)}
       {showEmailSignup && <a class="signup" href={headerSignup.url}>{headerSignup.label || 'Email Sign Up'}</a>}
+      {showTextSignup && <a class="signup" href={textSignup.url} aria-current={path === textSignup.url ? 'page' : undefined}>{textSignup.label || 'Text Sign Up'}</a>}
       {showGiveButton && <a class="give" href={giveButton.url} aria-current={path === giveButton.url ? 'page' : undefined}>{giveButton.label || 'Give'}</a>}
     </nav>
   </div>

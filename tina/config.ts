@@ -74,6 +74,16 @@ export default defineConfig({
               },
               {
                 type: "object",
+                name: "textSignup",
+                label: "Text Signup Button",
+                fields: [
+                  { type: "boolean", name: "enabled", label: "Show button on every page" },
+                  { type: "string", name: "label", label: "Button Text" },
+                  { type: "string", name: "url", label: "Button Link" }
+                ]
+              },
+              {
+                type: "object",
                 name: "giveButton",
                 label: "Give Button",
                 fields: [
