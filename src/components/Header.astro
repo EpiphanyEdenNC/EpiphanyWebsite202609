@@ -1,6 +1,8 @@
 ---
 import { site } from '../lib/content';
 const path = Astro.url.pathname;
+const headerSignup = site.header?.emailSignup;
+const showEmailSignup = headerSignup?.enabled && headerSignup.url && headerSignup.url !== '#';
 const nav = [
   ['/welcome', 'Welcome'],
   ['/worship', 'Worship'],
@@ -25,6 +27,7 @@ const nav = [
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
     <nav class="nav" id="site-nav" aria-label="Primary navigation">
       {nav.map(([href, label]) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}
+      {showEmailSignup && <a class="signup" href={headerSignup.url}>{headerSignup.label || 'Email Sign Up'}</a>}
       <a class="give" href="/give" aria-current={path === '/give' ? 'page' : undefined}>Give</a>
     </nav>
   </div>
