@@ -45,7 +45,45 @@ export default defineConfig({
           { type: "string", name: "facebookUrl", label: "Facebook URL" },
           { type: "string", name: "youtubeUrl", label: "YouTube URL" },
           { type: "string", name: "givingUrl", label: "Online Giving URL" },
-          { type: "string", name: "mailingListUrl", label: "Email Signup URL" },
+          { type: "string", name: "mailingListUrl", label: "Footer Email Signup URL" },
+          {
+            type: "object",
+            name: "header",
+            label: "Header Settings",
+            fields: [
+              {
+                type: "object",
+                name: "navigationLinks",
+                label: "Navigation Buttons (add, remove, or reorder)",
+                list: true,
+                ui: { itemProps: (item) => ({ label: item?.label || "New button" }) },
+                fields: [
+                  { type: "string", name: "label", label: "Button Text", required: true },
+                  { type: "string", name: "url", label: "Button Link", required: true }
+                ]
+              },
+              {
+                type: "object",
+                name: "emailSignup",
+                label: "Email Signup Button",
+                fields: [
+                  { type: "boolean", name: "enabled", label: "Show button on every page" },
+                  { type: "string", name: "label", label: "Button Text" },
+                  { type: "string", name: "url", label: "Button Link" }
+                ]
+              },
+              {
+                type: "object",
+                name: "giveButton",
+                label: "Give Button",
+                fields: [
+                  { type: "boolean", name: "enabled", label: "Show button on every page" },
+                  { type: "string", name: "label", label: "Button Text" },
+                  { type: "string", name: "url", label: "Button Link" }
+                ]
+              }
+            ]
+          },
           { type: "string", name: "footerNote", label: "Footer Message" },
           { type: "string", name: "seoDescription", label: "Search Description", ui: { component: "textarea" } }
         ]

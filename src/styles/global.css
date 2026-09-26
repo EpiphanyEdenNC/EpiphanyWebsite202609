@@ -232,6 +232,15 @@ textarea {
 .nav a[aria-current="page"] {
   background: var(--sand);
 }
+.nav .signup {
+  margin-left: 0.35rem;
+  border: 1px solid var(--sage-deep);
+  color: var(--sage-deep);
+}
+.nav .signup:hover {
+  background: var(--sage-deep);
+  color: white;
+}
 .nav .give {
   margin-left: 0.35rem;
   background: var(--ink);
@@ -502,15 +511,7 @@ textarea {
   font-size: 0.86rem;
 }
 
-@media (max-width: 900px) {
-  .grid-2,
-  .page-section {
-    grid-template-columns: 1fr;
-  }
-  .cards,
-  .ministry-grid {
-    grid-template-columns: 1fr 1fr;
-  }
+@media (max-width: 1100px) {
   .menu-toggle {
     display: inline-flex;
   }
@@ -531,8 +532,20 @@ textarea {
   .nav.open {
     display: flex;
   }
+  .nav .signup,
   .nav .give {
     margin-left: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .grid-2,
+  .page-section {
+    grid-template-columns: 1fr;
+  }
+  .cards,
+  .ministry-grid {
+    grid-template-columns: 1fr 1fr;
   }
   .hero {
     min-height: 560px;

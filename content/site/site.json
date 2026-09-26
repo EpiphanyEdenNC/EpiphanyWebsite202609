@@ -9,6 +9,25 @@
   "youtubeUrl": "#",
   "givingUrl": "https://give.tithe.ly/?formId=3f5210a6-6865-11ee-90fc-1260ab546d11",
   "mailingListUrl": "https://mailchi.mp/7585f512f250/email-signup",
+  "header": {
+    "navigationLinks": [
+      { "label": "Welcome", "url": "/welcome" },
+      { "label": "Worship", "url": "/worship" },
+      { "label": "Connect", "url": "/connect" },
+      { "label": "Serve", "url": "/serve" },
+      { "label": "Events", "url": "/events" }
+    ],
+    "emailSignup": {
+      "enabled": true,
+      "label": "Email Sign Up",
+      "url": "https://mailchi.mp/7585f512f250/email-signup"
+    },
+    "giveButton": {
+      "enabled": true,
+      "label": "Give",
+      "url": "/give"
+    }
+  },
   "footerNote": "All are welcome at Church of the Epiphany.",
   "seoDescription": "Church of the Epiphany is an Episcopal parish in Eden, North Carolina. Join us for worship, fellowship, formation, and service."
 }
