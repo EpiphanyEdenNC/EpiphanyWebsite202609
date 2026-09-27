@@ -1,14 +1,13 @@
 {
   "churchName": "Church of the Epiphany",
   "tagline": "An Episcopal church in Eden, North Carolina",
-  "address": "Eden, North Carolina",
+  "address": "538 Henry St, Eden, NC 27288",
   "phone": "(336)623-9410",
   "email": "church@epiphanyeden.org",
   "sundayTime": "10:00 AM",
   "facebookUrl": "https://www.facebook.com/epiphanyeden",
   "youtubeUrl": "https://www.youtube.com/@epiphanyeden4487/streams",
   "givingUrl": "https://give.tithe.ly/?formId=3f5210a6-6865-11ee-90fc-1260ab546d11",
-  "mailingListUrl": "https://mailchi.mp/7585f512f250/email-signup",
   "header": {
     "navigationLinks": [
       {
@@ -54,5 +53,26 @@
     }
   },
   "footerNote": "All are welcome at Church of the Epiphany.",
+  "footer": {
+    "visitHeading": "Visit",
+    "connectHeading": "Connect",
+    "supportHeading": "Support",
+    "mapHeading": "Find us",
+    "showMap": true,
+    "mapEmbedUrl": "",
+    "directionsLabel": "Get directions",
+    "connectLinks": [
+      { "label": "Facebook", "url": "https://www.facebook.com/epiphanyeden" },
+      { "label": "YouTube", "url": "https://www.youtube.com/@epiphanyeden4487/streams" },
+      { "label": "Join our email list", "url": "https://mailchi.mp/7585f512f250/email-signup" },
+      { "label": "Contact us", "url": "/contact" },
+      { "label": "Website editor", "url": "/admin/index.html#/~/" }
+    ],
+    "supportLinks": [
+      { "label": "Give", "url": "/give" },
+      { "label": "Pledge", "url": "/pledge" }
+    ],
+    "copyrightText": "All rights reserved."
+  },
   "seoDescription": "Church of the Epiphany is an Episcopal parish in Eden, North Carolina. Join us for worship, fellowship, formation, and service."
 }

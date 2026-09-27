@@ -1,35 +1,67 @@
 ---
 import { site } from '../lib/content';
+
+const footer = site.footer;
 const safeLink = (url: string) => url && url !== '#';
+const address = site.address?.trim();
+const directionsUrl = address
+  ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`
+  : '';
+
+// Google Maps' keyless share embed follows the address until an editor supplies a custom embed URL.
+const defaultMapUrl = address
+  ? `https://maps.google.com/maps?q=${encodeURIComponent(address)}&output=embed`
+  : '';
+const customMapUrl = (() => {
+  try {
+    const url = new URL(footer?.mapEmbedUrl || '');
+    return url.protocol === 'https:' &&
+      ['www.google.com', 'maps.google.com'].includes(url.hostname) &&
+      url.pathname.startsWith('/maps/embed') ? url.href : '';
+  } catch {
+    return '';
+  }
+})();
+const mapUrl = customMapUrl || defaultMapUrl;
 ---
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
       <div>
         <h2>{site.churchName}</h2>
-        <p>{site.tagline}</p>
-        <p>{site.footerNote}</p>
+        {site.tagline && <p>{site.tagline}</p>}
+        {site.footerNote && <p>{site.footerNote}</p>}
       </div>
       <div>
-        <h3>Visit</h3>
+        <h3>{footer?.visitHeading || 'Visit'}</h3>
         <ul class="footer-links">
-          <li>Sunday · {site.sundayTime}</li>
-          <li>{site.address}</li>
+          {site.sundayTime && <li>Sunday · {site.sundayTime}</li>}
+          {address && <li><a class="footer-address" href={directionsUrl} target="_blank" rel="noopener noreferrer" aria-label={`Directions to ${address}`}>
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            <span>{address}</span>
+          </a></li>}
+          {address && <li><a class="directions-link" href={directionsUrl} target="_blank" rel="noopener noreferrer">{footer?.directionsLabel || 'Get directions'} <span aria-hidden="true">↗</span></a></li>}
           {site.phone && <li><a href={`tel:${site.phone}`}>{site.phone}</a></li>}
           {site.email && <li><a href={`mailto:${site.email}`}>{site.email}</a></li>}
         </ul>
       </div>
       <div>
-        <h3>Connect</h3>
+        <h3>{footer?.connectHeading || 'Connect'}</h3>
         <ul class="footer-links">
-          {safeLink(site.facebookUrl) && <li><a href={site.facebookUrl}>Facebook</a></li>}
-          {safeLink(site.youtubeUrl) && <li><a href={site.youtubeUrl}>YouTube</a></li>}
-          {safeLink(site.mailingListUrl) && <li><a href={site.mailingListUrl}>Join our email list</a></li>}
-          <li><a href="/contact">Contact us</a></li>
-          <li><a href="/admin/index.html#/~/">Website editor</a></li>
+          {(footer?.connectLinks || []).filter((link) => link.label && safeLink(link.url)).map((link) => <li><a href={link.url}>{link.label}</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <h3>{footer?.supportHeading || 'Support'}</h3>
+        <ul class="footer-links footer-support-links">
+          {(footer?.supportLinks || []).filter((link) => link.label && safeLink(link.url)).map((link) => <li><a href={link.url}>{link.label}</a></li>)}
         </ul>
       </div>
     </div>
-    <div class="copyright">© {new Date().getFullYear()} {site.churchName}. Built as a lightweight Astro + TinaCMS site.</div>
+    {footer?.showMap && mapUrl && <div class="footer-map">
+      <h3>{footer.mapHeading || 'Find us'}</h3>
+      <iframe src={mapUrl} title={`Map of ${site.churchName} at ${address}`} loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    </div>}
+    <div class="copyright">© {new Date().getFullYear()} {site.churchName}. {footer?.copyrightText}</div>
   </div>
 </footer>
