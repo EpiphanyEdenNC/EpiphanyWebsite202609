@@ -8,6 +8,8 @@ const showTextSignup = textSignup?.enabled && textSignup.url && textSignup.url !
 const nav = site.header?.navigationLinks ?? [];
 const giveButton = site.header?.giveButton;
 const showGiveButton = giveButton?.enabled && giveButton.url && giveButton.url !== '#';
+const pledgeButton = site.header?.pledgeButton;
+const showPledgeButton = pledgeButton?.enabled && pledgeButton.url && pledgeButton.url !== '#';
 ---
 <a class="skip-link" href="#main">Skip to main content</a>
 <div class="topbar">
@@ -28,6 +30,7 @@ const showGiveButton = giveButton?.enabled && giveButton.url && giveButton.url !
       {showEmailSignup && <a class="signup" href={headerSignup.url}>{headerSignup.label || 'Email Sign Up'}</a>}
       {showTextSignup && <a class="signup" href={textSignup.url} aria-current={path === textSignup.url ? 'page' : undefined}>{textSignup.label || 'Text Sign Up'}</a>}
       {showGiveButton && <a class="give" href={giveButton.url} aria-current={path === giveButton.url ? 'page' : undefined}>{giveButton.label || 'Give'}</a>}
+      {showPledgeButton && <a class="give" href={pledgeButton.url} aria-current={path === pledgeButton.url ? 'page' : undefined}>{pledgeButton.label || 'Pledge'}</a>}
     </nav>
   </div>
 </header>
