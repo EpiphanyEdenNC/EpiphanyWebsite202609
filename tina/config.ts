@@ -45,7 +45,6 @@ export default defineConfig({
           { type: "string", name: "facebookUrl", label: "Facebook URL" },
           { type: "string", name: "youtubeUrl", label: "YouTube URL" },
           { type: "string", name: "givingUrl", label: "Online Giving URL" },
-          { type: "string", name: "mailingListUrl", label: "Footer Email Signup URL" },
           {
             type: "object",
             name: "header",
@@ -105,6 +104,37 @@ export default defineConfig({
             ]
           },
           { type: "string", name: "footerNote", label: "Footer Message" },
+          {
+            type: "object",
+            name: "footer",
+            label: "Footer Settings",
+            fields: [
+              { type: "string", name: "visitHeading", label: "Visit Heading" },
+              { type: "string", name: "connectHeading", label: "Connect Heading" },
+              { type: "string", name: "supportHeading", label: "Support Heading" },
+              { type: "string", name: "mapHeading", label: "Map Heading" },
+              { type: "boolean", name: "showMap", label: "Show Google Map" },
+              { type: "string", name: "mapEmbedUrl", label: "Optional Google Maps Embed URL (paste the iframe src, not the whole iframe)" },
+              { type: "string", name: "directionsLabel", label: "Directions Link Text" },
+              {
+                type: "object", name: "connectLinks", label: "Connect Links (add, remove, or reorder)", list: true,
+                ui: { itemProps: (item) => ({ label: item?.label || "New link" }) },
+                fields: [
+                  { type: "string", name: "label", label: "Link Text", required: true },
+                  { type: "string", name: "url", label: "Link URL", required: true }
+                ]
+              },
+              {
+                type: "object", name: "supportLinks", label: "Give and Pledge Links (add, remove, or reorder)", list: true,
+                ui: { itemProps: (item) => ({ label: item?.label || "New link" }) },
+                fields: [
+                  { type: "string", name: "label", label: "Link Text", required: true },
+                  { type: "string", name: "url", label: "Link URL", required: true }
+                ]
+              },
+              { type: "string", name: "copyrightText", label: "Copyright Line (year and church name added automatically)" }
+            ]
+          },
           { type: "string", name: "seoDescription", label: "Search Description", ui: { component: "textarea" } }
         ]
       },
