@@ -46,6 +46,11 @@
       "enabled": true,
       "label": "Give",
       "url": "/give"
+    },
+    "pledgeButton": {
+      "enabled": true,
+      "label": "Pledge",
+      "url": "/pledge"
     }
   },
   "footerNote": "All are welcome at Church of the Epiphany.",
