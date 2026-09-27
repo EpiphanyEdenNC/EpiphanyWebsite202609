@@ -91,6 +91,16 @@ export default defineConfig({
                   { type: "string", name: "label", label: "Button Text" },
                   { type: "string", name: "url", label: "Button Link" }
                 ]
+              },
+              {
+                type: "object",
+                name: "pledgeButton",
+                label: "Pledge Button",
+                fields: [
+                  { type: "boolean", name: "enabled", label: "Show button on every page" },
+                  { type: "string", name: "label", label: "Button Text" },
+                  { type: "string", name: "url", label: "Button Link" }
+                ]
               }
             ]
           },
