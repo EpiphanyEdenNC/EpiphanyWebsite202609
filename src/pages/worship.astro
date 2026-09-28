@@ -7,9 +7,22 @@ const safe = (url: string) => url && url !== '#';
   <section class="section compact" style="padding-top:0">
     <div class="container">
       <div class="actions">
-        {safe(site.facebookUrl) && <a class="button" href={site.facebookUrl}>Watch on Facebook</a>}
+        <a class="button prayer-book" href="https://www.bcponline.org/" target="_blank" rel="noopener noreferrer">Book of Common Prayer</a>
         {safe(site.youtubeUrl) && <a class="button secondary" href={site.youtubeUrl}>Watch on YouTube</a>}
       </div>
     </div>
   </section>
 </ContentPage>
+
+<style>
+  .prayer-book {
+    background: #a5232b;
+    border-color: #a5232b;
+    color: #fff;
+  }
+  .prayer-book:hover,
+  .prayer-book:focus-visible {
+    background: #861a21;
+    border-color: #861a21;
+  }
+</style>

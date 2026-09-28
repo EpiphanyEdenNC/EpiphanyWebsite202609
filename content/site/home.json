@@ -7,6 +7,23 @@
   "primaryButtonUrl": "/welcome",
   "secondaryButtonLabel": "Watch Online",
   "secondaryButtonUrl": "/worship#watch-online",
+  "quickLinks": [
+    {
+      "label": "Sunday",
+      "text": "Worship at 10:00 AM",
+      "url": "/worship"
+    },
+    {
+      "label": "New here?",
+      "text": "Plan your first visit",
+      "url": "/welcome"
+    },
+    {
+      "label": "Events",
+      "text": "See what is happening",
+      "url": "/events"
+    }
+  ],
   "welcomeHeading": "A church rooted in worship and open to everyone",
   "welcomeText": "Epiphany is a community of people learning to follow Jesus together. Whether you have been part of the Episcopal Church for years, are returning to church, or are simply curious, you are welcome to join us.",
   "serviceHeading": "Worship with us Sunday",
