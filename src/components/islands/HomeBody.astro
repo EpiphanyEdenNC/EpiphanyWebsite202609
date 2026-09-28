@@ -24,13 +24,18 @@ const safe = (url: string) => url && url !== '#';
       </div>
     </section>
 
-    <div class="container quick-strip" aria-label="Quick information">
-      <div class="quick-strip-inner">
-        <a class="quick" href="/worship"><small>Sunday</small><strong>Worship at {site.sundayTime}</strong></a>
-        <a class="quick" href="/welcome"><small>New here?</small><strong>Plan your first visit</strong></a>
-        <a class="quick" href="/events"><small>This week</small><strong>See what is happening</strong></a>
+    {home.quickLinks?.length > 0 && (
+      <div class="container quick-strip" aria-label="Quick information">
+        <div class="quick-strip-inner" data-tina-field={tinaField(home, 'quickLinks')}>
+          {home.quickLinks.map((link) => (
+            <a class="quick" href={link.url}>
+              <small data-tina-field={tinaField(link, 'label')}>{link.label}</small>
+              <strong data-tina-field={tinaField(link, 'text')}>{link.text}</strong>
+            </a>
+          ))}
+        </div>
       </div>
-    </div>
+    )}
 
     <section class="section">
       <div class="container grid-2">

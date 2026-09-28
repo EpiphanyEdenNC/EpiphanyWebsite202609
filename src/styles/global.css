@@ -317,7 +317,7 @@ textarea {
 }
 .quick-strip-inner {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
   overflow: hidden;
   border-radius: 22px;
   box-shadow: var(--shadow);

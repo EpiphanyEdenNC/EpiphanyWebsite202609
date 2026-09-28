@@ -157,6 +157,18 @@ export default defineConfig({
           { type: "string", name: "primaryButtonUrl", label: "Primary Button Link" },
           { type: "string", name: "secondaryButtonLabel", label: "Secondary Button Label" },
           { type: "string", name: "secondaryButtonUrl", label: "Secondary Button Link" },
+          {
+            type: "object",
+            name: "quickLinks",
+            label: "Bar Below Hero (add, remove, or reorder sections)",
+            list: true,
+            ui: { itemProps: (item) => ({ label: item?.label || "New section" }) },
+            fields: [
+              { type: "string", name: "label", label: "Small Heading", required: true },
+              { type: "string", name: "text", label: "Main Text", required: true },
+              { type: "string", name: "url", label: "Link URL", required: true }
+            ]
+          },
           { type: "string", name: "welcomeHeading", label: "Welcome Heading" },
           { type: "string", name: "welcomeText", label: "Welcome Text", ui: { component: "textarea" } },
           { type: "string", name: "serviceHeading", label: "Worship Heading" },
