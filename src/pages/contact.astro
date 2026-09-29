@@ -1,13 +1,4 @@
 ---
-import ContentPage from '../layouts/ContentPage.astro';
-import { site } from '../lib/content';
+export const prerender = false;
+return Astro.redirect('/connect#contact', 301);
 ---
-<ContentPage slug="contact">
-  <section class="section compact" style="padding-top:0">
-    <div class="container cards">
-      <div class="card"><h3>Sunday</h3><p>Worship at {site.sundayTime}</p></div>
-      <div class="card"><h3>Location</h3><p>{site.address}</p></div>
-      <div class="card"><h3>Contact</h3><p>{site.email || 'Add the church email in Site Settings.'}</p></div>
-    </div>
-  </section>
-</ContentPage>

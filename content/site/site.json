@@ -62,15 +62,36 @@
     "mapEmbedUrl": "",
     "directionsLabel": "Get directions",
     "connectLinks": [
-      { "label": "Facebook", "url": "https://www.facebook.com/epiphanyeden" },
-      { "label": "YouTube", "url": "https://www.youtube.com/@epiphanyeden4487/streams" },
-      { "label": "Join our email list", "url": "https://mailchi.mp/7585f512f250/email-signup" },
-      { "label": "Contact us", "url": "/contact" },
-      { "label": "Website editor", "url": "/admin/index.html#/~/" }
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/epiphanyeden"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/epiphanyeden/"
+      },
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@epiphanyeden4487/streams"
+      },
+      {
+        "label": "Join our email list",
+        "url": "https://mailchi.mp/7585f512f250/email-signup"
+      },
+      {
+        "label": "Contact us",
+        "url": "/connect#contact"
+      }
     ],
     "supportLinks": [
-      { "label": "Give", "url": "/give" },
-      { "label": "Pledge", "url": "/pledge" }
+      {
+        "label": "Give",
+        "url": "/give"
+      },
+      {
+        "label": "Pledge",
+        "url": "/pledge"
+      }
     ],
     "copyrightText": "All rights reserved."
   },

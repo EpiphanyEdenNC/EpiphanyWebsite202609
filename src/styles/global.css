@@ -154,6 +154,24 @@ textarea {
 .card p:last-child {
   margin-bottom: 0;
 }
+.contact-card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.contact-card:hover,
+.contact-card:focus-visible {
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+.contact-card:focus-visible {
+  outline: 2px solid var(--sage-deep);
+  outline-offset: 3px;
+}
+.contact-cards {
+  padding: 1.5rem 0 2.2rem;
+}
 .meta {
   color: var(--muted);
   font-size: 0.94rem;
@@ -435,6 +453,9 @@ textarea {
   gap: clamp(1.5rem, 5vw, 5rem);
   padding: 2.2rem 0;
   border-bottom: 1px solid var(--line);
+}
+.page-section[id] {
+  scroll-margin-top: 6rem;
 }
 .page-section h2 {
   margin: 0;
