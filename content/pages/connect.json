@@ -4,6 +4,10 @@
   "intro": "Church is more than a Sunday service. We learn, eat, pray, serve, and spend time together throughout the year.",
   "sections": [
     {
+      "heading": "Church office",
+      "text": "The church office is normally open Tuesday - Friday from 9 am to 1 pm."
+    },
+    {
       "heading": "Adult Formation",
       "text": "Our adult formation opportunities explore Scripture, faith, and the questions people bring to Christian life. Current opportunities can be listed here."
     },
@@ -13,7 +17,7 @@
     },
     {
       "heading": "Stay informed",
-      "text": "Use the email signup link in the footer to receive parish news, worship information, and upcoming events."
+      "text": "Use the email and text signup links at the top of the page to receive parish news, worship information, and upcoming events."
     }
   ]
 }

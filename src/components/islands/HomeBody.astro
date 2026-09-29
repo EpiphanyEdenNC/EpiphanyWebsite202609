@@ -99,7 +99,7 @@ const safe = (url: string) => url && url !== '#';
         <div>
           <p class="lede" data-tina-field={tinaField(home, 'closingText')}>{home.closingText}</p>
           <div class="actions">
-            <a class="button light" href="/contact">Contact Us</a>
+            <a class="button light" href="/connect#contact">Contact Us</a>
             {safe(site.youtubeUrl) && <a class="button ghost-light" href={site.youtubeUrl}>Watch on YouTube</a>}
           </div>
         </div>
