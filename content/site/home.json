@@ -34,6 +34,19 @@
   "outreachText": "Faith takes us beyond Sunday morning. Epiphany supports local neighbors through hands-on outreach, partnerships, and practical care.",
   "outreachButtonLabel": "See How We Serve",
   "outreachButtonUrl": "/serve",
+  "sundayService": {
+    "heading": "Sunday Service",
+    "priestImage": "/images/uploads/RevBarbaraCooke.jpg",
+    "date": "October 4, 2026",
+    "time": "10:00 AM",
+    "location": "Church of the Epiphany",
+    "sundayName": "19th Sunday after Pentecost\n\nFeast of St. Francis of Assisi",
+    "priestName": "The Rev. Barbara Cooke",
+    "priestBio": "After many years in parish ministry, the Rev. Barbara Cooke retired from full-time service in 2016.\n\nSince then, she has continued serving congregations through supply work, offering a faithful presence and steady support to churches in times of transition.\n\nKnown for her thoughtful preaching, warm pastoral care, and deeply reflective sermons, Reverend Cooke often leaves parishioners continuing in conversation about her message long after the service has ended.\n\nShe and her husband live in Greensboro and have three adult children and seven grandchildren.",
+    "orderOfServicePdf": "/images/uploads/20260927OOS_September_27_2026_Pentecost_18.pdf",
+    "musicPdf": "/images/uploads/20260920Music_for_Sunday_September_20.pdf",
+    "additionalInfo": "This is where additional info can be added or left blank. The links above are not the correct servce/music but should work"
+  },
   "closingHeading": "There is a place for you here.",
   "closingText": "Visit on Sunday, join us online, or reach out if you have a question before you come."
 }
