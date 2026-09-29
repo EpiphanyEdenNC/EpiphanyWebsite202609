@@ -1,0 +1,16 @@
+---
+import { site } from '../lib/content';
+
+const phone = site.phone?.trim();
+const email = site.email?.trim();
+const address = site.address?.trim();
+const phoneUrl = phone ? `tel:${phone.replace(/[^\d+]/g, '')}` : '';
+const mapUrl = address
+  ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`
+  : '';
+---
+<div class="cards contact-cards" aria-label="Contact details">
+  {phone && <a class="card contact-card" href={phoneUrl}><h3>Phone</h3><p>{phone}</p></a>}
+  {email && <a class="card contact-card" href={`mailto:${email}`}><h3>Email</h3><p>{email}</p></a>}
+  {address && <a class="card contact-card" href={mapUrl} target="_blank" rel="noopener noreferrer"><h3>Location</h3><p>{address}</p></a>}
+</div>
