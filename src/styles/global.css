@@ -412,7 +412,8 @@ textarea {
   background: linear-gradient(135deg, var(--sand), var(--sky));
 }
 .sunday-service-content {
-  padding: clamp(2rem, 5vw, 4rem) clamp(2rem, 5vw, 4rem) clamp(2.2rem, 5vw, 4.2rem) 0;
+  padding: clamp(2rem, 5vw, 4rem) clamp(2rem, 5vw, 4rem)
+    clamp(2.2rem, 5vw, 4.2rem) 0;
 }
 .sunday-service-details {
   display: grid;
@@ -444,6 +445,7 @@ textarea {
   font-family: Georgia, 'Times New Roman', serif;
   font-size: clamp(1.5rem, 2.6vw, 2.1rem);
   font-weight: 500;
+  white-space: pre-line;
 }
 .priest-name {
   margin: 0;
