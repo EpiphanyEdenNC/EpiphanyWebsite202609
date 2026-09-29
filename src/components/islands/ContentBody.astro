@@ -8,9 +8,17 @@ const isConnectPage = page?._sys?.filename === 'connect';
   <>
     <section class="page-hero">
       <div class="container">
+        {page.headerImage && (
+          <img
+            class="page-header-image"
+            src={page.headerImage}
+            alt={page.headerImageAlt || ''}
+            data-tina-field={tinaField(page, 'headerImage')}
+          />
+        )}
         {page.eyebrow && <p class="eyebrow" data-tina-field={tinaField(page, 'eyebrow')}>{page.eyebrow}</p>}
         <h1 class="h1" data-tina-field={tinaField(page, 'title')}>{page.title}</h1>
-        {page.intro && <p class="lede" data-tina-field={tinaField(page, 'intro')}>{page.intro}</p>}
+        {page.intro && <p class="lede page-intro" data-tina-field={tinaField(page, 'intro')}>{page.intro}</p>}
       </div>
     </section>
     <section class="section compact">

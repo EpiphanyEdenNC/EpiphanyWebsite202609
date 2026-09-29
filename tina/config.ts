@@ -445,6 +445,18 @@ export default defineConfig({
           },
           { type: 'string', name: 'eyebrow', label: 'Small Heading' },
           {
+            type: 'image',
+            name: 'headerImage',
+            label: 'Header Image',
+            description: 'Choose a horizontal image. It displays as a wide banner above the page heading (3:1 ratio).',
+          },
+          {
+            type: 'string',
+            name: 'headerImageAlt',
+            label: 'Header Image Description',
+            description: 'Briefly describe the image for people using screen readers.',
+          },
+          {
             type: 'string',
             name: 'intro',
             label: 'Page Introduction',
