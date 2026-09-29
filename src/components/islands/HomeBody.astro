@@ -67,6 +67,100 @@ const safe = (url: string) => url && url !== '#';
       </div>
     </section>
 
+    {home.sundayService && (
+      <section class="section compact sunday-service-section">
+        <div class="container">
+          <article class="sunday-service-card" data-tina-field={tinaField(home, 'sundayService')}>
+            <div class="sunday-service-photo-wrap">
+              {home.sundayService.priestImage ? (
+                <img
+                  class="sunday-service-photo"
+                  src={home.sundayService.priestImage}
+                  alt={home.sundayService.priestName ? `${home.sundayService.priestName}, Sunday service priest` : 'Sunday service priest'}
+                  loading="lazy"
+                  data-tina-field={tinaField(home.sundayService, 'priestImage')}
+                />
+              ) : (
+                <div class="sunday-service-photo-placeholder" data-tina-field={tinaField(home.sundayService, 'priestImage')}>
+                  Priest photo
+                </div>
+              )}
+            </div>
+
+            <div class="sunday-service-content">
+              <p class="eyebrow">THIS SUNDAY</p>
+              <h2 class="h2" data-tina-field={tinaField(home.sundayService, 'heading')}>
+                {home.sundayService.heading || 'Sunday Service'}
+              </h2>
+
+              <div class="sunday-service-details">
+                <div>
+                  <span>Date</span>
+                  <strong data-tina-field={tinaField(home.sundayService, 'date')}>{home.sundayService.date}</strong>
+                </div>
+                <div>
+                  <span>Time</span>
+                  <strong data-tina-field={tinaField(home.sundayService, 'time')}>{home.sundayService.time}</strong>
+                </div>
+                {home.sundayService.location && (
+                  <div>
+                    <span>Location</span>
+                    <strong data-tina-field={tinaField(home.sundayService, 'location')}>{home.sundayService.location}</strong>
+                  </div>
+                )}
+              </div>
+
+              <h3 class="sunday-name" data-tina-field={tinaField(home.sundayService, 'sundayName')}>
+                {home.sundayService.sundayName}
+              </h3>
+
+              <div class="sunday-service-priest">
+                <p class="priest-name" data-tina-field={tinaField(home.sundayService, 'priestName')}>
+                  {home.sundayService.priestName}
+                </p>
+                {home.sundayService.priestBio && (
+                  <p class="priest-bio" data-tina-field={tinaField(home.sundayService, 'priestBio')}>
+                    {home.sundayService.priestBio}
+                  </p>
+                )}
+              </div>
+
+              <div class="actions sunday-service-links">
+                {home.sundayService.orderOfServicePdf && (
+                  <a
+                    class="button"
+                    href={home.sundayService.orderOfServicePdf}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-tina-field={tinaField(home.sundayService, 'orderOfServicePdf')}
+                  >
+                    Order of Service
+                  </a>
+                )}
+                {home.sundayService.musicPdf && (
+                  <a
+                    class="button secondary"
+                    href={home.sundayService.musicPdf}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-tina-field={tinaField(home.sundayService, 'musicPdf')}
+                  >
+                    Music
+                  </a>
+                )}
+              </div>
+
+              {home.sundayService.additionalInfo && (
+                <p class="sunday-service-additional" data-tina-field={tinaField(home.sundayService, 'additionalInfo')}>
+                  {home.sundayService.additionalInfo}
+                </p>
+              )}
+            </div>
+          </article>
+        </div>
+      </section>
+    )}
+
     <section class="section">
       <div class="container">
         <div class="events-head">
