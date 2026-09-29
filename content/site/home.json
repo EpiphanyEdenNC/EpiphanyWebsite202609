@@ -35,5 +35,18 @@
   "outreachButtonLabel": "See How We Serve",
   "outreachButtonUrl": "/serve",
   "closingHeading": "There is a place for you here.",
-  "closingText": "Visit on Sunday, join us online, or reach out if you have a question before you come."
+  "closingText": "Visit on Sunday, join us online, or reach out if you have a question before you come.",
+  "sundayService": {
+    "heading": "Sunday Service",
+    "priestImage": "",
+    "date": "Sunday, October 4, 2026",
+    "time": "10:00 AM",
+    "location": "Church of the Epiphany",
+    "sundayName": "",
+    "priestName": "",
+    "priestBio": "",
+    "orderOfServicePdf": "",
+    "musicPdf": "",
+    "additionalInfo": ""
+  }
 }
