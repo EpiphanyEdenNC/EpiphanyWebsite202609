@@ -2,6 +2,7 @@
 import { tinaField } from '@tinacms/astro/tina-field';
 import ContactCards from '../ContactCards.astro';
 const { data: page } = Astro.props;
+const isConnectPage = page?._sys?.filename === 'connect';
 ---
 {page && (
   <>
@@ -14,14 +15,20 @@ const { data: page } = Astro.props;
     </section>
     <section class="section compact">
       <div class="container page-sections">
-        {(page.sections || []).map((section) => (
+        {isConnectPage && (
           <>
-            <article class="page-section" id={section.anchor || undefined} data-tina-field={tinaField(section)}>
-              <h2 data-tina-field={tinaField(section, 'heading')}>{section.heading}</h2>
-              <p data-tina-field={tinaField(section, 'text')}>{section.text}</p>
-            </article>
-            {section.anchor === 'contact' && <ContactCards />}
+            <div class="page-section" id="contact">
+              <h2>Contact us</h2>
+              <p>Call or email us, or get directions to the church. We would be glad to hear from you.</p>
+            </div>
+            <ContactCards />
           </>
+        )}
+        {(page.sections || []).map((section) => (
+          <article class="page-section" id={section.anchor || undefined} data-tina-field={tinaField(section)}>
+            <h2 data-tina-field={tinaField(section, 'heading')}>{section.heading}</h2>
+            <p data-tina-field={tinaField(section, 'text')}>{section.text}</p>
+          </article>
         ))}
       </div>
     </section>
