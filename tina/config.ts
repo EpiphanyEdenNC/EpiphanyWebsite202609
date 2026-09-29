@@ -179,6 +179,24 @@ export default defineConfig({
           { type: "string", name: "outreachText", label: "Outreach Text", ui: { component: "textarea" } },
           { type: "string", name: "outreachButtonLabel", label: "Outreach Button Label" },
           { type: "string", name: "outreachButtonUrl", label: "Outreach Button Link" },
+          {
+            type: "object",
+            name: "sundayService",
+            label: "Sunday Service",
+            fields: [
+              { type: "string", name: "heading", label: "Card Title", required: true },
+              { type: "image", name: "priestImage", label: "Priest Photo" },
+              { type: "string", name: "date", label: "Service Date", required: true },
+              { type: "string", name: "time", label: "Service Time", required: true },
+              { type: "string", name: "location", label: "Location (optional)" },
+              { type: "string", name: "sundayName", label: "Name of the Sunday", required: true },
+              { type: "string", name: "priestName", label: "Priest Name", required: true },
+              { type: "string", name: "priestBio", label: "Priest Bio", ui: { component: "textarea" } },
+              { type: "image", name: "orderOfServicePdf", label: "Order of Service PDF", accept: "document" },
+              { type: "image", name: "musicPdf", label: "Music PDF", accept: "document" },
+              { type: "string", name: "additionalInfo", label: "Additional Information (optional)", ui: { component: "textarea" } }
+            ]
+          },
           { type: "string", name: "closingHeading", label: "Closing Heading" },
           { type: "string", name: "closingText", label: "Closing Text", ui: { component: "textarea" } }
         ]
