@@ -64,6 +64,22 @@ function PublishSiteScreen() {
       >
         <h1 style={{ marginTop: 0, fontSize: '28px' }}>Publish Website</h1>
 
+        <div
+          style={{
+            marginBottom: '20px',
+            padding: '14px 16px',
+            borderRadius: '8px',
+            background: '#eff6ff',
+            color: '#1e3a8a',
+            fontSize: '16px',
+            lineHeight: 1.5,
+            fontWeight: 600,
+          }}
+        >
+          Saving does not update the live website. Click Publish Website when you
+          are ready for your saved changes to appear publicly.
+        </div>
+
         <p style={{ fontSize: '16px', lineHeight: 1.6 }}>
           Your Tina saves are stored without immediately rebuilding the public website.
           When you are finished making changes, use this button to publish all saved
