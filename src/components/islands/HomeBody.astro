@@ -2,7 +2,7 @@
 import { tinaField } from '@tinacms/astro/tina-field';
 import { site, getEvents, formatDate } from '../../lib/content';
 const { data: home } = Astro.props;
-const events = getEvents().filter((event) => event.featured).slice(0, 3);
+const events = getEvents().filter((event) => event.featured);
 const heroStyle = home?.heroImage ? `background-image:url('${home.heroImage}')` : undefined;
 const safe = (url: string) => url && url !== '#';
 ---
@@ -172,7 +172,7 @@ const safe = (url: string) => url && url !== '#';
         </div>
         <div class="cards">
           {events.map((event) => (
-            <article class="event-card">
+            <article class="event-card" data-home-event data-event-date={String(event.date).slice(0, 10)}>
               {event.image && <img class="event-card-image" src={event.image} alt={event.title} loading="lazy" />}
               <div class="grow">
                 <div class="event-date">{formatDate(event.date)}</div>
@@ -184,6 +184,32 @@ const safe = (url: string) => url && url !== '#';
             </article>
           ))}
         </div>
+        <script is:inline>
+          (() => {
+            const parts = new Intl.DateTimeFormat('en-US', {
+              timeZone: 'America/New_York',
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
+            }).formatToParts(new Date());
+
+            const dateParts = Object.fromEntries(
+              parts
+                .filter((part) => part.type !== 'literal')
+                .map((part) => [part.type, part.value])
+            );
+
+            const today = `${dateParts.year}-${dateParts.month}-${dateParts.day}`;
+            let shown = 0;
+
+            document.querySelectorAll('[data-home-event]').forEach((card) => {
+              const eventDate = card.getAttribute('data-event-date') || '';
+              const shouldShow = eventDate >= today && shown < 3;
+              card.hidden = !shouldShow;
+              if (shouldShow) shown += 1;
+            });
+          })();
+        </script>
         <div class="actions">
           <a class="button secondary" href="/events">All Events →</a>
         </div>
