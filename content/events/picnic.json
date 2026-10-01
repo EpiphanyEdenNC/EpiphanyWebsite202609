@@ -4,7 +4,11 @@
   "date": "2026-10-03T15:07:54.030Z",
   "time": "Noon-2 pm",
   "location": "Park",
+<<<<<<< HEAD
   "summary": "Blah, blah, blah ",
+=======
+  "summary": "Blah, blah, blah  and more\nabc",
+>>>>>>> 71fcf9a (TinaCMS content update)
   "details": "Call Rob at home",
   "image": "/images/uploads/Epiphany-Photo.jpg",
   "featured": true
