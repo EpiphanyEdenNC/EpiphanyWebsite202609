@@ -1,10 +1,21 @@
 [build]
   command = "npm run build"
   publish = "dist"
-  # Tina saves use the commit message "Update from TinaCMS". Skip those automatic
-  # Git-triggered builds; an intentional Publish Website action uses a Netlify
-  # build hook, and Netlify build-hook deploys bypass this ignore command.
-  ignore = "git log -1 --pretty=%B | grep -qx 'Update from TinaCMS'"
+  # Tina saves currently use the commit message "TinaCMS content update".
+  # Skip those automatic Git-triggered builds. Keep the older Tina wording
+  # as a fallback. Netlify build-hook deploys bypass this ignore command.
+  ignore = "git log -1 --pretty=%B | grep -Eq '^(TinaCMS content update|Update from TinaCMS)
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+"
 
 [build.environment]
   NODE_VERSION = "22"
