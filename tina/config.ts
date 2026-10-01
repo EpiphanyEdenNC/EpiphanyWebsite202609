@@ -1,4 +1,5 @@
 import { defineConfig } from 'tinacms';
+import { PublishSitePlugin } from './PublishSite';
 
 const branch =
   process.env.HEAD ||
@@ -8,6 +9,10 @@ const branch =
 
 export default defineConfig({
   branch,
+  cmsCallback: (cms) => {
+    cms.plugins.add(PublishSitePlugin);
+    return cms;
+  },
   clientId: process.env.PUBLIC_TINA_CLIENT_ID || '',
   token: process.env.TINA_TOKEN || '',
 
