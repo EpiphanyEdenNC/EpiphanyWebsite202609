@@ -1,9 +1,16 @@
 ---
 import { tinaField } from '@tinacms/astro/tina-field';
 import { site, getEvents, formatDate } from '../../lib/content';
+import { getGeneratedWebp } from '../../lib/images';
+import OptimizedImage from '../OptimizedImage.astro';
 const { data: home } = Astro.props;
 const events = getEvents().filter((event) => event.featured);
-const heroStyle = home?.heroImage ? `background-image:url('${home.heroImage}')` : undefined;
+const heroWebp = getGeneratedWebp(home?.heroImage);
+const heroStyle = home?.heroImage
+  ? heroWebp
+    ? `background-image:url('${home.heroImage}');background-image:image-set(url('${heroWebp}') type("image/webp"),url('${home.heroImage}'))`
+    : `background-image:url('${home.heroImage}')`
+  : undefined;
 const safe = (url: string) => url && url !== '#';
 ---
 {home && (
@@ -73,7 +80,7 @@ const safe = (url: string) => url && url !== '#';
           <article class="sunday-service-card" data-tina-field={tinaField(home, 'sundayService')}>
             <div class="sunday-service-photo-wrap">
               {home.sundayService.priestImage ? (
-                <img
+                <OptimizedImage
                   class="sunday-service-photo"
                   src={home.sundayService.priestImage}
                   alt={home.sundayService.priestName ? `${home.sundayService.priestName}, Sunday service priest` : 'Sunday service priest'}
@@ -173,7 +180,7 @@ const safe = (url: string) => url && url !== '#';
         <div class="cards">
           {events.map((event) => (
             <article class="event-card" data-home-event data-event-date={String(event.date).slice(0, 10)}>
-              {event.image && <img class="event-card-image" src={event.image} alt={event.title} loading="lazy" />}
+              {event.image && <OptimizedImage class="event-card-image" src={event.image} alt={event.title} loading="lazy" />}
               <div class="grow">
                 <div class="event-date">{formatDate(event.date)}</div>
                 <h3>{event.title}</h3>
