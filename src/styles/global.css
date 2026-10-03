@@ -298,17 +298,6 @@ textarea {
     rgba(18, 29, 31, 0.08)
   );
 }
-.hero::after {
-  content: '';
-  position: absolute;
-  width: 420px;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  right: -80px;
-  top: 80px;
-  background: rgba(255, 255, 255, 0.22);
-  filter: blur(2px);
-}
 .hero-inner {
   position: relative;
   z-index: 2;
