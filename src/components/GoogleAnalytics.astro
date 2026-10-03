@@ -1,0 +1,18 @@
+---
+// Netlify sets CONTEXT automatically. Development and deploy previews stay untracked.
+const enabled = import.meta.env.PROD && process.env.CONTEXT === 'production';
+---
+{enabled && <script is:inline>
+  // Also guard the hostname if a production artifact is served elsewhere.
+  if (['epiphanyeden.org', 'www.epiphanyeden.org'].includes(window.location.hostname)) {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ window.dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-M8JCF6ZVJ5');
+
+    var analyticsScript = document.createElement('script');
+    analyticsScript.async = true;
+    analyticsScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-M8JCF6ZVJ5';
+    document.head.appendChild(analyticsScript);
+  }
+</script>}
