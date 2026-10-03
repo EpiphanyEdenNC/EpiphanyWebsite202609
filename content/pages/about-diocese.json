@@ -1,0 +1,18 @@
+{
+  "title": "Our Diocese",
+  "eyebrow": "ABOUT EPIPHANY",
+  "intro": "Church of the Epiphany is part of the Episcopal Diocese of North Carolina.",
+  "sections": [
+    {
+      "heading": "Connected in faith",
+      "text": "Our parish belongs to a wider community of Episcopal congregations. Together, we share in worship, formation, and service."
+    }
+  ],
+  "summaryCards": [
+    {
+      "heading": "Visit our diocese",
+      "text": "Explore diocesan news, ministries, and resources.",
+      "url": "https://www.episdionc.org/"
+    }
+  ]
+}

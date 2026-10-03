@@ -5,7 +5,9 @@ const headerSignup = site.header?.emailSignup;
 const showEmailSignup = headerSignup?.enabled && headerSignup.url && headerSignup.url !== '#';
 const textSignup = site.header?.textSignup;
 const showTextSignup = textSignup?.enabled && textSignup.url && textSignup.url !== '#';
-const nav = site.header?.navigationLinks ?? [];
+type NavLink = { label: string; url: string; hidden?: boolean; children?: NavLink[] };
+const nav: NavLink[] = site.header?.navigationLinks ?? [];
+const visibleLinks = (links: NavLink[]) => links.filter((link) => !link.hidden && link.label && link.url && link.url !== '#');
 const giveButton = site.header?.giveButton;
 const showGiveButton = giveButton?.enabled && giveButton.url && giveButton.url !== '#';
 const pledgeButton = site.header?.pledgeButton;
@@ -26,7 +28,20 @@ const showPledgeButton = pledgeButton?.enabled && pledgeButton.url && pledgeButt
     </a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
     <nav class="nav" id="site-nav" aria-label="Primary navigation">
-      {nav.filter((link) => link.label && link.url && link.url !== '#').map((link) => <a href={link.url} aria-current={path === link.url ? 'page' : undefined}>{link.label}</a>)}
+      {visibleLinks(nav).map((link, index) => {
+        const children = visibleLinks(link.children ?? []);
+        return children.length ? (
+          <div class="nav-group">
+            <div class="nav-parent">
+              <a href={link.url} aria-current={path === link.url ? 'page' : undefined} class:list={{ 'nav-ancestor': children.some((child) => path === child.url) }}>{link.label}</a>
+              <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls={`submenu-${index}`} aria-label={`${link.label} submenu`}><span aria-hidden="true">⌄</span></button>
+            </div>
+            <div class="nav-submenu" id={`submenu-${index}`} hidden>
+              {children.map((child) => <a href={child.url} aria-current={path === child.url ? 'page' : undefined}>{child.label}</a>)}
+            </div>
+          </div>
+        ) : <a href={link.url} aria-current={path === link.url ? 'page' : undefined}>{link.label}</a>;
+      })}
       {showEmailSignup && <a class="signup" href={headerSignup.url}>{headerSignup.label || 'Email Sign Up'}</a>}
       {showTextSignup && <a class="signup" href={textSignup.url} aria-current={path === textSignup.url ? 'page' : undefined}>{textSignup.label || 'Text Sign Up'}</a>}
       {showGiveButton && <a class="give" href={giveButton.url} aria-current={path === giveButton.url ? 'page' : undefined}>{giveButton.label || 'Give'}</a>}
@@ -35,10 +50,61 @@ const showPledgeButton = pledgeButton?.enabled && pledgeButton.url && pledgeButt
   </div>
 </header>
 <script>
-  const button = document.querySelector('.menu-toggle');
-  const nav = document.querySelector('#site-nav');
+  const button = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const nav = document.querySelector<HTMLElement>('#site-nav');
+  const groups = Array.from(document.querySelectorAll<HTMLElement>('.nav-group'));
+  function setOpen(group: HTMLElement, open: boolean) {
+    group.querySelector('button')?.setAttribute('aria-expanded', String(open));
+    const submenu = group.querySelector<HTMLElement>('.nav-submenu');
+    if (submenu) submenu.hidden = !open;
+  }
+  function closeAll(except?: HTMLElement) {
+    groups.forEach((group) => { if (group !== except) setOpen(group, false); });
+  }
   button?.addEventListener('click', () => {
     const open = nav?.classList.toggle('open') ?? false;
     button.setAttribute('aria-expanded', String(open));
+    if (!open) closeAll();
+  });
+  groups.forEach((group) => {
+    const toggle = group.querySelector<HTMLButtonElement>('.submenu-toggle');
+    toggle?.addEventListener('click', () => {
+      const open = toggle.getAttribute('aria-expanded') !== 'true';
+      closeAll(group);
+      setOpen(group, open);
+    });
+    group.addEventListener('pointerenter', (event) => {
+      if (event.pointerType === 'mouse' && window.matchMedia('(min-width: 1201px)').matches) {
+        closeAll(group);
+        setOpen(group, true);
+      }
+    });
+    group.addEventListener('pointerleave', () => {
+      if (window.matchMedia('(min-width: 1201px)').matches && !group.contains(document.activeElement)) setOpen(group, false);
+    });
+    group.addEventListener('focusout', (event) => {
+      if (!group.contains(event.relatedTarget as Node | null)) setOpen(group, false);
+    });
+  });
+  document.addEventListener('click', (event) => {
+    if (!nav?.contains(event.target as Node)) {
+      closeAll();
+      if (event.target !== button) {
+        nav?.classList.remove('open');
+        button?.setAttribute('aria-expanded', 'false');
+      }
+    }
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    const active = groups.find((group) => group.querySelector('button')?.getAttribute('aria-expanded') === 'true');
+    if (active) {
+      setOpen(active, false);
+      active.querySelector<HTMLButtonElement>('button')?.focus();
+    } else if (nav?.classList.contains('open')) {
+      nav.classList.remove('open');
+      button?.setAttribute('aria-expanded', 'false');
+      button?.focus();
+    }
   });
 </script>

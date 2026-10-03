@@ -32,6 +32,18 @@ const isConnectPage = page?._sys?.filename === 'connect';
             <ContactCards />
           </>
         )}
+        {page._sys?.filename?.startsWith('about-') && <a class="about-back" href="/about">← About Epiphany</a>}
+        {page.summaryCards?.length > 0 && (
+          <div class="summary-grid">
+            {page.summaryCards.filter((card) => card.heading && card.url && card.url !== '#').map((card) => (
+              <a class="card summary-card" href={card.url} data-tina-field={tinaField(card)}>
+                <h2 data-tina-field={tinaField(card, 'heading')}>{card.heading}</h2>
+                <p data-tina-field={tinaField(card, 'text')}>{card.text}</p>
+                <span class="summary-arrow" aria-hidden="true">Learn more →</span>
+              </a>
+            ))}
+          </div>
+        )}
         {(page.sections || []).map((section) => (
           <article class="page-section" id={section.anchor || undefined} data-tina-field={tinaField(section)}>
             <h2 data-tina-field={tinaField(section, 'heading')}>{section.heading}</h2>

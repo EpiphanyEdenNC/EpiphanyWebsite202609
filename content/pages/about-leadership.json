@@ -1,0 +1,18 @@
+{
+  "title": "Leadership",
+  "eyebrow": "ABOUT EPIPHANY",
+  "intro": "Our parish life is supported by clergy and lay leaders serving together.",
+  "sections": [
+    {
+      "heading": "Parish leadership",
+      "text": "Leadership names and roles will be added here. For current information, please contact the church office."
+    }
+  ],
+  "summaryCards": [
+    {
+      "heading": "Contact the church office",
+      "text": "Get in touch with questions about our parish and its leadership.",
+      "url": "/connect#contact"
+    }
+  ]
+}
