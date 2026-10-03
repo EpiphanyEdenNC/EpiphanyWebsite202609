@@ -465,7 +465,7 @@ export default defineConfig({
             type: 'image',
             name: 'headerImage',
             label: 'Header Image',
-            description: 'Choose a horizontal image. It displays as a wide banner above the page heading (3:1 ratio).',
+            description: 'Recommended: a wide 3:1 image, about 1800 × 600 pixels. The entire image is shown; other proportions may leave extra space around the image.',
           },
           {
             type: 'string',
