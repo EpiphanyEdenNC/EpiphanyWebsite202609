@@ -1,6 +1,7 @@
 ---
 import { tinaField } from '@tinacms/astro/tina-field';
 import { formatDate } from '../../lib/content';
+import OptimizedImage from '../OptimizedImage.astro';
 const { data: event } = Astro.props;
 ---
 {event && (
@@ -15,7 +16,7 @@ const { data: event } = Astro.props;
     <section class="section compact">
       <div class="container">
         {event.image && (
-          <img class="event-detail-image" src={event.image} alt={event.title} data-tina-field={tinaField(event, 'image')} />
+          <OptimizedImage class="event-detail-image" src={event.image} alt={event.title} data-tina-field={tinaField(event, 'image')} />
         )}
         <div class="grid-2" style="align-items:start">
           <div>
