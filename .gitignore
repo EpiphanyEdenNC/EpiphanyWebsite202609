@@ -8,3 +8,7 @@ dist/
 tina/__generated__/
 # Local Netlify folder
 .netlify
+
+# Generated during local/Netlify builds by scripts/optimize-images.mjs
+public/images/uploads/**/*.webp
+public/images/uploads/*.webp
