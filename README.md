@@ -9,7 +9,7 @@ Developer handoff for the Church of the Epiphany, Eden, North Carolina.
 - **Integration branch:** `develop`
 - **Documentation reviewed:** October 3, 2026
 
-This README combines the current repository implementation with decisions recorded in the New Church Website project conversations. Source inspection used main commit `7ed70c77cfbf215eea56ee2e73f700a409c393cb`. Netlify account settings, environment values, build-hook branch, TinaCloud settings, and external service ownership must be checked in their respective dashboards; they are not all represented in Git.
+This README combines the current repository implementation with decisions recorded in the New Church Website project conversations. This update was checked against develop commit `dabd518a7b75190da7c352786f8af712fb1b811e`. Netlify account settings, environment values, build-hook branch, TinaCloud settings, and external service ownership must be checked in their respective dashboards; they are not all represented in Git.
 
 ## 1. Stack and architecture
 
@@ -22,6 +22,9 @@ This README combines the current repository implementation with decisions record
 | Source control | Git / GitHub | Store code, JSON content, media, branches, and change history. |
 | Hosting | Netlify, `@astrojs/netlify ^8.2.6` | Build and serve the site and deploy server functions. |
 | Runtime | Node 22; `.nvmrc` specifies `22.22.0` | Match local and hosted builds. |
+| Image processing | Sharp `^0.35.4` in Node | Generate smaller WebP copies of uploaded raster images before Tina/Astro builds. |
+| Search discovery | `@astrojs/sitemap ^3.7.4`, generated SEO metadata, Google Search Console | Publish crawl/indexing signals and monitor Google search visibility. |
+| Visitor measurement | Google Analytics 4 (GA4) | Measure production website visits and supported interactions. |
 
 These are package.json version ranges; package-lock.json records the installed versions.
 
@@ -33,7 +36,7 @@ The usual flow is:
 
 1. A developer changes code, or an editor changes content in Tina.
 2. GitHub stores the change.
-3. Netlify builds the chosen branch with Tina's CLI followed by Astro.
+3. Netlify optimizes uploaded images with Sharp, then builds the chosen branch with Tina's CLI followed by Astro.
 4. Netlify serves the generated site and functions.
 
 **A Tina Save and a live publication are separate operations.** A normal developer push/merge to main can also publish previously saved Tina content. Saved content is not isolated in a separate draft store.
@@ -55,6 +58,11 @@ The usual flow is:
 | `src/layouts/ContentPage.astro` | Shared Tina-enabled page layout. |
 | `src/components/Header.astro`, `Footer.astro`, `ContactCards.astro` | Shared navigation, footer/map, and clickable phone/email/location cards. |
 | `src/components/islands/` | `HomeBody.astro`, `ContentBody.astro`, `EventBody.astro`: rendered content with Tina field markers. |
+| `scripts/optimize-images.mjs` | Build-time Sharp processing for JPG/JPEG/PNG uploads; creates adjacent WebP copies. |
+| `src/lib/images.ts`, `src/components/OptimizedImage.astro` | Select generated WebP files for built pages and retain original-image fallbacks. |
+| `src/components/GoogleAnalytics.astro` | Production-only Google tag for the church's GA4 web stream. |
+| `src/lib/seo.ts`, `src/pages/robots.txt.ts` | SEO URL/description/schema helpers and generated crawler rules. |
+| `public/google*.html` | Google ownership verification files; preserve them through commits and deployments. |
 | `src/lib/content.ts` | Direct JSON loading, date formatting, event and ministry ordering. |
 | `src/lib/tina-data.ts` | Generated Tina client queries with editing metadata. |
 | `src/lib/islands.ts` | Registry mapping home/page/event editing islands to queries and components. |
@@ -84,7 +92,7 @@ Review these before changing hosting, domains, schemas, dependencies, or branch 
 | `package.json` | Commands, dependency ranges, ESM mode, Node minimum `>=22.22.0`. There is no test/lint/check script currently. |
 | `package-lock.json` | Reproducible npm dependency graph; commit intentional updates alongside package.json. |
 | `.nvmrc` | Pins the local Node version to `22.22.0`. |
-| `astro.config.mjs` | Site URL uses `SITE_URL`, then Netlify `URL`, then localhost. Static output, Netlify adapter, no trailing slashes, Tina integration/Vite plugin, SSR package handling. Local Edge emulation is disabled because it caused development errors. |
+| `astro.config.mjs` | Public SEO origin uses `SITE_URL`, defaulting to `https://epiphanyeden.org`; Netlify `URL` is not a fallback. Generates sitemaps with `@astrojs/sitemap`. Static output, Netlify adapter, no trailing slashes, Tina integration/Vite plugin, SSR package handling. Local Edge emulation is disabled because it caused development errors. |
 | `netlify.toml` | `npm run build`, publish `dist`, Node `22`, Tina-save ignore rule, and security headers. TOML/shell quoting is significant. |
 | `tina/config.ts` | All editable fields and collections, admin output, media paths, branch environment precedence, editor routing and plugin registration. A schema change must match content and rendering. |
 | `tina/tina-lock.json` | Generated schema snapshot; keep consistent with schema changes. |
@@ -102,19 +110,20 @@ Create an ignored local `.env` yourself when cloud-connected local builds are ne
 ```dotenv
 PUBLIC_TINA_CLIENT_ID=your-project-client-id
 TINA_TOKEN=your-read-only-tina-token
-SITE_URL=http://localhost:4321
+SITE_URL=https://epiphanyeden.org
 ```
 
 | Variable | Where / why |
 | --- | --- |
 | `PUBLIC_TINA_CLIENT_ID` | Local/cloud builds and publish function. Identifies the Tina project; not a secret. |
 | `TINA_TOKEN` | Cloud-connected builds. Read-only Tina token; treat it as a secret. |
-| `SITE_URL` | Astro's configured site origin. Set production to `https://epiphanyeden.org`; review development/preview contexts separately. |
+| `SITE_URL` | Astro's public SEO origin. Set `https://epiphanyeden.org` in all Netlify deploy contexts, including previews and branch deploys. This does not change where a preview is hosted. |
 | `NETLIFY_BUILD_HOOK_URL` | Secret Netlify runtime setting for publish-site. Must reach the deployed function, not just the build process. Hook should target main. Do not put it in public variables or commit it. |
 | `HEAD` | Tina's first branch selector; normally supplied by Netlify. |
 | `VERCEL_GIT_COMMIT_REF` | Second branch fallback retained in code; this does not mean the site is hosted on Vercel. |
 | `GITHUB_BRANCH` | Third branch fallback; useful to explicitly select a cloud-connected local build's branch. |
-| `URL` | Netlify site URL fallback for Astro; SITE_URL takes precedence. |
+| `CONTEXT` | Supplied by Netlify. Analytics requires `production`; do not override preview contexts to enable tracking. |
+| `URL` | Netlify-provided hosting URL; not used as Astro's public SEO origin. |
 
 Tina branch precedence is `HEAD → VERCEL_GIT_COMMIT_REF → GITHUB_BRANCH → main`. A local Git checkout alone does not change that fallback. For cloud-connected local builds, deliberately select the correct branch and ensure it is indexed in TinaCloud.
 
@@ -144,9 +153,10 @@ If nvm is unavailable, install/use Node 22.22.0 or a compatible version satisfyi
 
 | Command | Use |
 | --- | --- |
-| `npm run dev` | Runs Tina development server and Astro together. |
-| `npm run build:local` | Local schema/client generation and Astro build without cloud checks. Useful for local validation; does not prove cloud indexing/authentication works. |
-| `npm run build` | Production command: `tinacms build --content=local --verbose -c "astro build"`. Reads checkout content but still checks TinaCloud. Needs valid project configuration/credentials. |
+| `npm run dev` | Runs Tina development server and Astro together; does not run the image optimizer automatically. |
+| `npm run build:local` | Image optimization, local schema/client generation, and Astro build without cloud checks. Useful for local validation; does not prove cloud indexing/authentication works. |
+| `npm run build` | Production command: `npm run optimize-images && tinacms build --content=local --verbose -c "astro build"`. Reads checkout content but still checks TinaCloud. Needs valid project configuration/credentials. |
+| `npm run optimize-images` | Generates WebP copies without running Tina or Astro. |
 | `npm run preview` | Astro preview of built output. Does not replace Netlify validation of runtime functions. |
 
 There is no automated test suite declared. For a feature, run an appropriate build and inspect affected pages on desktop/mobile. Check links, navigation/submenus, images, line breaks, and Tina fields. Validate server functions and hosted editing in a Netlify environment where they are available.
@@ -159,7 +169,7 @@ There is no automated test suite declared. For a feature, run an appropriate bui
 - `develop`: accumulate reviewed work before a deliberate production release.
 - `feature/<description>`: one scoped change, normally based on current develop.
 
-**Handoff finding:** on October 3, develop was 34 commits behind main and zero ahead. Bring it current before new work. Counts will change; recheck the comparison rather than treating this as a permanent state.
+Compare develop with main before starting new work. The original handoff found develop behind main, but subsequent feature merges have changed that state. Use the fast-forward sync below only when develop has no commits of its own to preserve.
 
 With a clean working tree:
 
@@ -172,7 +182,7 @@ git push origin develop
 git switch -c feature/describe-the-change
 ```
 
-The fast-forward sync is appropriate for the observed behind-only state. If develop acquires its own commits, review/merge divergence normally; do not reset or force-push away work.
+The fast-forward sync is appropriate for a behind-only state. If develop acquires its own commits, review/merge divergence normally; do not reset or force-push away work.
 
 ### Edit, review, and release
 
@@ -267,11 +277,13 @@ Schema changes need more than a local form edit: build/regenerate Tina output, c
 | TextMagic | `src/pages/text-signup.astro` loads the subscribe widget; widget code is in the route. Page text and header signup button are editable in Tina; subscriber management is in TextMagic. |
 | Google Maps | Footer displays a map and directions based on site settings/address. Review Footer.astro for fallback map URL construction; no Maps API key is configured in the reviewed source. |
 | YouTube / Facebook / Instagram | Links in content/site settings. Streaming is external; the site does not run OBS or publish streams. Worship currently points users to YouTube. |
+| Google Analytics | Sign in at https://analytics.google.com/ using **the Epiphany Google/gmail account**. GA4 reports website visits and interactions; the site sends production-only data through its Google tag. See the Google tools section below. |
+| Google Search Console | Sign in at https://search.google.com/search-console using **the Epiphany Google/gmail account**. Monitor Google search visibility, indexing, and sitemap processing. Ownership is verified with an HTML file in `public`. See the Google tools section below. |
 | Book of Common Prayer online | Worship includes a red Book of Common Prayer button linking to https://www.bcponline.org/. |
 
 External scripts may be blocked by browser extensions or service outages. Test signup/pledge rendering on the deployed site; account-side changes can affect behavior without a Git commit. Coordinate any real test submission with the service owner.
 
-Maintain church-controlled access to GitHub, Netlify, TinaCloud, Tally, Mailchimp, TextMagic, Tithely, and domain/DNS management. Store credentials in approved account/password management, not this README.
+Maintain church-controlled access to GitHub, Netlify, TinaCloud, Tally, Mailchimp, TextMagic, Tithely, Google Analytics, Google Search Console, and domain/DNS management. For both Google reporting tools, use **the Epiphany Google/gmail account**, not a developer's personal account. Store credentials in approved account/password management, not this README.
 
 ## 8. Project decisions and reasons
 
@@ -298,7 +310,7 @@ The following summarizes the project conversations, with implementation checked 
 | Keep cloud validation in production | Local content indexing does not eliminate TinaCloud schema/index checks; local bypass builds are for development validation. |
 | Use modern, warm, inviting visuals | Establish the parish's own presentation; avoid clip art. Earlier comparison to St. Mary's Asheville was a design reference, not a license to copy their text/assets. |
 
-Image cropping questions were raised repeatedly. Current schema describes page banners as horizontal, about 3:1. Inspect actual CSS before altering fit/aspect ratio; making the uploaded file smaller does not necessarily fix cropping caused by cover behavior or the SVG viewBox. No universal Tina image-fit control is documented as implemented.
+Image cropping questions led to two separate changes: generate WebP copies in Node/Netlify for performance, and use `object-fit: contain` for page header images so the entire image is visible. Page headers have a 3:1 frame; wide images of approximately that shape give the best results. The homepage hero and other image classes retain their own CSS fit behavior. There is no universal Tina image-fit selector. See Image processing and presentation below.
 
 ## 9. Set up ChatGPT/Codex for repository changes
 
@@ -355,7 +367,7 @@ Before a handoff or dependency upgrade, verify one full production build, hosted
 
 Keep schema, content, and rendering changes together. Avoid editing generated admin/client output manually. Review the stale SETUP-CHECKLIST before treating it as current instructions. One minor source inconsistency to review later: BaseLayout references favicon.ico while declaring an SVG MIME type.
 
-## Technical SEO
+## 11. Technical SEO
 
 Astro generates SEO metadata during each build; Tina editors continue using the existing title, introduction, header image, event, and Site Settings fields. These changes do not alter page appearance.
 
@@ -368,14 +380,80 @@ Astro generates SEO metadata during each build; Tina editors continue using the 
 - Individual event pages also emit Event JSON-LD. Start dates match the date displayed in Eastern time; the free-form `time` field is deliberately not interpreted as a timestamp. Only known location information is emitted. Missing/invalid dates omit Event JSON-LD. This is descriptive schema, not a guarantee of Google event rich-result eligibility; complete venue addresses and structured start/end times would be needed to improve eligibility.
 - The homepage title includes Episcopal church and Eden, NC. Welcome and Worship have descriptive search titles; their visible headings remain controlled by Tina. Other page titles continue using Tina content.
 
-After merging to production, verify the property in Google Search Console and submit `https://epiphanyeden.org/sitemap-index.xml`. Search Console and Google Business Profile verification are external account tasks, not part of the build. Check that the public address, phone number, and website agree with the church's Business Profile. SEO head metadata updates after publishing and rebuilding; Tina's live body preview does not rewrite the document head.
+Search Console ownership has been verified with an uploaded HTML file. Preserve the tracked `public/google*.html` verification files. Sign in using **the Epiphany Google/gmail account** and submit `https://epiphanyeden.org/sitemap-index.xml`. Search Console reporting and Google Business Profile management are external account tasks, not part of the build. Check that the public address, phone number, and website agree with the church's Business Profile. SEO head metadata updates after publishing and rebuilding; Tina's live body preview does not rewrite the document head.
 
 For local verification, run `npm run build:local` and inspect `dist/sitemap-index.xml`, `dist/sitemap-0.xml`, `dist/robots.txt`, and the generated page HTML for canonical, social, and JSON-LD metadata. Production deploys still use the existing Tina Save/Publish workflow.
 
-## Google Analytics
+## 12. Google reporting tools and church account access
+
+**Logon for both Google Analytics and Google Search Console: the Epiphany Google/gmail account.** Use the church account to access the existing website property and reports. If a tool shows an empty setup screen, first check the signed-in Google account and selected property; do not create a duplicate property under a personal account. Keep passwords and recovery information in the church's approved account/password management, not Git or this README.
+
+| Tool | Where to sign in | What it tells you |
+| --- | --- | --- |
+| Google Analytics 4 (GA4) | https://analytics.google.com/ | How visitors reach and use the site: traffic sources, page visits, and interactions supported by the configured measurement settings. |
+| Google Search Console | https://search.google.com/search-console | How the site performs in Google Search: search queries, impressions, clicks, indexed pages, and crawl/sitemap problems. |
+
+The tools are separate. Search Console works without Analytics, and an Analytics tag is not needed for the site's existing HTML-file ownership verification.
+
+### Google Analytics implementation and checks
 
 `src/components/GoogleAnalytics.astro`, included once in the shared `BaseLayout.astro` head, installs the Google tag for GA4 web stream `G-M8JCF6ZVJ5`. The measurement ID is public configuration, not a secret. Update both occurrences in this component if the church changes Analytics properties.
 
 Tracking is enabled only when Astro is building for production and Netlify's built-in `CONTEXT` equals `production`. A browser hostname guard also limits collection to `epiphanyeden.org` and `www.epiphanyeden.org`. Local development, branch deploys, deploy previews, and the standalone Tina admin interface do not initialize this tag. `SITE_URL` is not used to decide whether Analytics runs, because previews also use the production SEO origin.
 
 Deploy through the normal develop-to-main workflow, then visit the live website and check Analytics Realtime or Google's Tag Assistant. Browser privacy settings and blockers can prevent collection. This installs the standard Google tag; enhanced measurement settings remain managed in the Google Analytics web stream. No additional custom events or Tag Manager container are installed.
+
+### Google Search Console operation and checks
+
+Search Console ownership was verified by uploading Google's HTML verification file into `public`. Astro copies that file to the website root during deployment. The repository currently contains `public/google2eeeed46cd4ef1d0.html` and `public/googlec4edbeb32a0fdea7.html`; retain the verification files and their contents. Do not rename or delete them during cleanup, and keep them committed so future deploys preserve verification.
+
+Using **the Epiphany Google/gmail account**, select the existing property for the production website. In Sitemaps, submit `https://epiphanyeden.org/sitemap-index.xml` (or `sitemap-index.xml` when the interface already supplies the site prefix). Astro regenerates the index and linked sitemap automatically when routes or event files change; do not maintain the XML by hand.
+
+If Search Console reports “Couldn't fetch”:
+
+1. Open https://epiphanyeden.org/sitemap-index.xml and the sitemap it links to, normally https://epiphanyeden.org/sitemap-0.xml. Both must be publicly accessible XML.
+2. Inspect the URLs inside them. They must start with `https://epiphanyeden.org`, not the temporary Netlify hostname.
+3. Check `SITE_URL=https://epiphanyeden.org` in all Netlify deploy contexts. Changing an environment value requires a fresh production build/deploy to update generated files.
+4. Confirm the SEO changes reached main and the production deploy succeeded, then retry the sitemap submission.
+
+Sitemap submission does not guarantee immediate indexing. Search Console reporting and Google's recrawling can take time, especially after replacing the old website. Use URL Inspection to examine a specific production URL and request indexing when appropriate. Analytics data collection is separate from this process.
+
+## 13. Image processing and presentation
+
+The site now optimizes uploaded images automatically in **Node during the Netlify build**, using Sharp. Tina continues to store and edit the original uploads. Editors do not need to create WebP files or replace image links themselves.
+
+### Processing pipeline
+
+`npm run build` and `npm run build:local` first run `npm run optimize-images`, which executes `scripts/optimize-images.mjs`.
+
+| Setting / behavior | Current implementation |
+| --- | --- |
+| Input folder | `public/images/uploads/`, including subfolders. |
+| Supported inputs | JPG, JPEG, and PNG, matched case-insensitively. |
+| Output | An adjacent WebP copy with the original extension retained, e.g. `photo.jpg.webp`. |
+| Maximum width | 1800 pixels; smaller images are not enlarged. Height scales proportionally. |
+| Orientation | Sharp auto-orients from image metadata before resizing. |
+| WebP encoding | Quality 82, effort 4. |
+| Source preservation | Original uploads remain unchanged and available as fallbacks. |
+| Reprocessing | An existing WebP at least as new as its source is skipped; missing or older copies are regenerated. |
+| Unsupported uploads | SVG, PDF, GIF, existing WebP, and other formats are not converted by this script. |
+| Error handling | An individual conversion failure logs a warning and continues; the original can still be served. A missing uploads folder skips optimization. |
+| Git storage | Generated WebP files in the uploads folder are ignored by `.gitignore`; commit originals and code, not generated copies. |
+
+The standard build makes generated files available before Astro selects image sources. `src/lib/images.ts` checks for the generated copy when building production-mode output. `src/components/OptimizedImage.astro` emits a `<picture>` with a WebP source and the original `<img>` fallback. Page headers, event cards/details, and the Sunday priest image use this component. The homepage hero uses CSS `image-set()` with an original-image fallback. Social-sharing metadata deliberately references original uploads.
+
+### Full-image display and recommended shape
+
+Compression/resizing and CSS fit solve different problems. Sharp reduces file dimensions and download size without cropping; CSS determines how the image occupies its frame.
+
+The shared `.page-header-image` style in `src/styles/global.css` has a **3:1 aspect ratio** and **`object-fit: contain`**, centered. The full image scales to fit inside that frame. A differently shaped image can leave unused space. For best results, upload a wide image around **3:1**, such as 1800 × 600 pixels. SVG headers still use this presentation rule even though Sharp does not convert them.
+
+Other image classes, including the homepage hero, use their own fit rules and can crop. For a different treatment on a particular page, review the relevant component/class and adjust CSS deliberately; there is no per-page Tina cover/contain control currently implemented.
+
+### Tina preview and developer maintenance
+
+Tina selects the original image, and live editor previews may show the original rather than the generated WebP. The deployed build chooses the optimized copy where available. Editors should judge the final layout after Save, Publish Website, and successful deployment. Oversized page-header images still display as the full image scaled into the header frame; matching the recommended shape improves the result.
+
+For local work, `npm run dev` does not run the optimizer and development output uses originals. Run `npm run build:local` to validate the optimized build, or `npm run optimize-images` to generate copies independently.
+
+After changing Sharp settings, delete the ignored generated WebP copies before rebuilding if you need existing images regenerated; the timestamp shortcut does not detect changes to width/quality settings. Check build logs for conversion warnings and inspect the resulting browser image sources. When adding a new image component, use `OptimizedImage` or the existing helper if it should participate in the optimization pipeline.
