@@ -354,3 +354,20 @@ An optional future AGENTS.md could record these branch, build, schema, and relea
 Before a handoff or dependency upgrade, verify one full production build, hosted Tina login, a controlled Save/Publish cycle, and the affected external links/widgets. The current README work changes documentation only; no new runtime behavior is introduced.
 
 Keep schema, content, and rendering changes together. Avoid editing generated admin/client output manually. Review the stale SETUP-CHECKLIST before treating it as current instructions. One minor source inconsistency to review later: BaseLayout references favicon.ico while declaring an SVG MIME type.
+
+## Technical SEO
+
+Astro generates SEO metadata during each build; Tina editors continue using the existing title, introduction, header image, event, and Site Settings fields. These changes do not alter page appearance.
+
+- `astro.config.mjs` uses `SITE_URL` (default `https://epiphanyeden.org`) as the public origin. Set it to the production custom domain, including in preview build contexts. Netlify's temporary `URL` is deliberately not used for canonical URLs. Keep the existing `trailingSlash: 'never'` convention.
+- `@astrojs/sitemap` generates `sitemap-index.xml` and its linked sitemap files, including individual event and About pages. Admin routes, Tina island endpoints, the `/contact` redirect, and 404 are excluded automatically.
+- `src/pages/robots.txt.ts` generates robots rules and the sitemap URL from the same Astro site origin. `netlify.toml` additionally sends `X-Robots-Tag: noindex, nofollow` for Tina admin and island endpoints.
+- `src/layouts/BaseLayout.astro` supplies canonical URLs, descriptions, Open Graph and Twitter card metadata, and Church JSON-LD. `src/lib/seo.ts` normalizes URLs, bounds descriptions, and safely serializes JSON-LD.
+- Content pages use their introduction and header image. Event pages use the summary and event image. The homepage hero is the fallback sharing image. Images in social metadata reference original uploads, so they do not depend on the optimization manifest and can be used by sharing crawlers.
+- Church identity, contact information, full address, and social profiles come from existing Site Settings. The address remains the editable full-address string rather than duplicating it in hard-coded structured fields.
+- Individual event pages also emit Event JSON-LD. Start dates match the date displayed in Eastern time; the free-form `time` field is deliberately not interpreted as a timestamp. Only known location information is emitted. Missing/invalid dates omit Event JSON-LD. This is descriptive schema, not a guarantee of Google event rich-result eligibility; complete venue addresses and structured start/end times would be needed to improve eligibility.
+- The homepage title includes Episcopal church and Eden, NC. Welcome and Worship have descriptive search titles; their visible headings remain controlled by Tina. Other page titles continue using Tina content.
+
+After merging to production, verify the property in Google Search Console and submit `https://epiphanyeden.org/sitemap-index.xml`. Search Console and Google Business Profile verification are external account tasks, not part of the build. Check that the public address, phone number, and website agree with the church's Business Profile. SEO head metadata updates after publishing and rebuilding; Tina's live body preview does not rewrite the document head.
+
+For local verification, run `npm run build:local` and inspect `dist/sitemap-index.xml`, `dist/sitemap-0.xml`, `dist/robots.txt`, and the generated page HTML for canonical, social, and JSON-LD metadata. Production deploys still use the existing Tina Save/Publish workflow.
