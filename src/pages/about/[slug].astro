@@ -1,0 +1,11 @@
+---
+import ContentPage from '../../layouts/ContentPage.astro';
+export function getStaticPaths() {
+  const pages = import.meta.glob('../../../content/pages/about-*.json');
+  return Object.keys(pages).map((file) => ({
+    params: { slug: file.split('/').pop()!.replace(/^about-/, '').replace(/\.json$/, '') },
+  }));
+}
+const { slug } = Astro.params;
+---
+<ContentPage slug={`about-${slug}`} />

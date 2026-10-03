@@ -1,0 +1,28 @@
+{
+  "title": "About Epiphany",
+  "eyebrow": "ABOUT EPIPHANY",
+  "intro": "Get to know Church of the Epiphany: our story, our faith, our connections, and the people who help our parish serve.",
+  "sections": [],
+  "summaryCards": [
+    {
+      "heading": "History",
+      "text": "Explore the story of our parish and its place in the Eden community.",
+      "url": "/about/history"
+    },
+    {
+      "heading": "Our Diocese",
+      "text": "Learn about our connection with the Episcopal Diocese of North Carolina.",
+      "url": "/about/diocese"
+    },
+    {
+      "heading": "What We Believe",
+      "text": "Discover the faith, prayer, and Episcopal traditions that shape our life together.",
+      "url": "/about/beliefs"
+    },
+    {
+      "heading": "Leadership",
+      "text": "Learn about the people who guide and support our parish.",
+      "url": "/about/leadership"
+    }
+  ]
+}

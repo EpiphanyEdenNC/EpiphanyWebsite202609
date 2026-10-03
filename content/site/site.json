@@ -15,6 +15,28 @@
         "url": "/welcome"
       },
       {
+        "label": "About",
+        "url": "/about",
+        "children": [
+          {
+            "label": "History",
+            "url": "/about/history"
+          },
+          {
+            "label": "Our Diocese",
+            "url": "/about/diocese"
+          },
+          {
+            "label": "What We Believe",
+            "url": "/about/beliefs"
+          },
+          {
+            "label": "Leadership",
+            "url": "/about/leadership"
+          }
+        ]
+      },
+      {
         "label": "Worship",
         "url": "/worship"
       },

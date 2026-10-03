@@ -84,6 +84,16 @@ export default defineConfig({
                     label: 'Button Link',
                     required: true,
                   },
+                  { type: 'boolean', name: 'hidden', label: 'Hide this menu item' },
+                  {
+                    type: 'object', name: 'children', label: 'Submenu Links', list: true,
+                    ui: { itemProps: (item) => ({ label: item?.label || 'New submenu link' }) },
+                    fields: [
+                      { type: 'string', name: 'label', label: 'Link Text', required: true },
+                      { type: 'string', name: 'url', label: 'Link URL', required: true },
+                      { type: 'boolean', name: 'hidden', label: 'Hide this link' },
+                    ],
+                  },
                 ],
               },
               {
@@ -439,7 +449,7 @@ export default defineConfig({
         path: 'content/pages',
         format: 'json',
         ui: {
-          router: ({ document }) => `/${document._sys.filename}`,
+          router: ({ document }) => `/${document._sys.filename.replace(/^about-/, 'about/')}`,
           allowedActions: { create: false, delete: false },
         },
         fields: [
@@ -468,6 +478,15 @@ export default defineConfig({
             name: 'intro',
             label: 'Page Introduction',
             ui: { component: 'textarea' },
+          },
+          {
+            type: 'object', name: 'summaryCards', label: 'Linked Summary Blocks', list: true,
+            ui: { itemProps: (item) => ({ label: item?.heading || 'New summary block' }) },
+            fields: [
+              { type: 'string', name: 'heading', label: 'Heading', required: true },
+              { type: 'string', name: 'text', label: 'Summary', ui: { component: 'textarea' } },
+              { type: 'string', name: 'url', label: 'Page Link', required: true },
+            ],
           },
           {
             type: 'object',
