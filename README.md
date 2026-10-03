@@ -371,3 +371,11 @@ Astro generates SEO metadata during each build; Tina editors continue using the 
 After merging to production, verify the property in Google Search Console and submit `https://epiphanyeden.org/sitemap-index.xml`. Search Console and Google Business Profile verification are external account tasks, not part of the build. Check that the public address, phone number, and website agree with the church's Business Profile. SEO head metadata updates after publishing and rebuilding; Tina's live body preview does not rewrite the document head.
 
 For local verification, run `npm run build:local` and inspect `dist/sitemap-index.xml`, `dist/sitemap-0.xml`, `dist/robots.txt`, and the generated page HTML for canonical, social, and JSON-LD metadata. Production deploys still use the existing Tina Save/Publish workflow.
+
+## Google Analytics
+
+`src/components/GoogleAnalytics.astro`, included once in the shared `BaseLayout.astro` head, installs the Google tag for GA4 web stream `G-M8JCF6ZVJ5`. The measurement ID is public configuration, not a secret. Update both occurrences in this component if the church changes Analytics properties.
+
+Tracking is enabled only when Astro is building for production and Netlify's built-in `CONTEXT` equals `production`. A browser hostname guard also limits collection to `epiphanyeden.org` and `www.epiphanyeden.org`. Local development, branch deploys, deploy previews, and the standalone Tina admin interface do not initialize this tag. `SITE_URL` is not used to decide whether Analytics runs, because previews also use the production SEO origin.
+
+Deploy through the normal develop-to-main workflow, then visit the live website and check Analytics Realtime or Google's Tag Assistant. Browser privacy settings and blockers can prevent collection. This installs the standard Google tag; enhanced measurement settings remain managed in the Google Analytics web stream. No additional custom events or Tag Manager container are installed.
