@@ -9,7 +9,7 @@ const result = await getHomeTina();
 const home = result.data?.home;
 if (!home) return new Response('Homepage content not found', { status: 404 });
 ---
-<BaseLayout>
+<BaseLayout image={home.heroImage}>
   <TinaIsland name="home" wrapper={islands.home.wrapper} primary>
     <HomeBody data={home} />
   </TinaIsland>

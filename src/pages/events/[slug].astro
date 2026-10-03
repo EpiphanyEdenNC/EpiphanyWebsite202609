@@ -1,4 +1,5 @@
 ---
+import { canonicalUrl, eventSchema } from '../../lib/seo';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import TinaIsland from '@tinacms/astro/TinaIsland.astro';
 import EventBody from '../../components/islands/EventBody.astro';
@@ -16,7 +17,7 @@ const result = await getEventTina(slug);
 const event = result.data?.event;
 if (!event) return new Response('Event not found', { status: 404 });
 ---
-<BaseLayout title={event.title} description={event.summary || undefined}>
+<BaseLayout title={event.title} description={event.summary || undefined} image={event.image} structuredData={eventSchema(event, canonicalUrl(Astro.url.pathname, Astro.site!), Astro.site!)}>
   <TinaIsland name="event" wrapper={islands.event.wrapper} params={{ slug }} primary>
     <EventBody data={event} />
   </TinaIsland>

@@ -11,7 +11,12 @@ const result = await getPageTina(slug);
 const page = result.data?.page;
 if (!page) throw new Error(`Page content not found: ${slug}`);
 ---
-<BaseLayout title={page.title} description={page.intro || undefined}>
+<BaseLayout
+  title={slug === 'welcome' ? 'Visit an Episcopal Church in Eden, NC' : slug === 'worship' ? 'Sunday Worship in Eden, NC' : page.title}
+  description={page.intro || undefined}
+  image={page.headerImage}
+  imageAlt={page.headerImageAlt}
+>
   <TinaIsland name="page" wrapper={islands.page.wrapper} params={{ slug }} primary>
     <ContentBody data={page} />
   </TinaIsland>
