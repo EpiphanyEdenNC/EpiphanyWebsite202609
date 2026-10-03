@@ -1,6 +1,7 @@
 ---
 import { tinaField } from '@tinacms/astro/tina-field';
 import ContactCards from '../ContactCards.astro';
+import OptimizedImage from '../OptimizedImage.astro';
 const { data: page } = Astro.props;
 const isConnectPage = page?._sys?.filename === 'connect';
 ---
@@ -9,7 +10,7 @@ const isConnectPage = page?._sys?.filename === 'connect';
     <section class="page-hero">
       <div class="container">
         {page.headerImage && (
-          <img
+          <OptimizedImage
             class="page-header-image"
             src={page.headerImage}
             alt={page.headerImageAlt || ''}
