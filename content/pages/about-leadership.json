@@ -1,18 +1,19 @@
 {
   "title": "Leadership",
   "eyebrow": "ABOUT EPIPHANY",
-  "intro": "Our parish life is supported by clergy and lay leaders serving together.",
-  "sections": [
-    {
-      "heading": "Parish leadership",
-      "text": "Leadership names and roles will be added here. For current information, please contact the church office."
-    }
-  ],
+  "headerImage": "/images/uploads/Vestry_-Guiding,-Stewarding,-Supporting.png",
+  "intro": "Our parish life is supported by  lay leaders serving together.",
   "summaryCards": [
     {
       "heading": "Contact the church office",
       "text": "Get in touch with questions about our parish and its leadership.",
-      "url": "/connect#contact"
+      "url": "/connect"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "Parish leadership",
+      "text": "Church of the Epiphany is led by a group called the Vestry. The Vestry is made up of lay, or non-clergy, members of the Parish. There are 9 Vestry members who are elected to their position by the parish members. The Vestry has a Senior Warden and a Junior Warden. In short, The Senior Warden ensures the chuch activities run as smoothly as possible and runs the monthly Vestry meetings The Junior Warden is mainly responsible for the building and grounds.\n\nJust as Jesus served the people, the Vestry serves the parish and parish members."
     }
   ]
 }
