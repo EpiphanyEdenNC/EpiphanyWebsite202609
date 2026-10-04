@@ -11,5 +11,11 @@
       "url": "https://epiphanyeden.org"
     }
   ],
-  "sections": []
+  "sections": [
+    {
+      "heading": "Dining",
+      "anchor": "dining",
+      "text": "this is about all the dining stuff"
+    }
+  ]
 }
