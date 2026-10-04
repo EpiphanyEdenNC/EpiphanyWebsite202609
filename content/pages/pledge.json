@@ -14,6 +14,16 @@
       "url": "https://epiphanyeden.org"
     }
   ],
+<<<<<<< HEAD
   "sections": []
 >>>>>>> ef17a51 (TinaCMS content update)
+=======
+  "sections": [
+    {
+      "heading": "Dining",
+      "anchor": "dining",
+      "text": "this is about all the dining stuff"
+    }
+  ]
+>>>>>>> 334e879 (TinaCMS content update)
 }
