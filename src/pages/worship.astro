@@ -1,17 +1,30 @@
 ---
 import ContentPage from '../layouts/ContentPage.astro';
-import { site } from '../lib/content';
+import { getPage } from '../lib/content';
+
+const page = getPage('worship');
+const buttons = page?.buttons ?? [];
 const safe = (url: string) => url && url !== '#';
 ---
 <ContentPage slug="worship">
-  <section class="section compact" style="padding-top:0">
-    <div class="container">
-      <div class="actions">
-        <a class="button prayer-book" href="https://www.bcponline.org/" target="_blank" rel="noopener noreferrer">Book of Common Prayer</a>
-        {safe(site.youtubeUrl) && <a class="button secondary" href={site.youtubeUrl}>Watch on YouTube</a>}
+  {buttons.length > 0 && (
+    <section class="section compact" style="padding-top:0">
+      <div class="container">
+        <div class="actions">
+          {buttons.map((button: any) => safe(button.url) && (
+            <a
+              class:list={['button', button.style === 'secondary' && 'secondary', button.style === 'prayer-book' && 'prayer-book']}
+              href={button.url}
+              target={button.newWindow ? '_blank' : undefined}
+              rel={button.newWindow ? 'noopener noreferrer' : undefined}
+            >
+              {button.label}
+            </a>
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 </ContentPage>
 
 <style>
