@@ -1,8 +1,13 @@
 ---
+import { getAboutPages } from '../../lib/content';
 import { tinaField } from '@tinacms/astro/tina-field';
 import ContactCards from '../ContactCards.astro';
 import OptimizedImage from '../OptimizedImage.astro';
 const { data: page } = Astro.props;
+const isAboutPage = page?._sys?.filename === 'about';
+const summaryCards = isAboutPage
+  ? [...getAboutPages().map((item) => ({ heading: item.title, text: item.summary || '', url: item.url })), ...(page.summaryCards || []).filter((card) => !card.url?.startsWith('/about/'))]
+  : page?.summaryCards || [];
 const isConnectPage = page?._sys?.filename === 'connect';
 ---
 {page && (
@@ -34,9 +39,9 @@ const isConnectPage = page?._sys?.filename === 'connect';
           </>
         )}
         {page._sys?.filename?.startsWith('about-') && <a class="about-back" href="/about">← About Epiphany</a>}
-        {page.summaryCards?.length > 0 && (
+        {summaryCards.length > 0 && (
           <div class="summary-grid">
-            {page.summaryCards.filter((card) => card.heading && card.url && card.url !== '#').map((card) => (
+            {summaryCards.filter((card) => card.heading && card.url && card.url !== '#').map((card) => (
               <a class="card summary-card" href={card.url} data-tina-field={tinaField(card)}>
                 <h2 data-tina-field={tinaField(card, 'heading')}>{card.heading}</h2>
                 <p data-tina-field={tinaField(card, 'text')}>{card.text}</p>

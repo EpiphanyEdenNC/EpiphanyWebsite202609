@@ -1,12 +1,18 @@
 ---
-import { site } from '../lib/content';
+import { site, getAboutPages } from '../lib/content';
 const path = Astro.url.pathname;
 const headerSignup = site.header?.emailSignup;
 const showEmailSignup = headerSignup?.enabled && headerSignup.url && headerSignup.url !== '#';
 const textSignup = site.header?.textSignup;
 const showTextSignup = textSignup?.enabled && textSignup.url && textSignup.url !== '#';
 type NavLink = { label: string; url: string; hidden?: boolean; children?: NavLink[] };
-const nav: NavLink[] = site.header?.navigationLinks ?? [];
+const nav: NavLink[] = (site.header?.navigationLinks ?? []).map((link) => link.url.replace(/\/$/, '') === '/about' ? {
+  ...link,
+  children: [
+    ...getAboutPages().map((page) => ({ label: page.title, url: page.url })),
+    ...(link.children ?? []).filter((child) => !child.url.startsWith('/about/')),
+  ],
+} : link);
 const visibleLinks = (links: NavLink[]) => links.filter((link) => !link.hidden && link.label && link.url && link.url !== '#');
 const giveButton = site.header?.giveButton;
 const showGiveButton = giveButton?.enabled && giveButton.url && giveButton.url !== '#';
