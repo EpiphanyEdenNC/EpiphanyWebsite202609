@@ -36,13 +36,13 @@
   "outreachButtonUrl": "/serve",
   "sundayService": {
     "heading": "Sunday Eucharist Service",
-    "priestImage": "/images/uploads/Supply%20Priest%20Images/RevBarbaraCooke.jpg",
-    "date": "October 4, 2026",
+    "priestImage": "/images/uploads/Supply Priest Images/GeoffreyTaylor.jpg",
+    "date": "October 11, 2026",
     "time": "10:00 AM",
     "location": "Church of the Epiphany",
-    "sundayName": "19th Sunday after Pentecost\nFeast of St. Francis of Assisi",
-    "priestName": "The Rev. Barbara Cooke",
-    "priestBio": "After many years in parish ministry, the Rev. Barbara Cooke retired from full-time service in 2016.\n\nSince then, she has continued serving congregations through supply work, offering a faithful presence and steady support to churches in times of transition.\n\nKnown for her thoughtful preaching, warm pastoral care, and deeply reflective sermons, Reverend Cooke often leaves parishioners continuing in conversation about her message long after the service has ended.\n\nShe and her husband live in Greensboro and have three adult children and seven grandchildren.",
+    "sundayName": "20th Sunday after Pentecost",
+    "priestName": "The Rev. Geoffrey Taylor",
+    "priestBio": "Father Geoff brings a rich background in music, ministry, and higher education. A graduate of the North Carolina School of the\nArts with additional studies at Juilliard in New York City, he worked as a professional musician before moving into arts management and university advancement.\n\nWhile serving at Emory University, he discerned a call to ordained ministry and earned his Master of Divinity from Candler School of Theology in 2003.\n\nFather Geoff has served parishes in the Dioceses of Atlanta and Upper South Carolina, including as Canon for Congregational Development.\n\nHe now serves as a bi-vocational priest while also working with Wake Forest University School of Medicine and Atrium Health Wake Forest Baptist.\n\nHe and his wife live in Winston-Salem with their Jack Russell Terrier. In his free time Fr. Geoff enjoys fly fishing in the North Carolina mountains and reading.",
     "buttons": [
       {
         "label": "Order of Service",
