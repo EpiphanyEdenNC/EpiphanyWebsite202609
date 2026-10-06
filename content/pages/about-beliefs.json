@@ -1,4 +1,7 @@
 {
+  "urlName": "beliefs",
+  "summary": "Discover the faith, prayer, and Episcopal traditions that shape our life together.",
+  "sortOrder": 5,
   "title": "What We Believe",
   "eyebrow": "ABOUT EPIPHANY",
   "headerImage": "/images/uploads/Scripture,-Tradition,-Reason-in-Color.png",
@@ -23,8 +26,5 @@
       "heading": "Faith in daily life",
       "text": "We seek to follow Jesus by loving our neighbors, serving others, and respecting the dignity of every person. Questions and learning are part of the journey."
     }
-  ],
-  "urlName": "beliefs",
-  "summary": "Discover the faith, prayer, and Episcopal traditions that shape our life together.",
-  "sortOrder": 30
+  ]
 }
