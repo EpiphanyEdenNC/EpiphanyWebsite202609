@@ -43,7 +43,6 @@
     "sundayName": "19th Sunday after Pentecost\nFeast of St. Francis of Assisi",
     "priestName": "The Rev. Barbara Cooke",
     "priestBio": "After many years in parish ministry, the Rev. Barbara Cooke retired from full-time service in 2016.\n\nSince then, she has continued serving congregations through supply work, offering a faithful presence and steady support to churches in times of transition.\n\nKnown for her thoughtful preaching, warm pastoral care, and deeply reflective sermons, Reverend Cooke often leaves parishioners continuing in conversation about her message long after the service has ended.\n\nShe and her husband live in Greensboro and have three adult children and seven grandchildren.",
-    "additionalInfo": "",
     "buttons": [
       {
         "label": "Order of Service",
@@ -56,8 +55,15 @@
         "url": "/images/uploads/20261004Music_for_Sunday_October_4.pdf",
         "style": "secondary",
         "newWindow": true
+      },
+      {
+        "label": "Watch",
+        "linkUrl": "https://www.youtube.com/@epiphanyeden4487/streams",
+        "style": "secondary",
+        "newWindow": true
       }
-    ]
+    ],
+    "additionalInfo": ""
   },
   "closingHeading": "There is a place for you here.",
   "closingText": "Visit on Sunday, join us online, or reach out if you have a question before you come."
