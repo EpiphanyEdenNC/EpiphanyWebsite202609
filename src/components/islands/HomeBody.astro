@@ -115,30 +115,23 @@ const safe = (url: string) => url && url !== '#';
                 )}
               </div>
 
-              <div class="actions sunday-service-links">
-                {home.sundayService.orderOfServicePdf && (
-                  <a
-                    class="button"
-                    href={home.sundayService.orderOfServicePdf}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-tina-field={tinaField(home.sundayService, 'orderOfServicePdf')}
-                  >
-                    Order of Service
-                  </a>
-                )}
-                {home.sundayService.musicPdf && (
-                  <a
-                    class="button secondary"
-                    href={home.sundayService.musicPdf}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-tina-field={tinaField(home.sundayService, 'musicPdf')}
-                  >
-                    Music
-                  </a>
-                )}
-              </div>
+              {home.sundayService.buttons?.length > 0 && (
+                <div class="actions sunday-service-links" data-tina-field={tinaField(home.sundayService, 'buttons')}>
+                  {home.sundayService.buttons.map((button) => (
+                    button?.label && button?.url && (
+                      <a
+                        class:list={["button", button.style === 'secondary' && "secondary"]}
+                        href={button.url}
+                        target={button.newWindow ? "_blank" : undefined}
+                        rel={button.newWindow ? "noopener noreferrer" : undefined}
+                        data-tina-field={tinaField(button, 'label')}
+                      >
+                        {button.label}
+                      </a>
+                    )
+                  ))}
+                </div>
+              )}
 
               {home.sundayService.additionalInfo && (
                 <p class="sunday-service-additional" data-tina-field={tinaField(home.sundayService, 'additionalInfo')}>

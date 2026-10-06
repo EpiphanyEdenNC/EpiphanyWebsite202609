@@ -415,16 +415,38 @@ export default defineConfig({
                 ui: { component: 'textarea' },
               },
               {
-                type: 'image',
-                name: 'orderOfServicePdf',
-                label: 'Order of Service PDF',
-                accept: 'document',
-              },
-              {
-                type: 'image',
-                name: 'musicPdf',
-                label: 'Music PDF',
-                accept: 'document',
+                type: 'object',
+                name: 'buttons',
+                label: 'Sunday Service Buttons (add, remove, or reorder)',
+                list: true,
+                ui: {
+                  itemProps: (item) => ({ label: item?.label || 'New button' }),
+                },
+                fields: [
+                  { type: 'string', name: 'label', label: 'Button Text', required: true },
+                  {
+                    type: 'image',
+                    name: 'url',
+                    label: 'Button Link or Document',
+                    description: 'Select an uploaded PDF/document or enter a website/page URL.',
+                    accept: 'document',
+                    required: true,
+                  },
+                  {
+                    type: 'string',
+                    name: 'style',
+                    label: 'Button Style',
+                    options: [
+                      { label: 'Standard', value: 'standard' },
+                      { label: 'Secondary', value: 'secondary' },
+                    ],
+                  },
+                  {
+                    type: 'boolean',
+                    name: 'newWindow',
+                    label: 'Open link in a new window',
+                  },
+                ],
               },
               {
                 type: 'string',
