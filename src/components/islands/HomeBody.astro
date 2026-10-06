@@ -57,23 +57,6 @@ const safe = (url: string) => url && url !== '#';
       </div>
     </section>
 
-    <section class="section compact">
-      <div class="container grid-2">
-        <div class="feature-block">
-          <p class="eyebrow" style="color:#f0c6b5">WORSHIP</p>
-          <h2 class="h2" data-tina-field={tinaField(home, 'serviceHeading')}>{home.serviceHeading}</h2>
-          <p class="lede" data-tina-field={tinaField(home, 'serviceText')}>{home.serviceText}</p>
-          <div class="actions"><a class="button light" href={home.serviceButtonUrl} data-tina-field={tinaField(home, 'serviceButtonLabel')}>{home.serviceButtonLabel}</a></div>
-        </div>
-        <div class="feature-block clay">
-          <p class="eyebrow" style="color:#f6e0d7">OUTREACH</p>
-          <h2 class="h2" data-tina-field={tinaField(home, 'outreachHeading')}>{home.outreachHeading}</h2>
-          <p class="lede" data-tina-field={tinaField(home, 'outreachText')}>{home.outreachText}</p>
-          <div class="actions"><a class="button ghost-light" href={home.outreachButtonUrl} data-tina-field={tinaField(home, 'outreachButtonLabel')}>{home.outreachButtonLabel}</a></div>
-        </div>
-      </div>
-    </section>
-
     {home.sundayService && (
       <section class="section compact sunday-service-section">
         <div class="container">
@@ -167,6 +150,23 @@ const safe = (url: string) => url && url !== '#';
         </div>
       </section>
     )}
+
+    <section class="section compact">
+      <div class="container grid-2">
+        <div class="feature-block">
+          <p class="eyebrow" style="color:#f0c6b5">WORSHIP</p>
+          <h2 class="h2" data-tina-field={tinaField(home, 'serviceHeading')}>{home.serviceHeading}</h2>
+          <p class="lede" data-tina-field={tinaField(home, 'serviceText')}>{home.serviceText}</p>
+          <div class="actions"><a class="button light" href={home.serviceButtonUrl} data-tina-field={tinaField(home, 'serviceButtonLabel')}>{home.serviceButtonLabel}</a></div>
+        </div>
+        <div class="feature-block clay">
+          <p class="eyebrow" style="color:#f6e0d7">OUTREACH</p>
+          <h2 class="h2" data-tina-field={tinaField(home, 'outreachHeading')}>{home.outreachHeading}</h2>
+          <p class="lede" data-tina-field={tinaField(home, 'outreachText')}>{home.outreachText}</p>
+          <div class="actions"><a class="button ghost-light" href={home.outreachButtonUrl} data-tina-field={tinaField(home, 'outreachButtonLabel')}>{home.outreachButtonLabel}</a></div>
+        </div>
+      </div>
+    </section>
 
     <section class="section">
       <div class="container">
