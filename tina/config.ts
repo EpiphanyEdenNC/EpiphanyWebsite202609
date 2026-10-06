@@ -475,6 +475,7 @@ export default defineConfig({
         label: 'Pages',
         path: 'content/pages',
         format: 'json',
+        match: { exclude: 'about-*' },
         ui: {
           router: ({ document }) => `/${document._sys.filename.replace(/^about-/, 'about/')}`,
           allowedActions: { create: false, delete: false },
@@ -507,7 +508,118 @@ export default defineConfig({
             ui: { component: 'textarea' },
           },
           {
-            type: 'object', name: 'summaryCards', label: 'Linked Summary Blocks', list: true,
+            type: 'object', name: 'summaryCards', label: 'Linked Summary Blocks', description: 'These link to existing destinations; they do not create pages. For About child pages, use the About Pages collection, which automatically supplies the About cards and submenu.', list: true,
+            ui: { itemProps: (item) => ({ label: item?.heading || 'New summary block' }) },
+            fields: [
+              { type: 'string', name: 'heading', label: 'Heading', required: true },
+              { type: 'string', name: 'text', label: 'Summary', ui: { component: 'textarea' } },
+              { type: 'string', name: 'url', label: 'Page Link', required: true },
+            ],
+          },
+          {
+            type: 'object',
+            name: 'buttons',
+            label: 'Page Buttons (add, remove, or reorder)',
+            list: true,
+            ui: {
+              itemProps: (item) => ({ label: item?.label || 'New button' }),
+            },
+            fields: [
+              { type: 'string', name: 'label', label: 'Button Text', required: true },
+              { type: 'string', name: 'url', label: 'Button Link', required: true },
+              {
+                type: 'string',
+                name: 'style',
+                label: 'Button Style',
+                options: [
+                  { label: 'Standard', value: 'standard' },
+                  { label: 'Secondary', value: 'secondary' },
+                  { label: 'Prayer Book Red', value: 'prayer-book' },
+                ],
+              },
+              {
+                type: 'boolean',
+                name: 'newWindow',
+                label: 'Open link in a new window',
+              },
+            ],
+          },
+          {
+            type: 'object',
+            name: 'sections',
+            label: 'Sections',
+            list: true,
+            ui: {
+              itemProps: (item) => ({ label: item?.heading || 'Section' }),
+            },
+            fields: [
+              {
+                type: 'string',
+                name: 'heading',
+                label: 'Heading',
+                required: true,
+              },
+              { type: 'string', name: 'anchor', label: 'Optional Anchor ID' },
+              {
+                type: 'string',
+                name: 'text',
+                label: 'Text',
+                ui: { component: 'textarea' },
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: 'aboutPage',
+        label: 'About Pages',
+        path: 'content/pages',
+        format: 'json',
+        match: { include: 'about-*' },
+        ui: {
+          router: ({ document }) => `/about/${document._sys.filename.replace(/^about-/, '')}`,
+          filename: {
+            readonly: true,
+            slugify: (values) => `about-${values?.urlName || 'new-page'}`,
+          },
+        },
+        fields: [
+          {
+            type: 'string', name: 'urlName', label: 'URL Name', required: true,
+            description: 'For example: endowment creates /about/endowment. Set this when creating the page; editing it later does not rename the existing URL.',
+            ui: { validate: (value) => /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value || '') ? undefined : 'Use lowercase letters, numbers, and single hyphens only.' },
+          },
+          { type: 'string', name: 'summary', label: 'About Page Summary', ui: { component: 'textarea' } },
+          { type: 'number', name: 'sortOrder', label: 'Display Order', description: 'Lower numbers appear first in both the About page and submenu.' },
+
+          {
+            type: 'string',
+            name: 'title',
+            label: 'Page Title',
+            isTitle: true,
+            required: true,
+          },
+          { type: 'string', name: 'eyebrow', label: 'Small Heading' },
+          {
+            type: 'image',
+            name: 'headerImage',
+            label: 'Header Image',
+            description: 'Recommended: a wide 3:1 image, about 1800 × 600 pixels. The entire image is shown; other proportions may leave extra space around the image.',
+          },
+          {
+            type: 'string',
+            name: 'headerImageAlt',
+            label: 'Header Image Description',
+            description: 'Briefly describe the image for people using screen readers.',
+          },
+          {
+            type: 'string',
+            name: 'intro',
+            label: 'Page Introduction',
+            ui: { component: 'textarea' },
+          },
+          {
+            type: 'object', name: 'summaryCards', label: 'Linked Summary Blocks', description: 'These link to existing destinations; they do not create pages. For About child pages, use the About Pages collection, which automatically supplies the About cards and submenu.', list: true,
             ui: { itemProps: (item) => ({ label: item?.heading || 'New summary block' }) },
             fields: [
               { type: 'string', name: 'heading', label: 'Heading', required: true },

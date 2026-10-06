@@ -457,3 +457,25 @@ Tina selects the original image, and live editor previews may show the original 
 For local work, `npm run dev` does not run the optimizer and development output uses originals. Run `npm run build:local` to validate the optimized build, or `npm run optimize-images` to generate copies independently.
 
 After changing Sharp settings, delete the ignored generated WebP copies before rebuilding if you need existing images regenerated; the timestamp shortcut does not detect changes to width/quality settings. Check build logs for conversion warnings and inspect the resulting browser image sources. When adding a new image component, use `OptimizedImage` or the existing helper if it should participate in the optimization pipeline.
+
+
+### About Pages in Tina
+
+Use **About Pages → Add** to create a child page. Enter a title, a unique URL Name
+(e.g. `endowment`), an About Page Summary, Display Order, and the page content.
+Save, then use **Publish to Live** after finishing your changes. The deployment
+creates `/about/endowment` and automatically includes the page in the About
+summary cards and About submenu. Lower Display Order numbers appear first;
+equal numbers sort by title. Existing pages keep their filenames and URLs.
+The URL Name controls the filename when creating a page; changing it later does
+not rename that file. Delete an entry from About Pages and publish to remove
+its page, card, and submenu link together.
+
+Edit the main About introduction under **Pages → About Epiphany**. Its legacy
+Linked Summary Blocks and the About header's manual submenu links no longer
+control internal `/about/…` entries. External links remain supported there.
+The summary cards and navigation refresh on a new build; for newly added or
+removed pages, verify them after publishing. Other Pages remain protected from
+creation/deletion. About Pages uses the existing `content/pages/about-*.json`
+files in a separate Tina collection and has its own Tina island/query for
+editing previews.
