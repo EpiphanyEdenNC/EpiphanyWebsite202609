@@ -415,16 +415,43 @@ export default defineConfig({
                 ui: { component: 'textarea' },
               },
               {
-                type: 'image',
-                name: 'orderOfServicePdf',
-                label: 'Order of Service PDF',
-                accept: 'document',
-              },
-              {
-                type: 'image',
-                name: 'musicPdf',
-                label: 'Music PDF',
-                accept: 'document',
+                type: 'object',
+                name: 'buttons',
+                label: 'Sunday Service Buttons (add, remove, or reorder)',
+                list: true,
+                ui: {
+                  itemProps: (item) => ({ label: item?.label || 'New button' }),
+                },
+                fields: [
+                  { type: 'string', name: 'label', label: 'Button Text', required: true },
+                  {
+                    type: 'image',
+                    name: 'url',
+                    label: 'PDF/Document (optional)',
+                    description: 'Upload or select a document, or leave empty and use Website/Page Link below. Documents display before link buttons. If both fields are filled, the document is used.',
+                    accept: 'document',
+                  },
+                  {
+                    type: 'string',
+                    name: 'linkUrl',
+                    label: 'Website/Page Link (optional)',
+                    description: 'Enter a full URL (https://...) or a page path (/worship). Leave PDF/Document empty to use this link. Fill at least one destination field for the button to appear.',
+                  },
+                  {
+                    type: 'string',
+                    name: 'style',
+                    label: 'Button Style',
+                    options: [
+                      { label: 'Standard', value: 'standard' },
+                      { label: 'Secondary', value: 'secondary' },
+                    ],
+                  },
+                  {
+                    type: 'boolean',
+                    name: 'newWindow',
+                    label: 'Open link in a new window',
+                  },
+                ],
               },
               {
                 type: 'string',

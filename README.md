@@ -222,7 +222,7 @@ For an urgent hosted regression, a Netlify administrator can restore a known-goo
 
 Tina exposes Site Settings, Homepage, Pages, Events, and Ministries. This includes editable navigation/submenus and button visibility, footer/map settings, homepage quick-link items, page banners and introductions, and the Sunday service card.
 
-Sunday service fields include priest photo, heading, date/time text, optional location, Sunday name, priest name/bio, Order of Service and Music PDFs, and optional additional information. It is manually maintained; it is not an automatic weekly scheduler.
+Sunday service fields include priest photo, heading, date/time text, optional location, Sunday name, priest name/bio, an editable button list, and optional additional information. For each button, enter its text and either select/upload a PDF/Document or enter a Website/Page Link (a full URL or a path such as `/worship`). If both destinations are filled, the document is used; buttons without a destination are hidden. Document buttons display first, followed by link buttons, preserving Tina's list order within each group. Each button also has a style and an optional new-window setting. Existing Order of Service and Music uploads are preserved. The card is manually maintained; it is not an automatic weekly scheduler.
 
 Layouts, responsive behavior, CSS, routes, and external embed code remain developer responsibilities. A textarea enables newlines in the editor; the template/CSS must also preserve them where desired. Review global.css and the relevant component when text displays as one line.
 

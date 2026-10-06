@@ -12,6 +12,12 @@ const heroStyle = home?.heroImage
     : `background-image:url('${home.heroImage}')`
   : undefined;
 const safe = (url: string) => url && url !== '#';
+const serviceButtons = home?.sundayService?.buttons || [];
+// Keep the editor's order within each group, with uploaded documents first.
+const sundayServiceButtons = [
+  ...serviceButtons.filter((button) => button?.url),
+  ...serviceButtons.filter((button) => !button?.url && button?.linkUrl),
+].filter((button) => button?.label);
 ---
 {home && (
   <>
@@ -53,23 +59,6 @@ const safe = (url: string) => url && url !== '#';
         <div>
           <p class="lede" data-tina-field={tinaField(home, 'welcomeText')}>{home.welcomeText}</p>
           <div class="actions"><a class="button secondary" href="/welcome">Plan Your Visit</a></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section compact">
-      <div class="container grid-2">
-        <div class="feature-block">
-          <p class="eyebrow" style="color:#f0c6b5">WORSHIP</p>
-          <h2 class="h2" data-tina-field={tinaField(home, 'serviceHeading')}>{home.serviceHeading}</h2>
-          <p class="lede" data-tina-field={tinaField(home, 'serviceText')}>{home.serviceText}</p>
-          <div class="actions"><a class="button light" href={home.serviceButtonUrl} data-tina-field={tinaField(home, 'serviceButtonLabel')}>{home.serviceButtonLabel}</a></div>
-        </div>
-        <div class="feature-block clay">
-          <p class="eyebrow" style="color:#f6e0d7">OUTREACH</p>
-          <h2 class="h2" data-tina-field={tinaField(home, 'outreachHeading')}>{home.outreachHeading}</h2>
-          <p class="lede" data-tina-field={tinaField(home, 'outreachText')}>{home.outreachText}</p>
-          <div class="actions"><a class="button ghost-light" href={home.outreachButtonUrl} data-tina-field={tinaField(home, 'outreachButtonLabel')}>{home.outreachButtonLabel}</a></div>
         </div>
       </div>
     </section>
@@ -132,30 +121,21 @@ const safe = (url: string) => url && url !== '#';
                 )}
               </div>
 
-              <div class="actions sunday-service-links">
-                {home.sundayService.orderOfServicePdf && (
-                  <a
-                    class="button"
-                    href={home.sundayService.orderOfServicePdf}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-tina-field={tinaField(home.sundayService, 'orderOfServicePdf')}
-                  >
-                    Order of Service
-                  </a>
-                )}
-                {home.sundayService.musicPdf && (
-                  <a
-                    class="button secondary"
-                    href={home.sundayService.musicPdf}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-tina-field={tinaField(home.sundayService, 'musicPdf')}
-                  >
-                    Music
-                  </a>
-                )}
-              </div>
+              {sundayServiceButtons.length > 0 && (
+                <div class="actions sunday-service-links" data-tina-field={tinaField(home.sundayService, 'buttons')}>
+                  {sundayServiceButtons.map((button) => (
+                    <a
+                      class:list={["button", button.style === 'secondary' && "secondary"]}
+                      href={button.url || button.linkUrl}
+                      target={button.newWindow ? "_blank" : undefined}
+                      rel={button.newWindow ? "noopener noreferrer" : undefined}
+                      data-tina-field={tinaField(button, 'label')}
+                    >
+                      {button.label}
+                    </a>
+                  ))}
+                </div>
+              )}
 
               {home.sundayService.additionalInfo && (
                 <p class="sunday-service-additional" data-tina-field={tinaField(home.sundayService, 'additionalInfo')}>
@@ -167,6 +147,23 @@ const safe = (url: string) => url && url !== '#';
         </div>
       </section>
     )}
+
+    <section class="section compact">
+      <div class="container grid-2">
+        <div class="feature-block">
+          <p class="eyebrow" style="color:#f0c6b5">WORSHIP</p>
+          <h2 class="h2" data-tina-field={tinaField(home, 'serviceHeading')}>{home.serviceHeading}</h2>
+          <p class="lede" data-tina-field={tinaField(home, 'serviceText')}>{home.serviceText}</p>
+          <div class="actions"><a class="button light" href={home.serviceButtonUrl} data-tina-field={tinaField(home, 'serviceButtonLabel')}>{home.serviceButtonLabel}</a></div>
+        </div>
+        <div class="feature-block clay">
+          <p class="eyebrow" style="color:#f6e0d7">OUTREACH</p>
+          <h2 class="h2" data-tina-field={tinaField(home, 'outreachHeading')}>{home.outreachHeading}</h2>
+          <p class="lede" data-tina-field={tinaField(home, 'outreachText')}>{home.outreachText}</p>
+          <div class="actions"><a class="button ghost-light" href={home.outreachButtonUrl} data-tina-field={tinaField(home, 'outreachButtonLabel')}>{home.outreachButtonLabel}</a></div>
+        </div>
+      </div>
+    </section>
 
     <section class="section">
       <div class="container">
