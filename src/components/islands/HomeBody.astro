@@ -12,6 +12,12 @@ const heroStyle = home?.heroImage
     : `background-image:url('${home.heroImage}')`
   : undefined;
 const safe = (url: string) => url && url !== '#';
+const serviceButtons = home?.sundayService?.buttons || [];
+// Keep the editor's order within each group, with uploaded documents first.
+const sundayServiceButtons = [
+  ...serviceButtons.filter((button) => button?.url),
+  ...serviceButtons.filter((button) => !button?.url && button?.linkUrl),
+].filter((button) => button?.label);
 ---
 {home && (
   <>
@@ -115,20 +121,18 @@ const safe = (url: string) => url && url !== '#';
                 )}
               </div>
 
-              {home.sundayService.buttons?.length > 0 && (
+              {sundayServiceButtons.length > 0 && (
                 <div class="actions sunday-service-links" data-tina-field={tinaField(home.sundayService, 'buttons')}>
-                  {home.sundayService.buttons.map((button) => (
-                    button?.label && button?.url && (
-                      <a
-                        class:list={["button", button.style === 'secondary' && "secondary"]}
-                        href={button.url}
-                        target={button.newWindow ? "_blank" : undefined}
-                        rel={button.newWindow ? "noopener noreferrer" : undefined}
-                        data-tina-field={tinaField(button, 'label')}
-                      >
-                        {button.label}
-                      </a>
-                    )
+                  {sundayServiceButtons.map((button) => (
+                    <a
+                      class:list={["button", button.style === 'secondary' && "secondary"]}
+                      href={button.url || button.linkUrl}
+                      target={button.newWindow ? "_blank" : undefined}
+                      rel={button.newWindow ? "noopener noreferrer" : undefined}
+                      data-tina-field={tinaField(button, 'label')}
+                    >
+                      {button.label}
+                    </a>
                   ))}
                 </div>
               )}

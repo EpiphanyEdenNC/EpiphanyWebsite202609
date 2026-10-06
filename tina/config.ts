@@ -427,10 +427,15 @@ export default defineConfig({
                   {
                     type: 'image',
                     name: 'url',
-                    label: 'Button Link or Document',
-                    description: 'Select an uploaded PDF/document or enter a website/page URL.',
+                    label: 'PDF/Document (optional)',
+                    description: 'Upload or select a document, or leave empty and use Website/Page Link below. Documents display before link buttons. If both fields are filled, the document is used.',
                     accept: 'document',
-                    required: true,
+                  },
+                  {
+                    type: 'string',
+                    name: 'linkUrl',
+                    label: 'Website/Page Link (optional)',
+                    description: 'Enter a full URL (https://...) or a page path (/worship). Leave PDF/Document empty to use this link. Fill at least one destination field for the button to appear.',
                   },
                   {
                     type: 'string',
