@@ -490,6 +490,34 @@ export default defineConfig({
           },
           {
             type: 'object',
+            name: 'buttons',
+            label: 'Page Buttons (add, remove, or reorder)',
+            list: true,
+            ui: {
+              itemProps: (item) => ({ label: item?.label || 'New button' }),
+            },
+            fields: [
+              { type: 'string', name: 'label', label: 'Button Text', required: true },
+              { type: 'string', name: 'url', label: 'Button Link', required: true },
+              {
+                type: 'string',
+                name: 'style',
+                label: 'Button Style',
+                options: [
+                  { label: 'Standard', value: 'standard' },
+                  { label: 'Secondary', value: 'secondary' },
+                  { label: 'Prayer Book Red', value: 'prayer-book' },
+                ],
+              },
+              {
+                type: 'boolean',
+                name: 'newWindow',
+                label: 'Open link in a new window',
+              },
+            ],
+          },
+          {
+            type: 'object',
             name: 'sections',
             label: 'Sections',
             list: true,

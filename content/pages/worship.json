@@ -29,5 +29,19 @@
       "anchor": "birthday",
       "text": "During the service we have a special blessing for anyone celebrating a birthday or anniversary."
     }
+  ],
+  "buttons": [
+    {
+      "label": "Book of Common Prayer",
+      "url": "https://www.bcponline.org/",
+      "style": "prayer-book",
+      "newWindow": true
+    },
+    {
+      "label": "Watch on YouTube",
+      "url": "https://www.youtube.com/@EpiphanyEden",
+      "style": "secondary",
+      "newWindow": true
+    }
   ]
 }
