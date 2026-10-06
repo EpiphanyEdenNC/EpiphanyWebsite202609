@@ -2,13 +2,16 @@
 import BaseLayout from './BaseLayout.astro';
 import TinaIsland from '@tinacms/astro/TinaIsland.astro';
 import ContentBody from '../components/islands/ContentBody.astro';
-import { getPageTina } from '../lib/tina-data';
+import { getPageTina, getAboutPageTina } from '../lib/tina-data';
 import { islands } from '../lib/islands';
 
 interface Props { slug: string; }
 const { slug } = Astro.props;
-const result = await getPageTina(slug);
-const page = result.data?.page;
+const isAboutChild = slug.startsWith('about-');
+const islandName = isAboutChild ? 'aboutPage' : 'page';
+const page = isAboutChild
+  ? (await getAboutPageTina(slug)).data?.aboutPage
+  : (await getPageTina(slug)).data?.page;
 if (!page) throw new Error(`Page content not found: ${slug}`);
 ---
 <BaseLayout
@@ -17,7 +20,7 @@ if (!page) throw new Error(`Page content not found: ${slug}`);
   image={page.headerImage}
   imageAlt={page.headerImageAlt}
 >
-  <TinaIsland name="page" wrapper={islands.page.wrapper} params={{ slug }} primary>
+  <TinaIsland name={islandName} wrapper={islands[islandName].wrapper} params={{ slug }} primary>
     <ContentBody data={page} />
   </TinaIsland>
   <slot />

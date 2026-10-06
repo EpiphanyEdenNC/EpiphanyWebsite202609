@@ -36,3 +36,11 @@ export function formatDate(date: string) {
     timeZone: 'America/New_York'
   }).format(new Date(date));
 }
+
+export function getAboutPages() {
+  const modules = import.meta.glob('../../content/pages/about-*.json', { eager: true });
+  return Object.entries(modules).map(([file, mod]: any) => ({
+    ...mod.default,
+    url: `/about/${file.split('/').pop().replace(/^about-/, '').replace(/\.json$/, '')}`,
+  })).sort((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999) || a.title.localeCompare(b.title));
+}
