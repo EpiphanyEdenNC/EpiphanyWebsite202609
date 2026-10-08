@@ -6,7 +6,7 @@
   "primaryButtonLabel": "Plan Your Visit",
   "primaryButtonUrl": "/welcome",
   "secondaryButtonLabel": "Watch Online",
-  "secondaryButtonUrl": "/worship#watch-online",
+  "secondaryButtonUrl": "https://www.youtube.com/@epiphanyeden4487/streams",
   "quickLinks": [
     {
       "label": "Sunday",
