@@ -1,17 +1,10 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContentPage from '../../layouts/ContentPage.astro';
 import { getEvents, formatDate } from '../../lib/content';
 import OptimizedImage from '../../components/OptimizedImage.astro';
 const events = getEvents();
 ---
-<BaseLayout title="Events" description="Upcoming worship, formation, fellowship, and outreach at Church of the Epiphany.">
-  <section class="page-hero">
-    <div class="container">
-      <p class="eyebrow">WHAT'S HAPPENING</p>
-      <h1 class="h1">Events</h1>
-      <p class="lede">Worship, formation, fellowship, outreach, and other opportunities to take part in parish life.</p>
-    </div>
-  </section>
+<ContentPage slug="events">
   <section class="section">
     <div class="container cards">
       {events.map((event: any) => (
@@ -35,4 +28,4 @@ const events = getEvents();
       ))}
     </div>
   </section>
-</BaseLayout>
+</ContentPage>
