@@ -2,7 +2,7 @@ import type { IslandRegistry } from '@tinacms/astro/experimental';
 import HomeBody from '../components/islands/HomeBody.astro';
 import ContentBody from '../components/islands/ContentBody.astro';
 import EventBody from '../components/islands/EventBody.astro';
-import { getAboutPageTina, getEventTina, getHomeTina, getPageTina } from './tina-data';
+import { getCustomPageTina, getAboutPageTina, getEventTina, getHomeTina, getPageTina } from './tina-data';
 
 export const islands: IslandRegistry = {
   home: {
@@ -16,6 +16,12 @@ export const islands: IslandRegistry = {
     component: ContentBody,
     wrapper: { tag: 'div' },
     propsFromData: (result: any) => ({ data: result.data?.page }),
+  },
+  customPage: {
+    fetch: (_request, params) => getCustomPageTina(params.get('slug') ?? ''),
+    component: ContentBody,
+    wrapper: { tag: 'div' },
+    propsFromData: (result: any) => ({ data: result.data?.customPage }),
   },
   aboutPage: {
     fetch: (_request, params) => getAboutPageTina(params.get('slug') ?? ''),

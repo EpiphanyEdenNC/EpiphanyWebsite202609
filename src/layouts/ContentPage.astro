@@ -2,14 +2,16 @@
 import BaseLayout from './BaseLayout.astro';
 import TinaIsland from '@tinacms/astro/TinaIsland.astro';
 import ContentBody from '../components/islands/ContentBody.astro';
-import { getPageTina, getAboutPageTina } from '../lib/tina-data';
+import { getPageTina, getAboutPageTina, getCustomPageTina } from '../lib/tina-data';
 import { islands } from '../lib/islands';
 
-interface Props { slug: string; }
-const { slug } = Astro.props;
-const isAboutChild = slug.startsWith('about-');
-const islandName = isAboutChild ? 'aboutPage' : 'page';
-const page = isAboutChild
+interface Props { slug: string; custom?: boolean; }
+const { slug, custom = false } = Astro.props;
+const isAboutChild = !custom && slug.startsWith('about-');
+const islandName = custom ? 'customPage' : isAboutChild ? 'aboutPage' : 'page';
+const page = custom
+  ? (await getCustomPageTina(slug)).data?.customPage
+  : isAboutChild
   ? (await getAboutPageTina(slug)).data?.aboutPage
   : (await getPageTina(slug)).data?.page;
 if (!page) throw new Error(`Page content not found: ${slug}`);
