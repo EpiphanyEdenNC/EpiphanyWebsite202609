@@ -479,3 +479,14 @@ removed pages, verify them after publishing. Other Pages remain protected from
 creation/deletion. About Pages uses the existing `content/pages/about-*.json`
 files in a separate Tina collection and has its own Tina island/query for
 editing previews.
+
+
+## Creating additional pages in Tina
+
+Use **New Pages → Create New** for a general page with the same layout as Serve. Enter a Page Title and a URL Name, such as `children-youth` for `/children-youth`. URL names use lowercase letters, numbers, and single hyphens. Existing page and system names are reserved. The filename determines the URL; editing URL Name after creation does not rename a saved page.
+
+Add an optional small heading, header image and its description, introduction, linked summary blocks, and text sections. Save the page, then add its URL under **Site Settings → Header → Navigation Buttons** or an item's **Submenu Links**. Save the menu and publish when all edits are ready. Menu links alone do not create pages.
+
+New pages are stored in `content/custom-pages/`. `src/pages/[slug].astro` generates their routes, and the `customPage` Tina collection and island provide editing through the shared ContentPage layout. The original Pages collection remains protected from creation/deletion; About Pages retain their separate workflow. New Pages can be deleted, but editors must also remove links pointing to a deleted page. Renaming a URL requires creating the replacement page and updating links.
+
+Page duplication is not added by this change. Create a new page and copy the desired text and image selections from an existing page.
