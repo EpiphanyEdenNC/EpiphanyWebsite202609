@@ -18,6 +18,26 @@ const giveButton = site.header?.giveButton;
 const showGiveButton = giveButton?.enabled && giveButton.url && giveButton.url !== '#';
 const pledgeButton = site.header?.pledgeButton;
 const showPledgeButton = pledgeButton?.enabled && pledgeButton.url && pledgeButton.url !== '#';
+const actionMenus = [
+  {
+    label: 'Sign Up',
+    id: 'submenu-signup',
+    style: 'signup',
+    children: [
+      ...(showEmailSignup ? [{ label: headerSignup.label || 'Email Sign Up', url: headerSignup.url }] : []),
+      ...(showTextSignup ? [{ label: textSignup.label || 'Text Sign Up', url: textSignup.url }] : []),
+    ],
+  },
+  {
+    label: 'Give',
+    id: 'submenu-give',
+    style: 'give',
+    children: [
+      ...(showGiveButton ? [{ label: giveButton.label || 'Give', url: giveButton.url }] : []),
+      ...(showPledgeButton ? [{ label: pledgeButton.label || 'Pledge', url: pledgeButton.url }] : []),
+    ],
+  },
+].filter((menu) => menu.children.length > 0);
 ---
 <a class="skip-link" href="#main">Skip to main content</a>
 <div class="topbar">
@@ -48,10 +68,25 @@ const showPledgeButton = pledgeButton?.enabled && pledgeButton.url && pledgeButt
           </div>
         ) : <a href={link.url} aria-current={path === link.url ? 'page' : undefined}>{link.label}</a>;
       })}
-      {showEmailSignup && <a class="signup" href={headerSignup.url}>{headerSignup.label || 'Email Sign Up'}</a>}
-      {showTextSignup && <a class="signup" href={textSignup.url} aria-current={path === textSignup.url ? 'page' : undefined}>{textSignup.label || 'Text Sign Up'}</a>}
-      {showGiveButton && <a class="give" href={giveButton.url} aria-current={path === giveButton.url ? 'page' : undefined}>{giveButton.label || 'Give'}</a>}
-      {showPledgeButton && <a class="give" href={pledgeButton.url} aria-current={path === pledgeButton.url ? 'page' : undefined}>{pledgeButton.label || 'Pledge'}</a>}
+      {actionMenus.map((menu) => (
+        <div class="nav-group">
+          <div class="nav-parent">
+            <button
+              class:list={['submenu-toggle', 'nav-action-toggle', menu.style, { 'nav-ancestor': menu.children.some((child) => path === child.url) }]}
+              type="button"
+              aria-expanded="false"
+              aria-controls={menu.id}
+            >
+              {menu.label} <span aria-hidden="true">⌄</span>
+            </button>
+          </div>
+          <div class="nav-submenu nav-action-submenu" id={menu.id} hidden>
+            {menu.children.map((child) => (
+              <a href={child.url} aria-current={path === child.url ? 'page' : undefined}>{child.label}</a>
+            ))}
+          </div>
+        </div>
+      ))}
     </nav>
   </div>
 </header>

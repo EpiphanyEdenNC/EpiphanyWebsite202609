@@ -812,3 +812,26 @@ textarea {
 @media (max-width: 640px) {
   .summary-grid { grid-template-columns: 1fr; }
 }
+
+/* Group the signup and giving actions using the same submenu controls as About. */
+.nav .nav-action-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.65rem 0.72rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+.nav .nav-action-toggle.signup[aria-expanded='true'] {
+  background: var(--sage-deep);
+  color: white;
+}
+.nav .nav-action-toggle.give:hover,
+.nav .nav-action-toggle.give[aria-expanded='true'] {
+  background: var(--sage-deep);
+  color: white;
+}
+.nav-action-submenu { left: auto; right: 0; }
+@media (max-width: 1200px) {
+  .nav .nav-action-toggle { flex: 1; justify-content: space-between; margin-left: 0; }
+}
