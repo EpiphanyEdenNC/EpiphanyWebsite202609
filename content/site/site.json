@@ -51,6 +51,16 @@
       {
         "label": "Events",
         "url": "/events"
+      },
+      {
+        "label": "Young People",
+        "url": "/young",
+        "children": [
+          {
+            "label": "Children",
+            "url": "/children"
+          }
+        ]
       }
     ],
     "emailSignup": {
