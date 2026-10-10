@@ -59,6 +59,10 @@
           {
             "label": "Children",
             "url": "/children"
+          },
+          {
+            "label": "Teenagers",
+            "url": "/teens"
           }
         ]
       }
