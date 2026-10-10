@@ -1,4 +1,5 @@
 import { defineConfig } from 'tinacms';
+import { validatePageName } from '../src/lib/page-names';
 import { PublishSitePlugin } from './PublishSite';
 import { ViewWebsitePlugin } from './ViewWebsite';
 
@@ -542,6 +543,82 @@ export default defineConfig({
                 name: 'newWindow',
                 label: 'Open link in a new window',
               },
+            ],
+          },
+          {
+            type: 'object',
+            name: 'sections',
+            label: 'Sections',
+            list: true,
+            ui: {
+              itemProps: (item) => ({ label: item?.heading || 'Section' }),
+            },
+            fields: [
+              {
+                type: 'string',
+                name: 'heading',
+                label: 'Heading',
+                required: true,
+              },
+              { type: 'string', name: 'anchor', label: 'Optional Anchor ID' },
+              {
+                type: 'string',
+                name: 'text',
+                label: 'Text',
+                ui: { component: 'textarea' },
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: 'customPage',
+        label: 'New Pages',
+        path: 'content/custom-pages',
+        format: 'json',
+        ui: {
+          router: ({ document }) => `/${document._sys.filename}`,
+          filename: { readonly: true, slugify: (values) => values?.urlName || 'new-page' },
+        },
+        fields: [
+          {
+            type: 'string', name: 'urlName', label: 'URL Name', required: true,
+            description: 'For example: children-youth creates /children-youth. Set this when creating the page; changing it later does not rename the existing URL. Add the menu link separately in Site Settings → Header. After deleting a page, remove its menu links too.',
+            ui: { validate: (value) => validatePageName(value) },
+          },
+          {
+            type: 'string',
+            name: 'title',
+            label: 'Page Title',
+            isTitle: true,
+            required: true,
+          },
+          { type: 'string', name: 'eyebrow', label: 'Small Heading' },
+          {
+            type: 'image',
+            name: 'headerImage',
+            label: 'Header Image',
+            description: 'Recommended: a wide 3:1 image, about 1800 × 600 pixels. The entire image is shown; other proportions may leave extra space around the image.',
+          },
+          {
+            type: 'string',
+            name: 'headerImageAlt',
+            label: 'Header Image Description',
+            description: 'Briefly describe the image for people using screen readers.',
+          },
+          {
+            type: 'string',
+            name: 'intro',
+            label: 'Page Introduction',
+            ui: { component: 'textarea' },
+          },
+          {
+            type: 'object', name: 'summaryCards', label: 'Linked Summary Blocks', description: 'Link to existing pages or websites. Create the destination page first.', list: true,
+            ui: { itemProps: (item) => ({ label: item?.heading || 'New summary block' }) },
+            fields: [
+              { type: 'string', name: 'heading', label: 'Heading', required: true },
+              { type: 'string', name: 'text', label: 'Summary', ui: { component: 'textarea' } },
+              { type: 'string', name: 'url', label: 'Page Link', required: true },
             ],
           },
           {

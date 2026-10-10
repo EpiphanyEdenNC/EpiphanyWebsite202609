@@ -20,3 +20,8 @@ export const getEventTina = (slug: string) =>
   requestWithMetadata(client.queries.event({ relativePath: `${slug}.json` }), {
     priority: 'primary',
   });
+
+export const getCustomPageTina = (slug: string) =>
+  requestWithMetadata(client.queries.customPage({ relativePath: `${slug}.json` }), {
+    priority: 'primary',
+  });
