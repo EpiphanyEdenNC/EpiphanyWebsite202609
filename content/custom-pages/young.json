@@ -2,6 +2,7 @@
   "urlName": "young",
   "title": "Young People at Epiphany",
   "eyebrow": "For I tell you that in heaven their angels always see the face of my Father who is in heaven.",
+  "intro": "",
   "summaryCards": [
     {
       "heading": "Children",
@@ -10,6 +11,12 @@
     {
       "heading": "Teens",
       "url": "/teens"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "Always Welcome",
+      "text": "Everyone is welcome at Epiphany. That includes people of all ages."
     }
   ]
 }
