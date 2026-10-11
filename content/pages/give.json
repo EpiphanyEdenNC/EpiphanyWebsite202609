@@ -1,7 +1,14 @@
 {
-  "title": "Give",
+  "title": "Make An Offering",
   "eyebrow": "SUPPORT OUR MINISTRY",
   "intro": "Financial gifts support worship, outreach, care for our buildings, and the shared ministry of Epiphany.",
+  "summaryCards": [
+    {
+      "heading": "Online",
+      "text": "Make a secure contribution through our online giving provider Tithely. You can make a one-time gift or create a recurring gifts. Use your debit/credit card or your checking account. Use of your checking account incurs less fees.",
+      "url": "https://give.tithe.ly/?formId=3f5210a6-6865-11ee-90fc-1260ab546d11"
+    }
+  ],
   "sections": [
     {
       "heading": "Give online",
