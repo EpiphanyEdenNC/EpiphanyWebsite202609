@@ -36,7 +36,7 @@
   ],
   "sections": [
     {
-      "heading": "Sunday Worship — 10:00 AM",
+      "heading": "Sunday Worship \u2014 10:00 AM",
       "text": "Our principal weekly service is Holy Eucharist. The service follows the Book of Common Prayer and normally lasts about an hour."
     },
     {
@@ -53,5 +53,6 @@
       "anchor": "birthday",
       "text": "During the service we have a special blessing for anyone celebrating a birthday or anniversary."
     }
-  ]
+  ],
+  "urlName": "worship"
 }

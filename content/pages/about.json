@@ -4,9 +4,19 @@
   "intro": "Get to know Church of the Epiphany: our story, our faith, our connections, and the people who help our parish serve.",
   "summaryCards": [
     {
+      "heading": "What We Believe",
+      "text": "Discover the faith, prayer, and Episcopal traditions that shape our life together.",
+      "url": "/about/beliefs"
+    },
+    {
       "heading": "History",
       "text": "Explore the story of our parish and its place in the Eden community.",
       "url": "/about/history"
+    },
+    {
+      "heading": "Leadership",
+      "text": "Learn about the people who guide and support our parish.",
+      "url": "/about/leadership"
     },
     {
       "heading": "Our Diocese",
@@ -14,14 +24,10 @@
       "url": "/about/diocese"
     },
     {
-      "heading": "What We Believe",
-      "text": "Discover the faith, prayer, and Episcopal traditions that shape our life together.",
-      "url": "/about/beliefs"
-    },
-    {
-      "heading": "Leadership",
-      "text": "Learn about the people who guide and support our parish.",
-      "url": "/about/leadership"
+      "heading": "Endowment Fund",
+      "text": "Leave a lasting legacy at Epiphany",
+      "url": "/about/endowment"
     }
-  ]
+  ],
+  "urlName": "about"
 }
