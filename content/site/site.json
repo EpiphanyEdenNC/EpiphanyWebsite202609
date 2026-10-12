@@ -19,20 +19,24 @@
         "url": "/about",
         "children": [
           {
+            "label": "What We Believe",
+            "url": "/about/beliefs"
+          },
+          {
             "label": "History",
             "url": "/about/history"
+          },
+          {
+            "label": "Leadership",
+            "url": "/about/leadership"
           },
           {
             "label": "Our Diocese",
             "url": "/about/diocese"
           },
           {
-            "label": "What We Believe",
-            "url": "/about/beliefs"
-          },
-          {
-            "label": "Leadership",
-            "url": "/about/leadership"
+            "label": "Endowment Fund",
+            "url": "/about/endowment"
           }
         ]
       },
