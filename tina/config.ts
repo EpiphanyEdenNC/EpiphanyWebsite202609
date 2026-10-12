@@ -816,36 +816,6 @@ export default defineConfig({
           { type: 'string', name: 'buttonUrl', label: 'Optional Button Link' },
         ],
       },
-      {
-        name: 'ministry',
-        label: 'Ministries',
-        path: 'content/ministries',
-        format: 'json',
-        fields: [
-          {
-            type: 'string',
-            name: 'title',
-            label: 'Ministry Name',
-            isTitle: true,
-            required: true,
-          },
-          {
-            type: 'string',
-            name: 'summary',
-            label: 'Short Summary',
-            ui: { component: 'textarea' },
-          },
-          {
-            type: 'string',
-            name: 'description',
-            label: 'Description',
-            ui: { component: 'textarea' },
-          },
-          { type: 'image', name: 'image', label: 'Photo' },
-          { type: 'boolean', name: 'featured', label: 'Feature on Serve Page' },
-          { type: 'number', name: 'sortOrder', label: 'Sort Order' },
-        ],
-      },
     ],
   },
 });

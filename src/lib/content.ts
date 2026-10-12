@@ -21,13 +21,6 @@ export function getEvents() {
     .sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
 }
 
-export function getMinistries() {
-  const modules = import.meta.glob('../../content/ministries/*.json', { eager: true });
-  return Object.values(modules)
-    .map((mod: any) => mod.default)
-    .sort((a: any, b: any) => (a.sortOrder || 999) - (b.sortOrder || 999));
-}
-
 export function formatDate(date: string) {
   return new Intl.DateTimeFormat('en-US', {
     month: 'long',
