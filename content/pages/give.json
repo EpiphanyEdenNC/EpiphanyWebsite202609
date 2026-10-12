@@ -1,14 +1,31 @@
 {
-  "title": "Give",
+  "title": "Make An Offering",
   "eyebrow": "SUPPORT OUR MINISTRY",
-  "intro": "Financial gifts support worship, outreach, care for our buildings, and the shared ministry of Epiphany.",
-  "sections": [
+  "headerImage": "/images/uploads/Give_-Many-Ways,-One-Ministry.png",
+  "intro": "Your gifts of financial support, time, and talent help sustain Epiphany’s worship, outreach, care of our historic buildings, and service to our community. Every gift, in whatever form, strengthens our shared ministry and helps us put God’s love into action.",
+  "summaryCards": [
     {
-      "heading": "Give online",
-      "text": "Use the Give Online button below to make a secure contribution through our online giving provider Tithely. You can make a one-time gift or create a recurring gifts. Use your debit/credit card or your checking account. Use of your checking account incurs less fees."
+      "heading": "Online",
+      "text": "Make a secure contribution through our online giving provider Tithely. You can make a one-time gift or create a recurring gifts. Use your debit/credit card or your checking account. Use of your checking account incurs less fees.",
+      "url": "https://give.tithe.ly/?formId=3f5210a6-6865-11ee-90fc-1260ab546d11"
     },
     {
-      "heading": "Other ways to give",
+      "heading": "Endowment Fund",
+      "text": "Epiphany has an Endowment Fund. The purpose of the Endowment is to provide funds for the church to use in perpetuity (forever) for capital improvements and outreach.",
+      "url": "https://epiphanyeden.org/about/endowment/"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "Time and Talents",
+      "text": "At Epiphany, we believe that every gift comes from God and can be offered back in love. While financial giving is important, we also honor the many ways people share their time and talents. If you would like to make an offering of your time or talent with Epiphany, please email the church and let us know."
+    },
+    {
+      "heading": "Qualified Charitable Distribution (QCD)",
+      "text": "We are not financial advisors - please consult your accountant or tax advisor for details. The IRS allows Qualified Charitable Distributions to non-profits such as Epiphany. Your QCD  from certain tax-deferred accounts might provide tax advantages if you are of a certain age."
+    },
+    {
+      "heading": "Other ways to give financially",
       "text": "Gifts may also be made by check or through other arrangements with the parish. Contact the church if you need assistance. Checks should be made out to \"Church of the Epiphany\"."
     }
   ],
