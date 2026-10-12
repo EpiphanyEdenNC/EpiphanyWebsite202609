@@ -1,0 +1,14 @@
+<script>
+  import { refreshEventLists } from '../lib/event-dates.mjs';
+
+  const refresh = () => refreshEventLists(document);
+  refresh();
+  document.addEventListener('astro:page-load', refresh);
+  // Tina can replace the island's markup after the initial page load.
+  new MutationObserver(refresh).observe(document.body, { childList: true, subtree: true });
+  // Also roll off events when a visitor leaves the page open overnight.
+  window.setInterval(refresh, 60_000);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) refresh();
+  });
+</script>

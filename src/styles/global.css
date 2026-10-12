@@ -835,3 +835,6 @@ textarea {
 @media (max-width: 1200px) {
   .nav .nav-action-toggle { flex: 1; justify-content: space-between; margin-left: 0; }
 }
+
+/* Card display rules must not override date/limit filtering. */
+.event-card[hidden] { display: none; }
