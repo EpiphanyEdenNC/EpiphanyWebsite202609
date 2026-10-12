@@ -1,4 +1,6 @@
 ---
+import EventRolloff from '../../components/EventRolloff.astro';
+import { eventDateKey } from '../../lib/event-dates.mjs';
 import ContentPage from '../../layouts/ContentPage.astro';
 import { getEvents, formatDate } from '../../lib/content';
 import OptimizedImage from '../../components/OptimizedImage.astro';
@@ -6,9 +8,9 @@ const events = getEvents();
 ---
 <ContentPage slug="events">
   <section class="section">
-    <div class="container cards">
+    <div class="container cards" data-event-list>
       {events.map((event: any) => (
-        <article class="event-card">
+        <article class="event-card" data-event-date={eventDateKey(event.date)}>
   {event.image && (
     <OptimizedImage
       class="event-card-image"
@@ -27,5 +29,6 @@ const events = getEvents();
         </article>
       ))}
     </div>
+    <EventRolloff />
   </section>
 </ContentPage>
