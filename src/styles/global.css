@@ -561,27 +561,6 @@ textarea {
   white-space: pre-line;
 }
 
-.ministry-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  margin-top: 2rem;
-}
-.ministry {
-  padding: 1.6rem;
-  border-radius: 24px;
-  background: var(--sky);
-}
-.ministry:nth-child(2n) {
-  background: var(--sand);
-}
-.ministry h3 {
-  margin: 0 0 0.5rem;
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: 1.55rem;
-  font-weight: 500;
-}
-
 .site-footer {
   padding: 3.5rem 0 2rem;
   background: #182225;
@@ -705,8 +684,7 @@ textarea {
     min-height: 320px;
     max-height: 520px;
   }
-  .cards,
-  .ministry-grid {
+  .cards {
     grid-template-columns: 1fr 1fr;
   }
   .hero {
@@ -745,7 +723,6 @@ textarea {
     border-bottom: 0;
   }
   .cards,
-  .ministry-grid,
   .footer-grid {
     grid-template-columns: 1fr;
   }
@@ -779,7 +756,6 @@ textarea {
 .summary-card h2 { margin: 0; font-family: Georgia, serif; font-size: 1.8rem; font-weight: 500; }
 .summary-card p { color: var(--muted); white-space: pre-line; }
 .summary-arrow { margin-top: auto; padding-top: 0.75rem; color: var(--sage-deep); font-weight: 700; }
-.about-back { justify-self: start; margin-bottom: 1.5rem; font-weight: 700; }
 .nav-group { position: relative; }
 .nav-parent { display: flex; align-items: center; }
 .nav-parent > a { padding-right: 0.3rem; }
@@ -838,3 +814,6 @@ textarea {
 
 /* Card display rules must not override date/limit filtering. */
 .event-card[hidden] { display: none; }
+
+.prayer-book { background: #a5232b; border-color: #a5232b; color: #fff; }
+.prayer-book:hover, .prayer-book:focus-visible { background: #861a21; border-color: #861a21; }

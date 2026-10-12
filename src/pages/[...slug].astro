@@ -1,0 +1,17 @@
+---
+import ContentPage from '../layouts/ContentPage.astro';
+import { validatePageName, builtInPageNames } from '../lib/page-names';
+
+export function getStaticPaths() {
+  const pages = import.meta.glob('../../content/pages/**/*.json');
+  return Object.keys(pages).flatMap((file) => {
+    const slug = file.replace('../../content/pages/', '').replace(/\.json$/, '');
+    if (builtInPageNames.has(slug)) return [];
+    const error = validatePageName(slug);
+    if (error) throw new Error(`Invalid page ${file}: ${error}`);
+    return [{ params: { slug } }];
+  });
+}
+const { slug } = Astro.params;
+---
+<ContentPage slug={slug!} />

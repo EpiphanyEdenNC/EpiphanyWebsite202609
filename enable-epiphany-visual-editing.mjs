@@ -419,24 +419,8 @@ const safe = (url: string) => url && url !== '#';
 
 write('src/pages/serve.astro', `---
 import ContentPage from '../layouts/ContentPage.astro';
-import { getMinistries } from '../lib/content';
-const ministries = getMinistries().filter((m) => m.featured);
 ---
-<ContentPage slug="serve">
-  <section class="section compact" style="padding-top:0">
-    <div class="container">
-      <div class="ministry-grid">
-        {ministries.map((ministry) => (
-          <article class="ministry">
-            <h3>{ministry.title}</h3>
-            <p><strong>{ministry.summary}</strong></p>
-            <p>{ministry.description}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-</ContentPage>`);
+<ContentPage slug="serve" />`);
 
 write('src/pages/give.astro', `---
 import ContentPage from '../layouts/ContentPage.astro';
