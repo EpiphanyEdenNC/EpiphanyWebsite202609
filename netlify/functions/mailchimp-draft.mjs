@@ -44,13 +44,12 @@ function render(data, origin) {
 }
 export async function handler(event) {
   if (event.httpMethod !== 'POST') return response(405, { error: 'Method not allowed' });
-  const { MAILCHIMP_API_KEY: apiKey, MAILCHIMP_AUDIENCE_ID: listId, MAILCHIMP_TAG_ID: tagId, MAILCHIMP_REPLY_TO: replyTo, NEWSLETTER_EDITOR_PASSWORD: password } = process.env;
-  if (!apiKey || !listId || !tagId || !replyTo || !password) return response(503, { error: 'Newsletter integration is not configured in Netlify.' });
+  const { MAILCHIMP_API_KEY: apiKey, MAILCHIMP_AUDIENCE_ID: listId, MAILCHIMP_REPLY_TO: replyTo, NEWSLETTER_EDITOR_PASSWORD: password } = process.env;
+  if (!apiKey || !listId || !replyTo || !password) return response(503, { error: 'Newsletter integration is not configured in Netlify.' });
   if (!authorized(event.headers['x-newsletter-password'], password)) return response(401, { error: 'Incorrect newsletter password.' });
   let data;
   try { data = JSON.parse(event.body || '{}'); } catch { return response(400, { error: 'Invalid request.' }); }
   if (!data || typeof data !== 'object' || !Array.isArray(data.events)) return response(400, { error: 'Invalid newsletter.' });
-  if (!/^[1-9][0-9]*$/.test(tagId)) return response(503, { error: 'MAILCHIMP_TAG_ID must be a numeric tag ID.' });
   const dc = apiKey.split('-').pop();
   if (!/^[a-z0-9]+$/i.test(dc || '')) return response(503, { error: 'Mailchimp API key format is invalid.' });
   const origin = (process.env.NEWSLETTER_SITE_URL || 'https://epiphanyeden.org').replace(/\/$/, '');
@@ -64,8 +63,18 @@ export async function handler(event) {
   };
   try {
     const subject = String(data.subject || 'This Week at Epiphany').trim().slice(0, 150);
+    // Resolve the existing church tag by its exact name, not a saved segment ID.
+    const tagName = 'MainMailingList';
+    const tagsRes = await fetch(apiBase + '/lists/' + encodeURIComponent(listId) + '/tag-search?name=' + encodeURIComponent(tagName), { headers: { Authorization: headers.Authorization } });
+    const tagsData = await tagsRes.json().catch(() => ({}));
+    if (!tagsRes.ok) throw new Error(tagsData.detail || 'Unable to find Mailchimp tags.');
+    const exactTags = (tagsData.tags || []).filter(t => t.name === tagName);
+    if (exactTags.length !== 1 || !Number.isSafeInteger(exactTags[0].id)) {
+      return response(422, { error: 'Recipient tag MainMailingList was not found uniquely. No campaign was created.' });
+    }
+    const tagId = exactTags[0].id;
     const campaign = await send('/campaigns', 'POST', {
-      type: 'regular', recipients: { list_id: listId, segment_opts: { saved_segment_id: Number(tagId) } },
+      type: 'regular', recipients: { list_id: listId, segment_opts: { match: 'all', conditions: [{ condition_type: 'StaticSegment', field: 'static_segment', op: 'static_is', value: tagId }] } },
       settings: { subject_line: subject, title: subject + ' (website draft)', from_name: process.env.MAILCHIMP_FROM_NAME || 'Church of the Epiphany', reply_to: replyTo },
     });
     try {
