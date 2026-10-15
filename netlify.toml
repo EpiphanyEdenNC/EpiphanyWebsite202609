@@ -6,6 +6,11 @@
   # bypass this ignore command, so Publish Website still triggers a build.
   ignore = "test \"$(git log -1 --pretty=%B)\" = \"TinaCMS content update\""
 
+# Mailchimp campaign creation runs as a server-side Netlify Function.
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
 [build.environment]
   NODE_VERSION = "22"
 
@@ -15,6 +20,12 @@
     X-Frame-Options = "SAMEORIGIN"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/newsletter-builder"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-store"
 
 # Generated Tina admin files are outside Astro's shared layout.
 [[headers]]
