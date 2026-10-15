@@ -44,8 +44,8 @@ function render(data, origin) {
 }
 export async function handler(event) {
   if (event.httpMethod !== 'POST') return response(405, { error: 'Method not allowed' });
-  const { MAILCHIMP_API_KEY: apiKey, MAILCHIMP_AUDIENCE_ID: listId, NEWSLETTER_EDITOR_PASSWORD: password } = process.env;
-  if (!apiKey || !listId || !password) return response(503, { error: 'Newsletter integration is not configured in Netlify.' });
+  const { MAILCHIMP_API_KEY: apiKey, MAILCHIMP_AUDIENCE_ID: listId, MAILCHIMP_REPLY_TO: replyTo, NEWSLETTER_EDITOR_PASSWORD: password } = process.env;
+  if (!apiKey || !listId || !replyTo || !password) return response(503, { error: 'Newsletter integration is not configured in Netlify.' });
   if (!authorized(event.headers['x-newsletter-password'], password)) return response(401, { error: 'Incorrect newsletter password.' });
   let data;
   try { data = JSON.parse(event.body || '{}'); } catch { return response(400, { error: 'Invalid request.' }); }
@@ -65,7 +65,7 @@ export async function handler(event) {
     const subject = String(data.subject || 'This Week at Epiphany').trim().slice(0, 150);
     const campaign = await send('/campaigns', 'POST', {
       type: 'regular', recipients: { list_id: listId },
-      settings: { subject_line: subject, title: subject + ' (website draft)', from_name: process.env.MAILCHIMP_FROM_NAME || 'Church of the Epiphany', reply_to: process.env.MAILCHIMP_REPLY_TO },
+      settings: { subject_line: subject, title: subject + ' (website draft)', from_name: process.env.MAILCHIMP_FROM_NAME || 'Church of the Epiphany', reply_to: replyTo },
     });
     try {
       await send('/campaigns/' + encodeURIComponent(campaign.id) + '/content', 'PUT', { html: render(data, origin) });
