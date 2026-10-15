@@ -44,3 +44,16 @@ If a failed submission says that the draft was created but adding content failed
 ## Local testing
 
 The static builder preview can be tested with `npm run dev`, but Netlify Functions need a compatible local Netlify development setup (or a Netlify deploy) to test Mailchimp draft creation. Never test with the live audience without checking the Mailchimp draft before sending.
+
+## Netlify deployment checklist
+
+The repository's `netlify.toml` explicitly declares `[functions] directory = "netlify/functions"` with esbuild. The deployed function endpoint is `/.netlify/functions/mailchimp-draft`. No additional Netlify redirect, external plugin, or Mailchimp webhook is needed.
+
+1. Confirm the four required environment variables above are in the **same Netlify site** as the deployment, and scoped for **Functions** if Netlify offers scope selection. Use **All scopes** if appropriate. The values are read at function runtime, so they must be available to functions, not only builds.
+2. Merge the feature branch into `develop` and let the connected development Netlify site deploy (or trigger a manual deployment of that branch).
+3. Under the site's **Deploys** tab, open the successful deploy and verify that the function `mailchimp-draft` is listed under **Functions/Logs**. A GET request to `/.netlify/functions/mailchimp-draft` intentionally responds 405; this confirms the function route exists without generating a campaign. A 404 means it was not deployed or routed correctly.
+4. Open `/admin`, choose **Weekly Newsletter**, and check that the Sunday information and upcoming event list load. They use the latest **published** content.
+5. Enter the editor password and create **one test draft**, then verify inside Mailchimp that its recipient filter is exactly `MainMailingList`, including recipient count. Never send it just to test the integration.
+6. Only after passing these checks, merge `develop` to `main`, verify production Netlify variables, and run the same checks on production.
+
+**Troubleshooting:** If the endpoint replies 503, check the Netlify environment variables and their scope. If 401, check the editor password. If 422, verify the tag's spelling and that the Audience ID is for the audience containing `MainMailingList`. A 502 usually means Mailchimp returned an error; see the response and Netlify function logs. If a draft was created but adding content failed, inspect Mailchimp before retrying.
