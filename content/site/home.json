@@ -36,23 +36,23 @@
   "outreachButtonUrl": "/serve",
   "sundayService": {
     "heading": "Sunday Eucharist Service",
-    "priestImage": "/images/uploads/Supply Priest Images/GeoffreyTaylor.jpg",
-    "date": "October 11, 2026",
+    "priestImage": "/images/uploads/Supply%20Priest%20Images/VirginiaHeistand.jpg",
+    "date": "October 18, 2026",
     "time": "10:00 AM",
     "location": "Church of the Epiphany",
-    "sundayName": "20th Sunday after Pentecost",
-    "priestName": "The Rev. Geoffrey Taylor",
-    "priestBio": "Father Geoff brings a rich background in music, ministry, and higher education. A graduate of the North Carolina School of the\nArts with additional studies at Juilliard in New York City, he worked as a professional musician before moving into arts management and university advancement.\n\nWhile serving at Emory University, he discerned a call to ordained ministry and earned his Master of Divinity from Candler School of Theology in 2003.\n\nFather Geoff has served parishes in the Dioceses of Atlanta and Upper South Carolina, including as Canon for Congregational Development.\n\nHe now serves as a bi-vocational priest while also working with Wake Forest University School of Medicine and Atrium Health Wake Forest Baptist.\n\nHe and his wife live in Winston-Salem with their Jack Russell Terrier. In his free time Fr. Geoff enjoys fly fishing in the North Carolina mountains and reading.",
+    "sundayName": "Twenty-First Sunday after Pentecost",
+    "priestName": "The Rev. Virginia Heistand",
+    "priestBio": "The Rev. Canon Virginia Heistand was ordained in 1991. One former parishioner remarked that it sometimes feels as though she attended seminary in the 1940s, thanks to the wisdom and stories passed down from her family, which included two bishops and two additional priests — all of whom still get quoted often!  \n\nShe and her husband, Jim Wilson, are a “love at last” couple whose family includes five children, three in-law children, and three precious grandchildren (though she says to stay tuned in case the count increases).  \n\nAfter 35 years in parish ministry, Reverend Virginia considers it a true joy to continue serving the church through supply ministry. ",
     "buttons": [
       {
         "label": "Order of Service",
-        "url": "/images/uploads/OOS_October_11_2026_Pentecost_20.pdf",
+        "url": "/images/uploads/OOS_October_18_2026_Pentecost_21.pdf",
         "style": "standard",
         "newWindow": true
       },
       {
         "label": "Music",
-        "url": "/images/uploads/Music_for_Sunday_October_11.pdf",
+        "url": "/images/uploads/Music_for_Sun_October_18.pdf",
         "style": "secondary",
         "newWindow": true
       },
