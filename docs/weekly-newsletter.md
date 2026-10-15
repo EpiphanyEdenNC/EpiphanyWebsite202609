@@ -9,7 +9,8 @@ The **Weekly Newsletter** item in Tina's Site navigation opens `/newsletter-buil
 Add these **secret environment variables** for each Netlify site where you want to test or use campaign creation:
 
 - `MAILCHIMP_API_KEY`: Mailchimp Marketing API key; keep it secret.
-- `MAILCHIMP_AUDIENCE_ID`: the existing church subscriber audience ID.
+- `MAILCHIMP_AUDIENCE_ID`: the Mailchimp audience/list ID containing the newsletter subscribers.
+- `MAILCHIMP_TAG_ID`: **required numeric ID of the existing newsletter recipient tag (static segment)**. This is different from the audience ID and different from the tag's display name. Campaign draft creation fails closed if this setting is missing; it must never default to emailing the entire audience. Confirm the draft's recipient filter and expected contact count in Mailchimp before sending.
 - `MAILCHIMP_REPLY_TO`: verified sender/reply-to email address for the Mailchimp campaign.
 - `MAILCHIMP_FROM_NAME`: optional, defaults to Church of the Epiphany.
 - `NEWSLETTER_EDITOR_PASSWORD`: long, unique password shared only with newsletter editors. **Not** their Tina login.
