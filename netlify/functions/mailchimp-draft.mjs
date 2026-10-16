@@ -62,7 +62,7 @@ export async function handler(event) {
     return json;
   };
   try {
-    const subject = String(data.subject || 'This Week at Epiphany').trim().slice(0, 150);
+    const subject = String(data.subject || 'Upcoming Events at Epiphany').trim().slice(0, 150);
     // Resolve the existing church tag by its exact name, not a saved segment ID.
     const tagName = 'MainMailingList';
     const tagsRes = await fetch(apiBase + '/lists/' + encodeURIComponent(listId) + '/tag-search?name=' + encodeURIComponent(tagName), { headers: { Authorization: headers.Authorization } });
