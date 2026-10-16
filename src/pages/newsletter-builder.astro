@@ -55,13 +55,19 @@ const dateKey = s => {
   const date = /^\d{4}-\d{2}-\d{2}/.test(text) ? new Date(text.slice(0,10)+'T12:00:00') : new Date(text);
   return Number.isFinite(date.getTime()) ? date : null;
 };
+function formatEventDate(value){
+ const raw=String(value||'');
+ const date=/^\d{4}-\d{2}-\d{2}$/.test(raw) ? new Date(raw+'T12:00:00Z') : new Date(raw);
+ if(!Number.isFinite(date.getTime()))return raw;
+ return new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',month:'long',day:'numeric',year:'numeric'}).format(date);
+}
 function renderEvents(){
  const now = new Date(); now.setHours(0,0,0,0);
  const end = new Date(now);end.setDate(end.getDate()+Number($('window').value));
  const chosen = new Set([...document.querySelectorAll('[data-event]:checked')].map(i=>i.dataset.event));
  const initial = !$('events').querySelector('[data-event]');
  const events = source.events.filter(e=>{const d=dateKey(e.date);return d && d>=now && d<=end});
- $('events').innerHTML = events.length ? events.map(e=>'<div class="event"><div class="option"><input type="checkbox" data-event="'+escape(e.id)+'" id="event-'+escape(e.id)+'" '+(initial||chosen.has(e.id)?'checked':'')+'/><label for="event-'+escape(e.id)+'"><strong>'+escape(e.title)+'</strong> — '+escape(e.date)+'<div class="muted">'+escape(e.summary||'')+'</div></label></div></div>').join('') : '<p>No upcoming events in this period.</p>';
+ $('events').innerHTML = events.length ? events.map(e=>'<div class="event"><div class="option"><input type="checkbox" data-event="'+escape(e.id)+'" id="event-'+escape(e.id)+'" '+(initial||chosen.has(e.id)?'checked':'')+'/><label for="event-'+escape(e.id)+'"><strong>'+escape(e.title)+'</strong> — '+escape(formatEventDate(e.date))+'<div class="muted">'+escape(e.summary||'')+'</div></label></div></div>').join('') : '<p>No upcoming events in this period.</p>';
  document.querySelectorAll('[data-event]').forEach(e=>e.addEventListener('change',showPreview));
  showPreview();
 }
@@ -76,7 +82,7 @@ function showPreview(){
  let html='<h2>This Week at Epiphany</h2>';
  if(data.intro)html+='<p>'+escape(data.intro).replace(/\n/g,'<br>')+'</p>';
  if(service)html+='<h3>Sunday Worship</h3><p>'+escape(service.heading)+'<br>'+escape(service.date)+' · '+escape(service.time)+'<br>'+escape(service.sundayName||'')+'<br>'+escape(service.priestName||'')+'</p>';
- if(data.events.length)html+='<h3>Upcoming Events</h3>'+data.events.map(e=>'<p><strong>'+escape(e.title)+'</strong><br>'+escape(e.date)+' '+escape(e.time||'')+'<br>'+escape(e.summary||'')+'</p>').join('');
+ if(data.events.length)html+='<h3>Upcoming Events</h3>'+data.events.map(e=>'<p><strong>'+escape(e.title)+'</strong><br>'+escape(formatEventDate(e.date))+' '+escape(e.time||'')+'<br>'+escape(e.summary||'')+'</p>').join('');
  if(data.announcement)html+='<h3>News & Announcements</h3><p>'+escape(data.announcement).replace(/\n/g,'<br>')+'</p>';
  $('preview').innerHTML=html+'<p class="muted">Draft preview. Mailchimp adds final email formatting and event links.</p>';
 }

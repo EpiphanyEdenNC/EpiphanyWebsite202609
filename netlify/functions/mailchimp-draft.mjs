@@ -18,6 +18,15 @@ function safeUrl(path, origin) {
     return u.protocol === 'https:' ? u.href : '';
   } catch { return ''; }
 }
+function formatEventDate(value) {
+  if (!value) return '';
+  const raw = String(value);
+  const date = /^\d{4}-\d{2}-\d{2}$/.test(raw) ? new Date(raw + 'T12:00:00Z') : new Date(raw);
+  if (!Number.isFinite(date.getTime())) return raw;
+  return new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/New_York', month: 'long', day: 'numeric', year: 'numeric',
+  }).format(date);
+}
 function line(s) { return escapeHtml(s).replace(/\r?\n/g, '<br>'); }
 function render(data, origin) {
   const button = (label, href) => href ? `<p style="margin:14px 0"><a href="${escapeHtml(href)}" style="color:#245b60;text-decoration:underline">${escapeHtml(label)} →</a></p>` : '';
@@ -35,7 +44,7 @@ function render(data, origin) {
   if (events.length) {
     rows.push('<h2 style="color:#27443f">Upcoming Events</h2>');
     for (const e of events) {
-      rows.push(`<div style="border-top:1px solid #ddd;padding:12px 0"><h3 style="margin:0;color:#27443f">${escapeHtml(e.title)}</h3><p style="margin:5px 0">${escapeHtml(e.date)} ${escapeHtml(e.time || '')} ${escapeHtml(e.location || '')}</p><p>${escapeHtml(e.summary || '')}</p>${button('Event details', safeUrl(e.url, origin))}</div>`);
+      rows.push(`<div style="border-top:1px solid #ddd;padding:12px 0"><h3 style="margin:0;color:#27443f">${escapeHtml(e.title)}</h3><p style="margin:5px 0">${escapeHtml(formatEventDate(e.date))} ${escapeHtml(e.time || '')} ${escapeHtml(e.location || '')}</p><p>${escapeHtml(e.summary || '')}</p>${button('Event details', safeUrl(e.url, origin))}</div>`);
     }
   }
   if (data.announcement) rows.push(`<h2 style="color:#27443f">News & Announcements</h2><p>${line(data.announcement)}</p>`);
