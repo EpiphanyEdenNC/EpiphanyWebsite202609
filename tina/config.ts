@@ -2,6 +2,7 @@ import { defineConfig } from 'tinacms';
 import { validatePageName } from '../src/lib/page-names';
 import { PublishSitePlugin } from './PublishSite';
 import { ViewWebsitePlugin } from './ViewWebsite';
+import { WeeklyNewsletterPlugin } from './WeeklyNewsletter';
 
 const branch =
   process.env.HEAD ||
@@ -14,6 +15,7 @@ export default defineConfig({
   cmsCallback: (cms) => {
     cms.plugins.add(PublishSitePlugin);
     cms.plugins.add(ViewWebsitePlugin);
+    cms.plugins.add(WeeklyNewsletterPlugin);
     return cms;
   },
   clientId: process.env.PUBLIC_TINA_CLIENT_ID || '',
