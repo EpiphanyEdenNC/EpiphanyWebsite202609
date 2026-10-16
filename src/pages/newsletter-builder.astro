@@ -24,7 +24,7 @@ button:disabled{opacity:.55;cursor:not-allowed}.muted{color:#52665c;font-size:.9
 <p>Create a Mailchimp <strong>draft only</strong> from published website information. Nothing is sent to subscribers from this page.</p>
 <div class="panel">
 <h2>1. Choose newsletter content</h2>
-<label for="subject">Email subject</label><input id="subject" type="text" value="This Week at Epiphany"/>
+<label for="subject">Email subject</label><input id="subject" type="text" value="Upcoming Events at Epiphany"/>
 <label for="intro">Personal introduction (optional)</label><textarea id="intro" placeholder="A few words for the congregation..."></textarea>
 <div class="option"><input type="checkbox" id="service" checked/><label for="service">Include Sunday service information</label></div>
 <p id="serviceDescription" class="muted">Loading Sunday service...</p>
@@ -67,7 +67,7 @@ function renderEvents(){
 }
 function selected(){
  const ids=new Set([...document.querySelectorAll('[data-event]:checked')].map(el=>el.dataset.event));
- return {subject:$('subject').value.trim()||'This Week at Epiphany',intro:$('intro').value.trim(),
+ return {subject:$('subject').value.trim()||'Upcoming Events at Epiphany',intro:$('intro').value.trim(),
   includeService:$('service').checked,service:source.service,
   events:source.events.filter(e=>ids.has(e.id)),announcement:$('announcement').value.trim()};
 }
