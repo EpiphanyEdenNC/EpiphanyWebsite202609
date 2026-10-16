@@ -33,7 +33,7 @@ function render(data, origin) {
   const service = data.includeService && data.service ? data.service : null;
   const events = Array.isArray(data.events) ? data.events.slice(0, 30) : [];
   const rows = [];
-  rows.push(`<div style="font-family:Arial,Helvetica,sans-serif;max-width:640px;margin:0 auto;color:#283735;font-size:16px;line-height:1.6"><div style="background:#f4f0e8;padding:26px;text-align:center"><h1 style="margin:0;color:#27443f">This Week at Epiphany</h1><div>Worship · Fellowship · Outreach</div></div><div style="padding:22px">`);
+  rows.push(`<div style="font-family:Arial,Helvetica,sans-serif;max-width:640px;margin:0 auto;color:#283735;font-size:16px;line-height:1.6"><div style="background:#f4f0e8;padding:26px;text-align:center"><h1 style="margin:0;color:#27443f">Upcoming Events at Epiphany</h1><div>Worship · Fellowship · Outreach</div></div><div style="padding:22px">`);
   if (data.intro) rows.push(`<p style="white-space:normal">${line(data.intro)}</p>`);
   if (service) {
     rows.push('<h2 style="color:#27443f">Sunday Worship</h2>');
