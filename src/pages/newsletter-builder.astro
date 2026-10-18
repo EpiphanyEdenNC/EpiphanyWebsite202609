@@ -48,7 +48,7 @@ button:disabled{opacity:.55;cursor:not-allowed}.muted{color:#52665c;font-size:.9
 </main>
 <script>
 const $ = (id) => document.getElementById(id);
-let source = { service: null, events: [] };
+let source = { service: null, events: [], newsletterSettings: {} };
 const escape = s => String(s ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const dateKey = s => {
   const text = String(s || '');
@@ -73,13 +73,17 @@ function renderEvents(){
 }
 function selected(){
  const ids=new Set([...document.querySelectorAll('[data-event]:checked')].map(el=>el.dataset.event));
- return {subject:$('subject').value.trim()||'Upcoming Events at Epiphany',intro:$('intro').value.trim(),
+ return {subject:$('subject').value.trim()||source.newsletterSettings?.subject||'Upcoming Events at Epiphany',
+  heading:source.newsletterSettings?.heading||'Upcoming Events at Epiphany',
+  subheading:source.newsletterSettings?.subheading??'Worship · Fellowship · Outreach',
+  intro:$('intro').value.trim(),
   includeService:$('service').checked,service:source.service,
   events:source.events.filter(e=>ids.has(e.id)),announcement:$('announcement').value.trim()};
 }
 function showPreview(){
  const data=selected(),service=data.includeService&&data.service;
- let html='<h2>Upcoming Events at Epiphany</h2>';
+ let html='<h2>'+escape(data.heading)+'</h2>';
+ if(data.subheading)html+='<p class="muted">'+escape(data.subheading)+'</p>';
  if(data.intro)html+='<p>'+escape(data.intro).replace(/\n/g,'<br>')+'</p>';
  if(service)html+='<h3>Sunday Worship</h3><p>'+escape(service.heading)+'<br>'+escape(service.date)+' · '+escape(service.time)+'<br>'+escape(service.sundayName||'')+'<br>'+escape(service.priestName||'')+'</p>';
  if(data.events.length)html+='<h3>Upcoming Events</h3>'+data.events.map(e=>'<p><strong>'+escape(e.title)+'</strong><br>'+escape(formatEventDate(e.date))+' '+escape(e.time||'')+'<br>'+escape(e.summary||'')+'</p>').join('');
@@ -90,6 +94,9 @@ async function initialize(){
  try{
   const r=await fetch('/newsletter-data.json',{cache:'no-store'});if(!r.ok)throw Error('Could not load website content');
   source=await r.json();
+  const defaults=source.newsletterSettings||{};
+  $('subject').value=defaults.subject||'Upcoming Events at Epiphany';
+  if(['7','14','30','90'].includes(String(defaults.defaultEventDays)))$('window').value=String(defaults.defaultEventDays);
   $('serviceDescription').textContent=source.service ? [source.service.date,source.service.time,source.service.priestName].filter(Boolean).join(' · ') : 'No Sunday service available';
   renderEvents();
  }catch(e){$('events').textContent=e.message;$('status').textContent='Could not load website data.';$('status').className='error';$('create').disabled=true;}
