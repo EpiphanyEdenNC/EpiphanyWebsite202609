@@ -4,19 +4,6 @@ The **Weekly Newsletter** item in Tina's Site navigation opens `/newsletter-buil
 
 **Important:** The newsletter data reflects the latest website deployment, not Tina changes that have only been saved but not published. Publish the website first. This is a draft creator, never an automatic sender.
 
-## Newsletter Settings in Tina
-
-Tina now has a separate **Newsletter Settings** collection under the content navigation. Its single record holds:
-
-- **Default Email Subject** — prepopulates the builder's Subject field. You can edit the subject for an individual campaign without overwriting this default.
-- **Email Heading** — main title shown in the preview and generated Mailchimp email.
-- **Email Subheading** — smaller line below that title, optional.
-- **Default Upcoming Events Range** — sets the initially selected range (7, 14, 30, or 90 days). You can still change it for one newsletter.
-
-Initial values are “Upcoming Events at Epiphany” for subject and heading, “Worship · Fellowship · Outreach” for subheading, and 90 days for events.
-
-After editing **Newsletter Settings**, choose **Save** and then **Publish Website** so the statically built `/newsletter-data.json` reflects the change. Open or refresh the Newsletter Builder after publishing. A draft already created in Mailchimp is not updated by later setting changes.
-
 ## One-time Netlify setup
 
 Add these **secret environment variables** for each Netlify site where you want to test or use campaign creation:
