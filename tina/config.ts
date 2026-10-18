@@ -250,6 +250,50 @@ export default defineConfig({
         ],
       },
       {
+        name: 'newsletter',
+        label: 'Newsletter Settings',
+        path: 'content/site',
+        format: 'json',
+        match: { include: 'newsletter' },
+        ui: {
+          global: true,
+          allowedActions: { create: false, delete: false },
+        },
+        fields: [
+          {
+            type: 'string',
+            name: 'subject',
+            label: 'Default Email Subject',
+            isTitle: true,
+            required: true,
+            description: 'Used when starting a newsletter. An editor may change the subject for an individual email.',
+          },
+          {
+            type: 'string',
+            name: 'heading',
+            label: 'Email Heading',
+            required: true,
+          },
+          {
+            type: 'string',
+            name: 'subheading',
+            label: 'Email Subheading',
+          },
+          {
+            type: 'string',
+            name: 'defaultEventDays',
+            label: 'Default Upcoming Events Range',
+            required: true,
+            options: [
+              { label: 'Next 7 days', value: '7' },
+              { label: 'Next 14 days', value: '14' },
+              { label: 'Next 30 days', value: '30' },
+              { label: 'Next 90 days', value: '90' },
+            ],
+          },
+        ],
+      },
+      {
         name: 'home',
         label: 'Homepage',
         path: 'content/site',
