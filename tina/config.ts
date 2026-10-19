@@ -10,6 +10,35 @@ const branch =
   process.env.GITHUB_BRANCH ||
   'main';
 
+/**
+ * New and duplicated events derive their filename (and detail-page URL) from
+ * the event name and event date. Never use the stored `slug`: Duplicate copies
+ * that value from the previous event, creating a filename collision.
+ *
+ * Event dates are stored as ISO timestamps; format them in the church's local
+ * timezone so an evening event isn't accidentally named for the next day.
+ */
+export function eventFilename(values: { title?: string; date?: string }): string {
+  const title = String(values.title || '')
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '') || 'event';
+
+  const date = values.date ? new Date(values.date) : null;
+  if (!date || Number.isNaN(date.getTime())) return title;
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/New_York',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(date);
+  const part = (type: string) => parts.find((item) => item.type === type)?.value;
+  return `${title}-${part('year')}-${part('month')}-${part('day')}`;
+}
+
 export default defineConfig({
   branch,
   cmsCallback: (cms) => {
@@ -585,15 +614,11 @@ export default defineConfig({
         ui: {
           router: ({ document }) => `/events/${document._sys.filename}`,
           filename: {
-            readonly: true,
-            slugify: (values) =>
-              values?.slug ||
-              values?.title
-                ?.toLowerCase()
-                .trim()
-                .replace(/[^a-z0-9]+/g, '-')
-                .replace(/^-|-$/g, '') ||
-              'event',
+            // Allow a custom filename while creating an event; existing files
+            // retain their filename/URL when their title or date is edited.
+            readonly: false,
+            description: 'Suggested automatically from Event Name and Date. You may customize this before creating the event. Every event needs a unique filename, including duplicates.',
+            slugify: (values) => eventFilename(values),
           },
         },
         fields: [
@@ -604,7 +629,9 @@ export default defineConfig({
             isTitle: true,
             required: true,
           },
-          { type: 'string', name: 'slug', label: 'URL Slug', required: true },
+          // Retain the legacy slug in JSON for older events, but hide it:
+          // routing uses the actual filename rather than this stored field.
+          { type: 'string', name: 'slug', label: 'Legacy URL Slug', ui: { component: 'hidden' } },
           {
             type: 'datetime',
             name: 'date',
