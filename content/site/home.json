@@ -36,23 +36,23 @@
   "outreachButtonUrl": "/serve",
   "sundayService": {
     "heading": "Sunday Eucharist Service",
-    "priestImage": "/images/uploads/Supply%20Priest%20Images/VirginiaHeistand.jpg",
-    "date": "October 18, 2026",
+    "priestImage": "/images/uploads/Supply%20Priest%20Images/RevFranklynColebrooke.jpg",
+    "date": "October 25, 2026",
     "time": "10:00 AM",
     "location": "Church of the Epiphany",
-    "sundayName": "Twenty-First Sunday after Pentecost",
-    "priestName": "The Rev. Virginia Heistand",
-    "priestBio": "The Rev. Canon Virginia Heistand was ordained in 1991. One former parishioner remarked that it sometimes feels as though she attended seminary in the 1940s, thanks to the wisdom and stories passed down from her family, which included two bishops and two additional priests — all of whom still get quoted often!  \n\nShe and her husband, Jim Wilson, are a “love at last” couple whose family includes five children, three in-law children, and three precious grandchildren (though she says to stay tuned in case the count increases).  \n\nAfter 35 years in parish ministry, Reverend Virginia considers it a true joy to continue serving the church through supply ministry. ",
+    "sundayName": "Twenty-Second Sunday After Pentecost",
+    "priestName": "The Rev. Franklyn Colebrooke",
+    "priestBio": "A retired priest, Father Colebrooke was known throughout his career and in his current ministry, not only as a faithful priest, but as a theologian and scholar deeply committed to religious education and community outreach. \n\nHis work has focused on bridging gaps between ethnic and religious communities — building understanding, cooperation, and genuine connection — work that feels especially meaningful in the world we live in today. \n\nFather Colebrooke and his wife Jennifer live in Clayton, North Carolina and have two daughters. ",
     "buttons": [
       {
         "label": "Order of Service",
-        "url": "/images/uploads/OOS_October_18_2026_Pentecost_21.pdf",
+        "url": "/images/uploads/20261025OOS_October_25_2026_Pentecost_22.pdf",
         "style": "standard",
         "newWindow": true
       },
       {
         "label": "Music",
-        "url": "/images/uploads/Music_for_Sun_October_18.pdf",
+        "url": "/images/uploads/20261025Music_for_Sun_October_25.pdf",
         "style": "secondary",
         "newWindow": true
       },
