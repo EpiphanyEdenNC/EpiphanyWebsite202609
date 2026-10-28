@@ -11,6 +11,11 @@
       "url": "https://www.youtube.com/@epiphanyeden4487/streams"
     },
     {
+      "heading": "Serve",
+      "text": "You can assist in the service multiple ways",
+      "url": "/serve"
+    },
+    {
       "heading": "Book of Common Prayer",
       "text": "The Book of Common Prayer(BCP) is the red book you can find in your pew. It contains the core worship and devotional texts used throughout the Episcopal church. Epiphany uses it in conjunction with the Order of Service (bulletin) you receive at a service.\n\nMost Sunday services are The Holy Eucharist which starts on page 355. \n\n You can click on this box to view the BCP. ",
       "url": "https://www.episcopalcommonprayer.org/uploads/1/2/9/8/129843103/bcp_2020.pdf"
@@ -19,11 +24,6 @@
       "heading": "Hymnal",
       "text": "The Hymnal is the blue book you can find in your pew. The Hymnal contains most of the songs sung at a service. Occasionally, we use songs from the Lift Every Voice and Sing II: An African American Hymnal, also found in your pew.\n\nYou can click on this box to view the Hymnal.\n\nThe bulletin lists the songs to be sung at each service, In addition the hymn numbers are display on the board to the left of the pulpit.",
       "url": "https://hymnary.org/hymnal/EH1982"
-    },
-    {
-      "heading": "Serve",
-      "text": "You can assist in the service multiple ways",
-      "url": "/serve"
     }
   ],
   "buttons": [
@@ -51,13 +51,9 @@
       "text": "In the Episcopal church, our ministers are referred to as priests. Epiphany currently does not have a \"regular\" priest. Instead we have the next best thing - a rotation of experienced priests that conduct our services. Watch our service videos to get an idea of the variety."
     },
     {
-      "heading": "Visitors and newcomers",
-      "text": "You do not need to know the Episcopal liturgy before you come. A bulletin provides what you need along with the red  Book of Common Prayer and the blue Hymnal found in the pews. You are free to participate at your own pace. We are a friendly group. Please ask someone for help if you need it."
-    },
-    {
       "heading": "Birthday/Anniversary",
       "anchor": "birthday",
-      "text": "During the service we have a special blessing for anyone celebrating a birthday or anniversary."
+      "text": "During the service we have a special blessing for anyone celebrating a birthday or anniversary. Just let us know,"
     }
   ]
 }
