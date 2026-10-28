@@ -54,7 +54,7 @@
         "label": "Order of Service",
         "url": "/images/uploads/20261101-OOS-November-1-2026-All-Saints-Day.pdf",
         "style": "standard",
-        "newWindow": true
+        "newWindow": false
       },
       {
         "label": "Music",
