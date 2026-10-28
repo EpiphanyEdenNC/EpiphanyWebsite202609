@@ -54,6 +54,11 @@
         "label": "Order of Service",
         "style": "standard",
         "newWindow": true
+      },
+      {
+        "label": "Music",
+        "style": "standard",
+        "newWindow": true
       }
     ],
     "additionalInfo": ""
