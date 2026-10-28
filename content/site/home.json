@@ -49,6 +49,11 @@
         "linkUrl": "https://www.youtube.com/@epiphanyeden4487/streams",
         "style": "secondary",
         "newWindow": true
+      },
+      {
+        "label": "Order of Service",
+        "style": "standard",
+        "newWindow": true
       }
     ],
     "additionalInfo": ""
