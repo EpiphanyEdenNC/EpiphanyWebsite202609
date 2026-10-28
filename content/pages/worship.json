@@ -1,4 +1,5 @@
 {
+  "urlName": "worship",
   "title": "Worship",
   "eyebrow": "PRAY WITH US",
   "headerImage": "/images/uploads/20160106_182234-(1).jpg",
@@ -18,6 +19,11 @@
       "heading": "Hymnal",
       "text": "The Hymnal is the blue book you can find in your pew. The Hymnal contains most of the songs sung at a service. Occasionally, we use songs from the Lift Every Voice and Sing II: An African American Hymnal, also found in your pew.\n\nYou can click on this box to view the Hymnal.\n\nThe bulletin lists the songs to be sung at each service, In addition the hymn numbers are display on the board to the left of the pulpit.",
       "url": "https://hymnary.org/hymnal/EH1982"
+    },
+    {
+      "heading": "go to serve",
+      "text": "test serve",
+      "url": "/serve"
     }
   ],
   "buttons": [
@@ -36,7 +42,7 @@
   ],
   "sections": [
     {
-      "heading": "Sunday Worship \u2014 10:00 AM",
+      "heading": "Sunday Worship — 10:00 AM",
       "text": "Our principal weekly service is Holy Eucharist. The service follows the Book of Common Prayer and normally lasts about an hour."
     },
     {
@@ -53,6 +59,5 @@
       "anchor": "birthday",
       "text": "During the service we have a special blessing for anyone celebrating a birthday or anniversary."
     }
-  ],
-  "urlName": "worship"
+  ]
 }
