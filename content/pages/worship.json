@@ -28,14 +28,20 @@
   ],
   "buttons": [
     {
+      "label": "Watch on YouTube",
+      "url": "https://www.youtube.com/@EpiphanyEden",
+      "style": "secondary",
+      "newWindow": true
+    },
+    {
       "label": "Book of Common Prayer",
       "url": "https://www.bcponline.org/",
       "style": "prayer-book",
       "newWindow": true
     },
     {
-      "label": "Watch on YouTube",
-      "url": "https://www.youtube.com/@EpiphanyEden",
+      "label": "Serve",
+      "url": "/serve",
       "style": "secondary",
       "newWindow": true
     }
