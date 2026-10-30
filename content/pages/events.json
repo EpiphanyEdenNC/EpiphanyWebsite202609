@@ -1,11 +1,17 @@
 {
+  "urlName": "events",
   "title": "Events",
   "eyebrow": "WHAT'S HAPPENING",
   "headerImage": "",
   "headerImageAlt": "",
   "intro": "Worship, formation, fellowship, outreach, and other opportunities to take part in parish life.",
-  "summaryCards": [],
+  "summaryCards": [
+    {
+      "heading": "Bishop Search Committee Announces Schedule of Listening Sessions",
+      "text": "The Search Committee warmly invites you to take part in Holy Conversations, our listening sessions as part of our search for the 13th bishop of the Diocese of North Carolina. Our main purpose is to gather your thoughts, hopes and prayers as we work to nominate a slate of candidates for bishop of this diocese, so that, in the words of the Prayer Book, “we may receive a faithful pastor, who will care for your people and equip us for our ministries.”",
+      "url": "https://email.notification.circle.so/c/eJwUj72upiAUAJ8GOozyT0Gxja_xBc85KlkFI7jZ7z79jd10MwP1PJ-S-_eTMeopKBM4RqthcsgpTi4o5eWoLd_jAkF7F2hVgJYICFPQKqze28lNyfMcbSKNNpDxqMzHa9LgrVEyWKZHpOuo35NKF0uCv9tdn4ICaU3P0YVxDvSKZrHi5_8Oy3CmfPAj7r1fjak_TM5MznTlhrkWGOq9MTnLUVom52l8OTA5L7nt9RKN0g27ePdy70QilVKfAtREg53wOUjUVRy5dSq5bKJRa7mWxuTM73jX13_3XAbjjGd63N6cAerJ_0X5GwAA__8sWGN-"
+    }
+  ],
   "buttons": [],
-  "sections": [],
-  "urlName": "events"
+  "sections": []
 }
