@@ -41,8 +41,8 @@
     "time": "10:00 AM",
     "location": "Church of the Epiphany",
     "sundayName": "The 24th Sunday After Pentecost",
-    "priestName": "The Rev. Barbara Cooke",
-    "priestBio": "After many years in parish ministry, the Rev. Barbara Cooke retired from full-time service in 2016.\n\nSince then, she has continued serving congregations through supply work, offering a faithful presence and steady support to churches in times of transition. Known for her thoughtful preaching, warm pastoral care, and deeply reflective sermons, Reverend Cooke often leaves parishioners continuing in conversation about her message long after the service has ended.\n\nShe and her husband live in Greensboro and have three adult children and seven grandchildren.  \n",
+    "priestName": "The Rev. Geoffrey Taylor",
+    "priestBio": "Father Geoffrey Taylor\nFather Geoff brings a rich background in music, ministry, and higher education. A graduate of the North Carolina School of the Arts with additional studies at Juilliard in New York City, he worked as a professional musician before moving into arts management and university advancement.\nWhile serving at Emory University, he discerned a call to ordained ministry and earned his Master of Divinity from Candler School of Theology in 2003.\n\nFather Geoff has served parishes in the Dioceses of Atlanta and Upper South Carolina, including as Canon for Congregational Development. He now serves as a bi-vocational priest while also working with Wake Forest University School of Medicine and Atrium Health Wake Forest Baptist.\n\nHe and his wife live in Winston-Salem with their Jack Russell Terrier. In his free time Fr. Geoff enjoys fly fishing in the North Carolina mountains and reading.\n",
     "buttons": [
       {
         "label": "Watch",
@@ -52,7 +52,7 @@
       },
       {
         "label": "Order of Service",
-        "url": "/images/uploads/20261101-OOS-November-1-2026-All-Saints-Day.pdf",
+        "url": "",
         "style": "standard",
         "newWindow": true
       },
