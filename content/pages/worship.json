@@ -33,12 +33,6 @@
       "url": "https://www.bcponline.org/",
       "style": "prayer-book",
       "newWindow": true
-    },
-    {
-      "label": "Serve",
-      "url": "/serve",
-      "style": "secondary",
-      "newWindow": true
     }
   ],
   "sections": [
