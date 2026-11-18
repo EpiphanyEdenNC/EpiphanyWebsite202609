@@ -36,13 +36,13 @@
   "outreachButtonUrl": "/serve",
   "sundayService": {
     "heading": "Sunday Eucharist Service",
-    "priestImage": "/images/uploads/Supply%20Priest%20Images/VirginiaHeistand.jpg",
-    "date": "November 15, 2026",
+    "priestImage": "/images/uploads/RevLitoSantos.jpg",
+    "date": "November 22, 2026",
     "time": "10:00 AM",
     "location": "Church of the Epiphany",
-    "sundayName": "The 25th Sunday After Pentecost",
-    "priestName": "The Rev. Virginia Heistand",
-    "priestBio": "Reverend Canon Virginia Heistand\nThe Rev. Canon Virginia Heistand was ordained in 1991. One former parishioner remarked that it sometimes feels as though she attended seminary in the 1940s, thanks to the wisdom and stories passed down from her family, which included two bishops and two additional priests — all of whom still get quoted often! \nShe and her husband, Jim Wilson, are a “love at last” couple whose family includes five children, three in-law children, and three precious grandchildren (though she says to stay tuned in case the count increases). \nAfter 35 years in parish ministry, Reverend Virginia considers it a true joy to continue serving the church through supply ministry.\n",
+    "sundayName": "The Last Sunday After Pentecost - Christ the King",
+    "priestName": "Fr. Lito Santos",
+    "priestBio": "Father Elenito “Lito” Santos\nFather Lito was born and raised in the Philippines before moving to the United States. \nOrdained for 47 years, he served both parish communities and as a military priest and chaplain for 20 years before retiring in 2020. \nKnown for his warm and approachable spirit, Father Lito is deeply loved by church congregations for the way he connects with people of all ages and encourages faith in everyday life. As a visiting priest, he shares insights from his experiences and offers unique perspectives on faith and spirituality.\nHe and his wife Annie live in Winston-Salem, where their daughter Megan also resides.\n\n",
     "buttons": [
       {
         "label": "Watch",
@@ -52,13 +52,13 @@
       },
       {
         "label": "Order of Service",
-        "url": "/images/uploads/Rev-OOS-November-15-2026-Pentecost-25.pdf",
+        "url": "/images/uploads/OOS-November-22-2026-Christ-the-King.pdf",
         "style": "standard",
         "newWindow": true
       },
       {
         "label": "Music",
-        "url": "/images/uploads/Music-for-Sunday-November-15.pdf",
+        "url": "/images/uploads/Music-for-Sunday-November-22.pdf",
         "style": "standard",
         "newWindow": true
       }
